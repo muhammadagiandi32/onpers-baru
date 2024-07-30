@@ -15,10 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return view('templates.index');
 });
 Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+=======
+Route::get('/',[News::class, 'index']);
+Route::get('/news-details/{id}',[News::class, 'show'])->name('news-details');
+Route::get('/dashboard', function () {
+    return view('templates.layouts');
+})->middleware(['auth', 'verified'])->name('dashboard');
+>>>>>>> f8751ae35e2e4cab661e4a41f7f4d3940399ce6b
 
 Route::post('/post-berita', [News::class, 'store'])->name('news.store');
 
