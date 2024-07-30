@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('templates.index');
-});
+Route::get('/',[News::class, 'index']);
+Route::get('/news-details/{id}',[News::class, 'show'])->name('news-details');
 Route::get('/dashboard', function () {
     return view('templates.layouts');
 })->middleware(['auth', 'verified'])->name('dashboard');

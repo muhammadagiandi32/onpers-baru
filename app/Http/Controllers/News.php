@@ -41,7 +41,7 @@ class News extends Controller
         // dd($Berita);
 
         // dd($Berita);
-        return view('pages.news', compact('Berita', 'Acara', 'Rilis'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis'));
     }
     public function dashboard()
     {
@@ -143,7 +143,7 @@ class News extends Controller
             ->take(3)  // Ambil 10 berita terbaru, sesuaikan sesuai kebutuhan
             ->get();
 
-        return view('pages.news-details', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Rilis'));
+        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru'));
     }
 
     /**
