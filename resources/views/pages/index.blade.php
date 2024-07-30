@@ -112,7 +112,7 @@
                     <div class="col-lg-8">
                         <div class="sn-container">
                             <div class="sn-img">
-                                <img src="img/news-825x525.jpg" />
+                                <img src="{{$data->image_url}}" />
                             </div>
                             <div class="sn-content">
                                 <h1 class="sn-title"> {{$data->title}}</h1>
