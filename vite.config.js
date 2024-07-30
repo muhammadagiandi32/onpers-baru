@@ -7,6 +7,18 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                // template news
+                'resources/customs/js/main.js',
+                'resources/customs/css/style.css',
+
+                'resources/customs/lib/easing/easing.min.js',
+                'resources/customs/lib/easing/easing.js',
+
+                'resources/customs/lib/slick/slick.min.js',
+                'resources/customs/lib/slick/slick-theme.css',
+                'resources/customs/lib/slick/slick.css',
+                
+                // adminlte
                 'resources/customs/adminlte/plugins/fontawesome-free/css/all.min.css',
                 'resources/customs/adminlte/dist/css/adminlte.min.css',
                 'resources/customs/adminlte/plugins/summernote/summernote-bs4.min.css',
