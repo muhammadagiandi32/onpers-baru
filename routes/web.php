@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('templates.index');
 });
-Route::get('/dashboard', function () {
-    return view('templates.layouts');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/post-berita', [News::class, 'store'])->name('news.store');
 

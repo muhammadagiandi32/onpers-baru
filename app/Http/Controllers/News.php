@@ -45,9 +45,9 @@ class News extends Controller
     }
     public function dashboard()
     {
-        $category = Category::get();
+        $categories = Category::get();
         // return view('dashboard', compact('category'));
-        return view('pages.dashboard', compact('category'));
+        return view('templates.layouts', compact('categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -63,8 +63,8 @@ class News extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'judul_berita' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'judul_berita' => 'required',
+            'category' => 'required',
             'content' => 'required|string',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -75,29 +75,28 @@ class News extends Controller
             ], 422);
         }
 
-        // $author_id = Author::where('user_uuid', Auth::user()->uuid)->first()->id;
 
         try {
             DB::beginTransaction();
 
-            $uploadedFiles = [];
-            foreach ($request->input('gambar') as $file) {
-                $filename = Str::uuid() . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
-                Storage::disk('s3')->put($filename, base64_decode($file['data']), 'public');
-                $uploadedFiles[] = [
-                    'name' => $filename,
-                    'url' => Storage::disk('s3')->url($filename),
-                ];
-            }
+            // $uploadedFiles = [];
+            $file = $request->file('gambar');
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+
+            $uploadedFile = [
+                'name' => $filename,
+                'url' => Storage::disk('s3')->url($filename),
+            ];
             $author = Auth::user();
             // return response()->json($author);
             $news_data = ModelsNews::create([
                 'id' => Str::uuid(),
-                'title' => $request->judul,
-                'slug' => Str::slug($request->judul),
-                'content' => $request->description,
-                'image_name' => $uploadedFiles[0]['name'],
-                'image_url' => $uploadedFiles[0]['url'],
+                'title' => $request->judul_berita,
+                'slug' => Str::slug($request->judul_berita),
+                'content' => $request->content,
+                'image_name' => $uploadedFile['name'],
+                'image_url' => $uploadedFile['url'],
                 'author_id' => $author->uuid,
                 'category_id' => $request->category
             ]);
@@ -109,7 +108,7 @@ class News extends Controller
                 'success' => true,
                 'message' => 'Files uploaded successfully',
                 'data' => $news_data,
-                'uploadedFiles' => $uploadedFiles
+                'uploadedFiles' => $uploadedFile
             ], 201);
         } catch (\Throwable $th) {
             DB::rollback();
