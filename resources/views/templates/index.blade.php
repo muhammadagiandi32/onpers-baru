@@ -180,12 +180,12 @@
     </div>
     <!-- Top News End-->
 
-    <!-- Category News Start-->
+    <!-- Berita News Start-->
     <div class="cat-news">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h2>Sports</h2>
+                <div class="col-md-12">
+                    <h2>Berita</h2>
                     <div class="row cn-slider">
                         <div class="col-md-6">
                             <div class="card" style="width: 18rem;">
@@ -217,309 +217,133 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <h2>Technology</h2>
-                    <div class="row cn-slider">
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+               
+            </div>
+        </div>
+    </div>
+   {{-- end berita --}}
+   {{-- Acara --}}
+   <div class="cat-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Acara</h2>
+                <div class="row cn-slider">
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-5.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
         </div>
     </div>
-    <!-- Category News End-->
-
-    <!-- Category News Start-->
-    <div class="cat-news">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Business</h2>
-                    <div class="row cn-slider">
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-5.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+</div>
+   {{-- end Acara --}}
+   {{-- Rilis --}}
+   <div class="cat-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Rilis</h2>
+                <div class="row cn-slider">
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <h2>Entertainment</h2>
-                    <div class="row cn-slider">
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the bulk of the card's content.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
         </div>
     </div>
-    <!-- Category News End-->
-
-    <!-- Tab News Start-->
-    <div class="tab-news">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="nav nav-pills nav-justified">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="pill" href="#featured">Featured News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#popular">Popular News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#latest">Latest News</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="featured" class="container tab-pane active">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="popular" class="container tab-pane fade">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-5.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="latest" class="container tab-pane fade">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <ul class="nav nav-pills nav-justified">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="pill" href="#m-viewed">Most Viewed</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#m-read">Most Read</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#m-recent">Most Recent</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="m-viewed" class="container tab-pane active">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-5.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="m-read" class="container tab-pane fade">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="m-recent" class="container tab-pane fade">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-5.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Tab News Start-->
-
+</div>
+   {{-- end RIlis --}}
     <!-- Main News Start-->
-    <div class="main-news">
+    {{-- <div class="main-news">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
@@ -618,11 +442,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Main News End-->
 
     <!-- Footer Start -->
-    <div class="footer">
+    {{-- <div class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -686,11 +510,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Footer End -->
 
     <!-- Footer Menu Start -->
-    <div class="footer-menu">
+    {{-- <div class="footer-menu">
         <div class="container">
             <div class="f-menu">
                 <a href="">Terms of use</a>
@@ -718,7 +542,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Footer Bottom End -->
 
     <!-- Back to Top -->
