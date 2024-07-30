@@ -63,15 +63,12 @@ class News extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'judul' => ['required'],
-            'description' => ['required'],
-            'category' => ['required'],
-            'files' => ['required', 'array'],
-            'files.*.data' => ['required'],
-            'files.*.type' => ['required'],
-            'files.*.name' => ['required'],
+            'judul_berita' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'content' => 'required|string',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        // dd($request);
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()
@@ -84,7 +81,7 @@ class News extends Controller
             DB::beginTransaction();
 
             $uploadedFiles = [];
-            foreach ($request->input('files') as $file) {
+            foreach ($request->input('gambar') as $file) {
                 $filename = Str::uuid() . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
                 Storage::disk('s3')->put($filename, base64_decode($file['data']), 'public');
                 $uploadedFiles[] = [

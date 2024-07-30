@@ -8,7 +8,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests, HasRoles;
