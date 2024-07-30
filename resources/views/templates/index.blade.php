@@ -19,7 +19,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    {{-- @vite('resources/customs/css/style.css') --}}
+    @vite('resources/customs/css/style.css')
     @vite('resources/customs/js/main.js')
     @vite('resources/customs/lib/slick/slick.min.js')
     @vite('resources/customs/lib/easing/easing.min.js')
