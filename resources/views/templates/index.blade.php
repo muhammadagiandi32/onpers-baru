@@ -19,7 +19,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    @vite('resources/customs/css/style.css')
+    {{-- @vite('resources/customs/css/style.css') --}}
     @vite('resources/customs/js/main.js')
     @vite('resources/customs/lib/slick/slick.min.js')
     @vite('resources/customs/lib/easing/easing.min.js')
@@ -188,13 +188,14 @@
                     <h2>Berita</h2>
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
-                            @foreach ($Berita as $beritas)
-                            <div class="col-md-6 "> 
-                            <!-- Menampilkan 3 item per baris -->
+                        @foreach ($Berita as $beritas)
+                            <div class="col-md-6 ">
+                                <!-- Menampilkan 3 item per baris -->
                                 <!-- Set width 100% untuk menyesuaikan dengan kolom -->
-                                <div class="card" style="width: 18rem;"> 
+                                <div class="card" style="width: 18rem;">
                                     <!-- Display image -->
-                                    <img class="card-img-top" src="{{$beritas->image_url}}" alt="{{$beritas->title}}">
+                                    <img class="card-img-top" src="{{ $beritas->image_url }}"
+                                        alt="{{ $beritas->title }}">
                                     <div class="card-body">
                                         <!-- Title and Link -->
                                         <a href="{{ route('news-details', $beritas->slug) }}" class="card-text">
@@ -208,103 +209,104 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    
-   {{-- end berita --}}
-   {{-- Acara --}}
-   <div class="cat-news">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Acara</h2>
-                <div class="row cn-slider">
-                    <!-- Mengelompokkan setiap 3 berita -->
-                        @foreach ($Acara as $acaras)
-                        <div class="col-md-6 "> 
-                        <!-- Menampilkan 3 item per baris -->
-                            <!-- Set width 100% untuk menyesuaikan dengan kolom -->
-                            <div class="card" style="width: 18rem;"> 
-                                <!-- Display image -->
-                                <img class="card-img-top" src="{{$acaras->image_url}}" alt="{{$acaras->title}}">
-                                <div class="card-body">
-                                    <!-- Title and Link -->
-                                    <a href="{{ route('news-details', $acaras->slug) }}" class="card-text">
-                                        {{ $acaras->title }}
-                                    </a>
-                                    <!-- Card Text -->
-                                    <p class="card-text text-muted mb-3">
-                                        {{ Str::limit(strip_tags($acaras->content), 50) }}</p>
-                                    {{-- <a href="{{ route('news-details', $beritas->slug) }}"
-                                        class="">Baca Selengkapnya</a> --}}
-                                </div>
-                            </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
-</div>
-   {{-- end Acara --}}
-   {{-- Rilis --}}
-   <div class="cat-news">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Rilis</h2>
-                <div class="row cn-slider">
-                    <div class="col-md-6">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
+    </div>
+
+    {{-- end berita --}}
+    {{-- Acara --}}
+    <div class="cat-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Acara</h2>
+                    <div class="row cn-slider">
+                        <!-- Mengelompokkan setiap 3 berita -->
+                        @foreach ($Acara as $acaras)
+                            <div class="col-md-6 ">
+                                <!-- Menampilkan 3 item per baris -->
+                                <!-- Set width 100% untuk menyesuaikan dengan kolom -->
+                                <div class="card" style="width: 18rem;">
+                                    <!-- Display image -->
+                                    <img class="card-img-top" src="{{ $acaras->image_url }}"
+                                        alt="{{ $acaras->title }}">
+                                    <div class="card-body">
+                                        <!-- Title and Link -->
+                                        <a href="{{ route('news-details', $acaras->slug) }}" class="card-text">
+                                            {{ $acaras->title }}
+                                        </a>
+                                        <!-- Card Text -->
+                                        <p class="card-text text-muted mb-3">
+                                            {{ Str::limit(strip_tags($acaras->content), 50) }}</p>
+                                        {{-- <a href="{{ route('news-details', $beritas->slug) }}"
+                                        class="">Baca Selengkapnya</a> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- end Acara --}}
+    {{-- Rilis --}}
+    <div class="cat-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Rilis</h2>
+                    <div class="row cn-slider">
+                        <div class="col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
+                        <div class="col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
+                        <div class="col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
+                        <div class="col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-           
         </div>
     </div>
-</div>
-   {{-- end RIlis --}}
+    {{-- end RIlis --}}
     <!-- Main News Start-->
     {{-- <div class="main-news">
         <div class="container">
@@ -512,8 +514,8 @@
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
 
 
 </body>
