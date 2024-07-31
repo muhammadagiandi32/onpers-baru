@@ -9,8 +9,10 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    @vite(['resources/customs/adminlte/plugins/fontawesome-free/css/all.min.css', 'resources/customs/adminlte/dist/css/adminlte.min.css', 'resources/customs/adminlte/plugins/summernote/summernote-bs4.min.css', 'resources/customs/adminlte/plugins/codemirror/codemirror.css', 'resources/customs/adminlte/plugins/codemirror/theme/monokai.css', 'resources/css/app.css'])
+    <link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('customs/adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/summernote/summernote-bs4.min.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -1588,7 +1590,13 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    @vite(['resources/customs/adminlte/plugins/jquery/jquery.min.js', 'resources/js/app.js', 'resources/customs/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'resources/customs/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js', 'resources/customs/adminlte/dist/js/adminlte.min.js', 'resources/customs/adminlte/dist/js/demo.js', 'resources/customs/adminlte/plugins/summernote/summernote-bs4.min.js', 'resources/customs/adminlte/plugins/codemirror/codemirror.js', 'resources/customs/adminlte/plugins/codemirror/mode/css/css.js', 'resources/customs/adminlte/plugins/codemirror/mode/xml/xml.js', 'resources/customs/adminlte/plugins/codemirror/mode/htmlmixed/htmlmixed.js'])
+    <script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/dist/js/demo.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
     <!-- Page specific script -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
