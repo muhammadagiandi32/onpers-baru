@@ -17,14 +17,10 @@
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
-    @vite('resources/customs/css/style.css')
-    @vite('resources/customs/js/main.js')
-    @vite('resources/customs/lib/slick/slick.min.js')
-    @vite('resources/customs/lib/easing/easing.min.js')
-    @vite('resources/customs/lib/slick/slick-theme.css')
-    @vite('resources/customs/lib/slick/slick.css')
+
+    <link rel="stylesheet" href="{{ asset('customs/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
 </head>
 
 <body>
@@ -107,8 +103,7 @@
                         <a href=""><i class="fab fa-facebook-f"></i></a>
                         <a href=""><i class="fab fa-linkedin-in"></i></a>
                         <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                    </div>
+                        <a href="{{route('login')}}"><i class="fab fa-right"></i></a>
                 </div>
             </nav>
         </div>
@@ -514,8 +509,11 @@
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
     <!-- JavaScript Libraries -->
-    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('customs/lib/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('customs/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('customs/js/main.js') }}"></script>
+
 
 
 </body>

@@ -18,14 +18,10 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        @vite('resources/css/app.css')
-        @vite('resources/js/app.js')
-        @vite('resources/customs/css/style.css')
-        @vite('resources/customs/js/main.js')
-        @vite('resources/customs/lib/slick/slick.min.js')
-        @vite('resources/customs/lib/easing/easing.min.js')
-        @vite('resources/customs/lib/slick/slick-theme.css')
-        @vite('resources/customs/lib/slick/slick.css')
+      
+        <link rel="stylesheet" href="{{ asset('customs/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
     </head>
 
     <body>
@@ -36,14 +32,14 @@
                     <div class="col-lg-3 col-md-4">
                         <div class="b-logo">
                             <a href="index.html">
-                                <img src="img/logo.png" alt="Logo">
+                                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-4">
                         <div class="b-ads">
                             <a href="https://htmlcodex.com">
-                                <img src="img/ads-1.jpg" alt="Ads">
+                                <img src="{{ asset('img/ads-1.jpg') }}" alt="Ads">
                             </a>
                         </div>
                     </div>
@@ -85,7 +81,7 @@
                             <a href=""><i class="fab fa-facebook-f"></i></a>
                             <a href=""><i class="fab fa-linkedin-in"></i></a>
                             <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
+                            <a href="{{route('login')}}"><i class="fab fa-right"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -122,38 +118,18 @@
                         <div class="sn-related">
                             <h2>Related News</h2>
                             <div class="row sn-slider">
+                                @foreach ($Berita as $beritas)
                                 <div class="col-md-4">
                                     <div class="sn-img">
-                                        <img src="img/news-350x223-1.jpg" />
+                                        <img src="{{ $beritas->image_url }}" />
                                         <div class="sn-title">
-                                            <a href="">Interdum et fames ac ante</a>
+                                            <a href="{{ route('news-details', $beritas->slug) }}" class="card-text">
+                                                {{ $beritas->title }}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="sn-img">
-                                        <img src="img/news-350x223-2.jpg" />
-                                        <div class="sn-title">
-                                            <a href="">Interdum et fames ac ante</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="sn-img">
-                                        <img src="img/news-350x223-3.jpg" />
-                                        <div class="sn-title">
-                                            <a href="">Interdum et fames ac ante</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="sn-img">
-                                        <img src="img/news-350x223-4.jpg" />
-                                        <div class="sn-title">
-                                            <a href="">Interdum et fames ac ante</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -200,6 +176,10 @@
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
         <!-- JavaScript Libraries -->
-       
+    <script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('customs/js/main.js') }}"></script>
+        <script src="{{ asset('customs/lib/slick/slick.min.js') }}"></script>
+        <script src="{{ asset('customs/lib/easing/easing.min.js') }}"></script>
+
     </body>
 </html>

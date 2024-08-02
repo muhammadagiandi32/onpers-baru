@@ -49,6 +49,11 @@ class News extends Controller
         // return view('dashboard', compact('category'));
         return view('templates.layouts', compact('categories'));
     }
+    public function input_berita(){
+        $categories = Category::get();
+        // return view('dashboard', compact('category'));
+        return view('pages.dashboard.input_berita', compact('categories'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -141,8 +146,12 @@ class News extends Controller
         $acaraTerbaru = \App\Models\News::orderBy('published_at', 'desc')
             ->take(3)  // Ambil 10 berita terbaru, sesuaikan sesuai kebutuhan
             ->get();
+            $categoryBerita = 'Berita';
+            $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
+                $query->where('name', $categoryBerita);
+            })->get();
 
-        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru'));
+        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru' ,'Berita'));
     }
 
     /**

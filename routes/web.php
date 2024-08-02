@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [News::class, 'index']);
 Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
 Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/input_berita', [News::class, 'input_berita'])->middleware(['auth', 'verified'])->name('input_berita');
 
 Route::post('/post-berita', [News::class, 'store'])->name('news.store');
 
