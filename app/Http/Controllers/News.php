@@ -24,18 +24,20 @@ class News extends Controller
         $categoryBerita = 'Berita';
         $categoryAcara = 'Acara';
         $categoryRilis = 'Rilis';
+
         $category =  \App\Models\Category::where('name', $categoryBerita)->first();
 
         $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
             $query->where('name', $categoryBerita);
-        })->get();
-        $Acara =
-            ModelsNews::whereHas('Category', function ($query) use ($categoryAcara) {
-                $query->where('name', $categoryAcara);
-            })->get();
+        })->orderBy('created_at', 'desc')->get();
+
+        $Acara = ModelsNews::whereHas('Category', function ($query) use ($categoryAcara) {
+            $query->where('name', $categoryAcara);
+        })->orderBy('created_at', 'desc')->get();
+
         $Rilis = ModelsNews::whereHas('Category', function ($query) use ($categoryRilis) {
             $query->where('name', $categoryRilis);
-        })->get();
+        })->orderBy('created_at', 'desc')->get();
 
         // dd($Berita);
 
