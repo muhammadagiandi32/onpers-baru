@@ -115,8 +115,40 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'title', name: 'title'},
                 // {data: 'email', name: 'email'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, row) {
+                        return `
+                            <a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>
+                            <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="${row.id}">Delete</a>
+                        `;
+                    }
+                },
             ]
+        });
+        $('#table1').on('click', '.delete', function() {
+            var id = $(this).data('id');
+            var url = "{{ route('news.destroy', ':id') }}".replace(':id', id);
+            
+            if (confirm("Are you sure you want to delete this news?")) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        alert(response.success);
+                        $('#table1').DataTable().ajax.reload();
+                    },
+                    error: function(response) {
+                        alert(response.responseJSON.error);
+                    }
+                });
+            }
         });
     });
     </script>

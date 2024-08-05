@@ -62,7 +62,7 @@ class News extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="' . $row->id . '">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -197,5 +197,11 @@ class News extends Controller
     public function destroy(string $id)
     {
         //
+        $news = ModelsNews::find($id);
+        if ($news) {
+            $news->delete();
+            return response()->json(['success' => 'Berita berhasil dihapus ' . $news->title]);
+        }
+        return response()->json(['error' => 'Berita tidak ditemukan'], 404);
     }
 }

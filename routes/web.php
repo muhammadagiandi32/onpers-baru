@@ -21,6 +21,8 @@ Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verif
 Route::get('/berita/input_berita', [News::class, 'input_berita'])->middleware(['auth', 'verified'])->name('input_berita');
 Route::get('/berita/index', [News::class, 'index_berita'])->middleware(['auth', 'verified'])->name('index_berita');
 Route::get('/berita/get_berita', [News::class, 'get_berita'])->middleware(['auth', 'verified'])->name('get_berita');
+Route::delete('/berita/{id}', [News::class, 'destroy'])->middleware(['auth', 'verified'])->name('news.destroy');
+
 
 
 
