@@ -21,6 +21,21 @@
     <link rel="stylesheet" href="{{ asset('customs/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
+    <style>
+    .card-img-top {
+        width: 100%;
+        height: 200px; /* Ubah sesuai dengan kebutuhan Anda */
+        object-fit: cover; /* Menjaga rasio aspek gambar */
+    }
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Pastikan card memiliki tinggi penuh sesuai dengan konten */
+    }
+    .card-body {
+        flex: 1;
+    }
+</style>
 </head>
 
 <body>
