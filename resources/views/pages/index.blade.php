@@ -2,10 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap News Template - Free HTML Templates</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Bootstrap News Template - Free HTML Templates" name="keywords">
-        <meta content="Bootstrap News Template - Free HTML Templates" name="description">
+        <title>onPers | Mulai Pemberitaan</title>
+        <meta name="description" content="{{ $data->content }}">
+        <meta property="og:title" content="{{ $data->title }}">
+        <meta property="og:description" content="{{ $data->content }}">
+        <meta property="og:image" content="{{ $data->image_url }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="article">
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
