@@ -198,7 +198,7 @@
                                         </a>
                                         <!-- Card Text -->
                                         <p class="card-text text-muted mb-3">
-                                            {{ Str::limit(strip_tags($beritas->content), 50) }}</p>
+                                            {!! Str::limit(strip_tags($beritas->content), 50) !!}</p>
                                         {{-- <a href="{{ route('news-details', $beritas->slug) }}"
                                             class="">Baca Selengkapnya</a> --}}
                                     </div>
@@ -235,7 +235,7 @@
                                         </a>
                                         <!-- Card Text -->
                                         <p class="card-text text-muted mb-3">
-                                            {{ Str::limit(strip_tags($acaras->content), 50) }}</p>
+                                            {!! Str::limit(strip_tags($acaras->content), 50) !!}</p>
                                         {{-- <a href="{{ route('news-details', $beritas->slug) }}"
                                         class="">Baca Selengkapnya</a> --}}
                                     </div>
@@ -270,7 +270,7 @@
                                         </a>
                                         <!-- Card Text -->
                                         <p class="card-text text-muted mb-3">
-                                            {{ Str::limit(strip_tags($riliss->content), 50) }}</p>
+                                            {!! Str::limit(strip_tags($riliss->content), 50) !!}</p>
                                         {{-- <a href="{{ route('news-details', $beritas->slug) }}"
                                         class="">Baca Selengkapnya</a> --}}
                                     </div>

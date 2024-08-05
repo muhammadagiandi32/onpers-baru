@@ -32,14 +32,14 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4">
                         <div class="b-logo">
-                            <a href="index.html">
+                            <a href="{{ url('/') }}l">
                                 <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-4">
                         <div class="b-ads">
-                            <a href="https://htmlcodex.com">
+                            <a href="">
                                 <img src="{{ asset('img/ads-1.jpg') }}" alt="Ads">
                             </a>
                         </div>
@@ -59,14 +59,14 @@
         <div class="nav-bar">
             <div class="container">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                    <a href="#" class="navbar-brand">MENU</a>
+                    <a href="{{ url('/') }}" class="navbar-brand">MENU</a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="index.html" class="nav-item nav-link">Home</a>
+                            <a href="{{ url('/') }}" class="nav-item nav-link">Home</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
                                 <div class="dropdown-menu">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <a href="single-page.html" class="nav-item nav-link active">Single Page</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
                         </div>
                         <div class="social ml-auto">
                             <a href=""><i class="fab fa-twitter"></i></a>
@@ -177,7 +177,7 @@
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
         <!-- JavaScript Libraries -->
-    <script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('customs/js/main.js') }}"></script>
         <script src="{{ asset('customs/lib/slick/slick.min.js') }}"></script>
         <script src="{{ asset('customs/lib/easing/easing.min.js') }}"></script>
