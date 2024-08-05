@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap News Template - Free HTML Templates</title>
+    <title>onPers | Mulai Pemberitaan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Bootstrap News Template - Free HTML Templates" name="keywords">
     <meta content="Bootstrap News Template - Free HTML Templates" name="description">
@@ -255,46 +255,28 @@
                 <div class="col-md-12">
                     <h2>Rilis</h2>
                     <div class="row cn-slider">
-                        <div class="col-md-6">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
+                        @foreach ($Rilis as $riliss)
+                            <div class="col-md-6 ">
+                                <!-- Menampilkan 3 item per baris -->
+                                <!-- Set width 100% untuk menyesuaikan dengan kolom -->
+                                <div class="card" style="width: 18rem;">
+                                    <!-- Display image -->
+                                    <img class="card-img-top" src="{{ $riliss->image_url }}"
+                                        alt="{{ $riliss->title }}">
+                                    <div class="card-body">
+                                        <!-- Title and Link -->
+                                        <a href="{{ route('news-details', $riliss->slug) }}" class="card-text">
+                                            {{ $riliss->title }}
+                                        </a>
+                                        <!-- Card Text -->
+                                        <p class="card-text text-muted mb-3">
+                                            {{ Str::limit(strip_tags($riliss->content), 50) }}</p>
+                                        {{-- <a href="{{ route('news-details', $beritas->slug) }}"
+                                        class="">Baca Selengkapnya</a> --}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{{ asset('img/news-350x223-1.jpg') }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 

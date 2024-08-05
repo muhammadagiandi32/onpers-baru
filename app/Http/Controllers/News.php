@@ -6,13 +6,12 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\News as ModelsNews;
 use Illuminate\Http\Request;
-use App\Models\New;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class News extends Controller
 {
@@ -49,7 +48,29 @@ class News extends Controller
         // return view('dashboard', compact('category'));
         return view('templates.layouts', compact('categories'));
     }
-    public function input_berita(){
+
+    public function index_berita()
+    {
+        // return view('dashboard', compact('category'));
+        return view('pages.dashboard.index_berita');
+    }
+    public function get_berita(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ModelsNews::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+    public function input_berita()
+    {
         $categories = Category::get();
         // return view('dashboard', compact('category'));
         return view('pages.dashboard.input_berita', compact('categories'));
@@ -146,12 +167,12 @@ class News extends Controller
         $acaraTerbaru = \App\Models\News::orderBy('published_at', 'desc')
             ->take(3)  // Ambil 10 berita terbaru, sesuaikan sesuai kebutuhan
             ->get();
-            $categoryBerita = 'Berita';
-            $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
-                $query->where('name', $categoryBerita);
-            })->get();
+        $categoryBerita = 'Berita';
+        $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
+            $query->where('name', $categoryBerita);
+        })->get();
 
-        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru' ,'Berita'));
+        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Berita'));
     }
 
     /**
