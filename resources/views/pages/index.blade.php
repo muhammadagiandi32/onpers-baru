@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>onPers | Mulai Pemberitaan</title>
-        <!-- <meta name="description" content="{!! $data->content !!}"> -->
         <meta property="og:title" content="{{ $data->title }}">
-        <!-- <meta property="og:description" content="{!! $data->content !!}"> -->
         <meta property="og:image" content="{{ $data->image_url }}">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="article">
