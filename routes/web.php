@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IklanController;
 use App\Http\Controllers\News;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,13 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/contoh', function () {
+    return view('templates.contoh');
+});
 Route::get('/', [News::class, 'index']);
 Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
 Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Berita
 Route::get('/berita/input_berita', [News::class, 'input_berita'])->middleware(['auth', 'verified'])->name('input_berita');
 Route::get('/berita/index', [News::class, 'index_berita'])->middleware(['auth', 'verified'])->name('index_berita');
 Route::get('/berita/get_berita', [News::class, 'get_berita'])->middleware(['auth', 'verified'])->name('get_berita');
+Route::get('/berita/{id}/edit', [News::class, 'edit'])->middleware(['auth', 'verified'])->name('berita.edit');
+Route::put('/berita/{id}', [News::class, 'update'])->middleware(['auth', 'verified'])->name('news.update');
+
 Route::delete('/berita/{id}', [News::class, 'destroy'])->middleware(['auth', 'verified'])->name('news.destroy');
+
+// Iklan
+Route::resource('iklan', IklanController::class);
+// Route::get('/iklan/input_iklan', [IklanController::class, 'create'])->middleware(['auth', 'verified'])->name('input_iklan');
 
 
 

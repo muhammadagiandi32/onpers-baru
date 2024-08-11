@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Iklan;
 use App\Models\News as ModelsNews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -39,10 +40,11 @@ class News extends Controller
             $query->where('name', $categoryRilis);
         })->orderBy('created_at', 'desc')->get();
 
-        // dd($Berita);
+        // iklan
+        $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
+        $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
 
-        // dd($Berita);
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'kiri', 'kanan'));
     }
     public function dashboard()
     {
@@ -183,6 +185,10 @@ class News extends Controller
     public function edit(string $id)
     {
         //
+        $news = ModelsNews::findOrFail($id);
+        $categories = Category::get();
+
+        return view('pages.dashboard.berita_edit', compact('news', 'categories'));
     }
 
     /**
@@ -191,6 +197,66 @@ class News extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'judul_berita' => 'required',
+            'category' => 'required',
+            'content' => 'required|string',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $news = ModelsNews::findOrFail($id);
+
+            $uploadedFile = [];
+            if ($request->hasFile('gambar')) {
+                $file = $request->file('gambar');
+                $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+                Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+
+                $uploadedFile = [
+                    'name' => $filename,
+                    'url' => Storage::disk('s3')->url($filename),
+                ];
+
+                // Remove old image
+                // Storage::disk('s3')->delete($news->image_name);
+            }
+
+            $news->update([
+                'title' => $request->judul_berita,
+                'slug' => Str::slug($request->judul_berita),
+                'content' => $request->content,
+                'image_name' => $uploadedFile['name'] ?? $news->image_name,
+                'image_url' => $uploadedFile['url'] ?? $news->image_url,
+                'category_id' => $request->category
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'error_code' => 200,
+                'success' => true,
+                'message' => 'News updated successfully',
+                'data' => $news,
+                'uploadedFile' => $uploadedFile
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'error_code' => 500,
+                'success' => false,
+                'message' => 'Error updating news',
+                'error' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
