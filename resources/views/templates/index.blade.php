@@ -200,24 +200,22 @@
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($Berita as $beritas)
                             <div class="col-md-6 ">
+                                <a href="{{ route('news-details', $beritas->slug) }}" class="card-link">
                                 <!-- Menampilkan 3 item per baris -->
                                 <!-- Set width 100% untuk menyesuaikan dengan kolom -->
-                                <div class="card" style="width: 18rem;">
+                                <div class="card">
                                     <!-- Display image -->
                                     <img class="card-img-top" src="{{ $beritas->image_url }}"
                                         alt="{{ $beritas->title }}">
-                                    <div class="card-body">
-                                        <!-- Title and Link -->
-                                        <a href="{{ route('news-details', $beritas->slug) }}" class="card-text">
-                                            {{ $beritas->title }}
-                                        </a>
-                                        <!-- Card Text -->
-                                        <p class="card-text text-muted mb-3">
-                                            {!! Str::limit(strip_tags($beritas->content), 50) !!}</p>
-                                        {{-- <a href="{{ route('news-details', $beritas->slug) }}"
-                                            class="">Baca Selengkapnya</a> --}}
-                                    </div>
                                 </div>
+                                <div>
+                                    <h5 style="color:#ff6f61;">{{ $beritas->title }}</h5> 
+                                    <!-- Card Text -->
+                                    <p class="card-text text-muted mb-3">
+                                        {!! Str::limit(strip_tags($beritas->content), 50) !!}
+                                    </p>
+                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
