@@ -141,7 +141,7 @@
                             <h1 class="sn-title">
                                 {{ $data->title }}
                             </h1>
-                            {{ $data->content }}
+                            {!! $data->content !!}
                         </div>
                     </div>
                     <div class="sn-related">
