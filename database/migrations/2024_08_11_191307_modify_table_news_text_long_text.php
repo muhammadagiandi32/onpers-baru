@@ -1,30 +1,19 @@
 <?php
 
+// Ini adalah file migrasi yang seharusnya memodifikasi tabel
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class ModifyTableNewsTextLongText extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        //
-        Schema::table('news', function (Blueprint $table) {
-            $table->longText('content')->change();
-        });
+        // Logika migrasi
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        //
-        Schema::table('news', function (Blueprint $table) {
-            $table->text('content')->change();
-        });
+        // Logika rollback migrasi
     }
-};
+}

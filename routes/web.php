@@ -23,6 +23,12 @@ Route::get('/', [News::class, 'index']);
 Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
 Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
+//dashboard
+Route::get('/dashboards', [News::class, 'dashboards'])->middleware(['auth', 'verified'])->name('dashboards');
+
+
+
+
 // Berita
 Route::get('/berita/input_berita', [News::class, 'input_berita'])->middleware(['auth', 'verified'])->name('input_berita');
 Route::get('/berita/index', [News::class, 'index_berita'])->middleware(['auth', 'verified'])->name('index_berita');
