@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 tn-right">
-                    <div class="row">
+                    <div class="row tn-slider">
                         @foreach ($kanan as $kanan)
                             <div class="col-md-6">
                                 <div class="tn-img">
@@ -384,13 +384,13 @@
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($adv as $item)
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ $item->image_url }}">
-                                <div class="cn-title">
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src="{{ $item->image_url }}">
+                                    <div class="cn-title">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
