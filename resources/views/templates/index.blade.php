@@ -380,6 +380,23 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <h2>Advetorial</h2>
+                    <div class="row cn-slider">
+                        <!-- Mengelompokkan setiap 3 berita -->
+                        @foreach ($adv as $item)
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $item->image_url }}">
+                                <div class="cn-title">
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <h2>Berita</h2>
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->

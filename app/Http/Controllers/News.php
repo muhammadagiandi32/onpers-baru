@@ -44,8 +44,9 @@ class News extends Controller
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
+        $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'kiri', 'kanan', 'video'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'kiri', 'kanan', 'video' , 'adv'));
     }
     public function dashboard()
     {
