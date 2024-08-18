@@ -47,6 +47,10 @@
             width: 100%;
             /* Pastikan video tetap responsif */
         }
+
+        img {
+            height: 200px;
+        }
     </style>
 </head>
 
