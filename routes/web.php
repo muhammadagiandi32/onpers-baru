@@ -34,7 +34,7 @@ Route::delete('/berita/{id}', [News::class, 'destroy'])->middleware(['auth', 've
 
 // Iklan
 Route::resource('iklan', IklanController::class);
-// Route::get('/iklan/input_iklan', [IklanController::class, 'create'])->middleware(['auth', 'verified'])->name('input_iklan');
+Route::post('/iklan/input_iklan', [IklanController::class, 'store_video'])->middleware(['auth', 'verified'])->name('video.upload');
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Iklan;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -93,6 +94,24 @@ class IklanController extends Controller
         }
     }
 
+    public function store_video(Request $request)
+    {
+
+        // $path = $request->file('file')->store('s3');
+        // $url = Storage::disk('s3')->url($path);
+
+        $file = $request->file('file');
+        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+        Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+
+        // Simpan informasi file ke database
+        $file = new Video();
+        $file->filename = $request->file('file')->getClientOriginalName();
+        $file->url = Storage::disk('s3')->url($filename);
+        $file->save();
+
+        return back()->with('success', 'File uploaded successfully')->with('file_id', $file->id);
+    }
     /**
      * Display the specified resource.
      */

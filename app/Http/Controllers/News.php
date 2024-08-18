@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Iklan;
 use App\Models\News as ModelsNews;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -43,8 +44,8 @@ class News extends Controller
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
-
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'kiri', 'kanan'));
+        $video = Video::take(1)->first();
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'kiri', 'kanan', 'video'));
     }
     public function dashboard()
     {

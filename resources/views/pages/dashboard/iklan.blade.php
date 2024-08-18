@@ -79,6 +79,16 @@
                 </div>
             </div>
             <!-- /.row -->
+            <div class="row">
+                <form action="{{ route('video.upload') }}" id="videoUpload" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="file">Upload file</label>
+                        <input type="file" class="form-control-file" id="file" name="file" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
         </div>
         <!-- /.container-fluid -->
     </section>
@@ -145,6 +155,44 @@
                         $("#exampleInputFile").val(null);
                         $("#previewImage").hide();
                         $("#removeImage").hide();
+
+                        // Reset custom file input label
+                        $(".custom-file-label").html("Choose file");
+                    },
+                    error: function(xhr) {
+                        // Gagal
+                        let errors = xhr.responseJSON.errors;
+                        let errorMessage = "Terjadi kesalahan:\n";
+                        $.each(errors, function(key, value) {
+                            errorMessage += value + "\n";
+                        });
+                        alert(errorMessage);
+                    },
+                });
+            });
+            $("#videoUpload").on("submit", function(e) {
+                e.preventDefault(); // Mencegah form submit secara default
+                // console.log('ini video');
+                // return;
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: $(this).attr("action"),
+                    method: $(this).attr("method"),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Berhasil
+                        alert("Berita berhasil ditambahkan!");
+
+                        // Reset form
+                        $("#videoUpload")[0].reset();
+
+                        // // Reset custom file input label
+                        // $("#exampleInputFile").val(null);
+                        // $("#previewImage").hide();
+                        // $("#removeImage").hide();
 
                         // Reset custom file input label
                         $(".custom-file-label").html("Choose file");

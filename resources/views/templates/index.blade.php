@@ -40,6 +40,13 @@
         .card-body {
             flex: 1;
         }
+
+        .custom-video-height {
+            height: 300px;
+            /* Atur tinggi sesuai kebutuhan */
+            width: 100%;
+            /* Pastikan video tetap responsif */
+        }
     </style>
 </head>
 
@@ -136,6 +143,17 @@
     <!-- Top News Start-->
     <div class="top-news">
         <div class="container">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="embed-responsive custom-video-height embed-responsive-4by3">
+                        <video class="embed-responsive-item" controls>
+                            <source src="{{ $video->url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-6 tn-left">
                     <div class="row tn-slider">
