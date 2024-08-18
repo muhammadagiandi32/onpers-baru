@@ -124,7 +124,7 @@
                         </div>
                         <a href="single-page.html" class="nav-item nav-link">Single Page</a> --}}
                         @if (!Auth::check())
-                            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
                         @endif
                     </div>
                     <div class="social ml-auto">
@@ -158,14 +158,14 @@
                 <div class="col-md-6 tn-left">
                     <div class="row tn-slider">
                         @foreach ($kiri as $kiri)
-                            <div class="col-md-6">
-                                <div class="tn-img">
-                                    <img src="{{ $kiri->image_url }}" />
-                                    {{-- <div class="tn-title">
-                                        <a href="">Lorem ipsum dolor sit amet</a>
-                                    </div> --}}
-                                </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ $kiri->image_url }}" />
+                                {{-- <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit amet</a>
+                                </div> --}}
                             </div>
+                        </div>
                         @endforeach
                         {{-- <div class="col-md-6">
                             <div class="tn-img">
@@ -180,14 +180,14 @@
                 <div class="col-md-6 tn-right">
                     <div class="row">
                         @foreach ($kanan as $kanan)
-                            <div class="col-md-6">
-                                <div class="tn-img">
-                                    <img src="{{ $kanan->image_url }}" />
-                                    {{-- <div class="tn-title">
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ $kanan->image_url }}" />
+                                {{-- <div class="tn-title">
                                     <a href="">Lorem ipsum dolor sit</a>
                                 </div> --}}
-                                </div>
                             </div>
+                        </div>
                         @endforeach
                         {{-- <div class="col-md-6">
                             <div class="tn-img">
@@ -234,8 +234,8 @@
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="48" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    class="bi bi-eraser-fill text-primary mb-4"
-                                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                     <path
                                                         d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                                                 </svg>
@@ -249,8 +249,8 @@
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    class="bi bi-eraser-fill text-primary mb-4"
-                                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                     <path
                                                         d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM609.3 512l-137.8 0c5.4-9.4 8.6-20.3 8.6-32l0-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2l61.4 0C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
                                                 </svg>
@@ -263,8 +263,7 @@
                                         <div class="card border-dark">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                                                    fill="#ff6f61"
-                                                    class="bi bi-clipboard-check-fill text-primary mb-4"
+                                                    fill="#ff6f61" class="bi bi-clipboard-check-fill text-primary mb-4"
                                                     viewBox="0 0 16 16">
                                                     <path
                                                         d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
@@ -309,8 +308,8 @@
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="48" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    class="bi bi-eraser-fill text-primary mb-4"
-                                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                     <path
                                                         d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                                                 </svg>
@@ -330,16 +329,16 @@
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($Berita as $beritas)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $beritas->slug) }}">
-                                            {{ $beritas->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $beritas->slug) }}">
+                                        {{ $beritas->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -357,16 +356,16 @@
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($Acara as $acaras)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $acaras->slug) }}">
-                                            {{ $acaras->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $acaras->slug) }}">
+                                        {{ $acaras->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -382,16 +381,16 @@
                     <h2>Rilis</h2>
                     <div class="row cn-slider">
                         @foreach ($Rilis as $riliss)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $riliss->slug) }}">
-                                            {{ $riliss->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $riliss->slug) }}">
+                                        {{ $riliss->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>

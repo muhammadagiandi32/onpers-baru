@@ -8,12 +8,10 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                    aria-label="Search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>
@@ -24,43 +22,20 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <!-- Dashboard -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('dashboards') }}"
+                        class="nav-link {{ Request::is('dashboards') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                        <p>Dashboard</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="../../index.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../index2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v2</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v3</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
-                {{-- FORMS --}}
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                <!-- Berita -->
+                <li class="nav-item {{ Request::is('berita*') ? 'menu-open' : '' }}">
+                    <a href="{{route('index_berita')}}" class="nav-link {{ Request::is('berita*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Berita
@@ -69,23 +44,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('index_berita') }}" class="nav-link active">
+                            <a href="{{ route('index_berita') }}"
+                                class="nav-link {{ Request::is('berita/index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Dashboard Berita</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('input_berita') }}" class="nav-link">
+                            <a href="{{ route('input_berita') }}"
+                                class="nav-link {{ Request::is('berita/input_berita') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tulis Berita</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                {{-- END FORMS --}}
-                {{-- Iklan --}}
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+
+                <!-- Iklan -->
+                <li class="nav-item {{ Request::is('iklan*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('iklan*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Iklan
@@ -94,20 +71,23 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('iklan.index') }}" class="nav-link active">
+                            <a href="{{ route('iklan.index') }}"
+                                class="nav-link {{ Request::is('iklan') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Dashboard Iklan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('iklan.create') }}" class="nav-link">
+                            <a href="{{ route('iklan.create') }}"
+                                class="nav-link {{ Request::is('iklan/create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Upload Iklan</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                {{-- END IKLAN --}}
+
+                <!-- Logout -->
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -118,7 +98,6 @@
                         @csrf
                     </form>
                 </li>
-
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

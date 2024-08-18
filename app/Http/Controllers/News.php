@@ -54,6 +54,39 @@ class News extends Controller
         return view('templates.layouts', compact('categories'));
     }
 
+    public function dashboards()
+    {
+       
+        $categoryBerita = 'Berita';
+        $categoryAcara = 'Acara';
+        $categoryRilis = 'Rilis';
+    
+        // Get news items for each category
+        $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
+            $query->where('name', $categoryBerita);
+        })->orderBy('created_at', 'desc')->get();
+    
+        $Acara = ModelsNews::whereHas('Category', function ($query) use ($categoryAcara) {
+            $query->where('name', $categoryAcara);
+        })->orderBy('created_at', 'desc')->get();
+    
+        $Rilis = ModelsNews::whereHas('Category', function ($query) use ($categoryRilis) {
+            $query->where('name', $categoryRilis);
+        })->orderBy('created_at', 'desc')->get();
+    
+        // Calculate totals
+        $totalBerita = $Berita->count();
+        $totalAcara = $Acara->count();
+        $totalRilis = $Rilis->count();
+    
+        // iklan
+        $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
+        $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
+    
+        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan'));
+
+       
+    }
     public function index_berita()
     {
         // return view('dashboard', compact('category'));
