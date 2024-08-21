@@ -478,7 +478,7 @@
     </div>
     {{-- end RIlis --}}
     {{-- Umum --}}
-    <div class="cat-news">
+    {{-- <div class="cat-news">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -501,7 +501,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Main News Start-->
     {{-- <div class="main-news">
         <div class="container">

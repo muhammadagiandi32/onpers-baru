@@ -131,13 +131,17 @@ class News extends Controller
     }
     public function input_berita()
     {
-        $categories = Category::get();
-        $userRole = 'user'; // Anda dapat mengganti ini sesuai kebutuhan
-        if (auth()->check() && auth()->user()->hasRole($userRole)) {
-            $categories = $categories->filter(function ($category) {
-                return $category->name === 'Umum';
-            });
-        }
+        // Ambil role pengguna saat ini
+        $role = Auth::user()->getRoleNames()->first();
+
+        // Filter kategori berdasarkan role pengguna
+        $categories = Category::when($role === 'user', function ($query) {
+            return $query->whereIn('name', ['Acara', 'Rilis']);
+        })
+            ->when($role === 'admin', function ($query) {
+                return $query;
+            })
+            ->get();
         // return view('dashboard', compact('category'));
         return view('pages.dashboard.input_berita', compact('categories'));
     }
