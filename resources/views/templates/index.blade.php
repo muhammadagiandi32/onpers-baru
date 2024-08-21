@@ -184,17 +184,17 @@
                     </div>
                 </div>
                 <div class="col-md-6 tn-right">
-                    <div class="row tn-slider">
-                        @foreach ($kanan as $kanan)
-                            <div class="col-md-6">
-                                <div class="tn-img">
-                                    <img src="{{ $kanan->image_url }}" />
-                                    {{-- <div class="tn-title">
+                    <div class="row">
+                        {{-- @foreach ($kanan as $kanan) --}}
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ $kanan->image_url }}" />
+                                {{-- <div class="tn-title">
                                     <a href="">Lorem ipsum dolor sit</a>
                                 </div> --}}
-                                </div>
                             </div>
-                        @endforeach
+                        </div>
+                        {{-- @endforeach --}}
                         {{-- <div class="col-md-6">
                             <div class="tn-img">
                                 <img src="{{ asset('img/news-350x223-2.jpg') }}" />
