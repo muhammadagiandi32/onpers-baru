@@ -11,7 +11,8 @@
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                    aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>
@@ -22,7 +23,8 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
 
                 <!-- Dashboard -->
                 <li class="nav-item">
@@ -35,7 +37,7 @@
 
                 <!-- Berita -->
                 <li class="nav-item {{ Request::is('berita*') ? 'menu-open' : '' }}">
-                    <a href="{{route('index_berita')}}" class="nav-link {{ Request::is('berita*') ? 'active' : '' }}">
+                    <a href="{{ route('index_berita') }}" class="nav-link {{ Request::is('berita*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Berita
@@ -59,34 +61,34 @@
                         </li>
                     </ul>
                 </li>
-
-                <!-- Iklan -->
-                <li class="nav-item {{ Request::is('iklan*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ Request::is('iklan*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Iklan
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('iklan.index') }}"
-                                class="nav-link {{ Request::is('iklan') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard Iklan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('iklan.create') }}"
-                                class="nav-link {{ Request::is('iklan/create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Upload Iklan</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
+                @hasallroles('admin')
+                    <!-- Iklan -->
+                    <li class="nav-item {{ Request::is('iklan*') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('iklan*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>
+                                Iklan
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('iklan.index') }}"
+                                    class="nav-link {{ Request::is('iklan') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Dashboard Iklan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('iklan.create') }}"
+                                    class="nav-link {{ Request::is('iklan/create') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Upload Iklan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endhasrole
                 <!-- Logout -->
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"

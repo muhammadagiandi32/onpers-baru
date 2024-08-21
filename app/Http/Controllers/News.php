@@ -26,6 +26,7 @@ class News extends Controller
         $categoryBerita = 'Berita';
         $categoryAcara = 'Acara';
         $categoryRilis = 'Rilis';
+        $categoryUmum = 'Umum';
 
         $category =  \App\Models\Category::where('name', $categoryBerita)->first();
 
@@ -41,12 +42,16 @@ class News extends Controller
             $query->where('name', $categoryRilis);
         })->orderBy('created_at', 'desc')->get();
 
+        $Umum = ModelsNews::whereHas('Category', function ($query) use ($categoryUmum) {
+            $query->where('name', $categoryUmum);
+        })->orderBy('created_at', 'desc')->get();
+
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'kiri', 'kanan', 'video' , 'adv'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv'));
     }
     public function dashboard()
     {
@@ -57,46 +62,62 @@ class News extends Controller
 
     public function dashboards()
     {
-       
+
         $categoryBerita = 'Berita';
         $categoryAcara = 'Acara';
         $categoryRilis = 'Rilis';
-    
+        $categoryUmum = 'Umum';
+
+
         // Get news items for each category
         $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
             $query->where('name', $categoryBerita);
         })->orderBy('created_at', 'desc')->get();
-    
+
         $Acara = ModelsNews::whereHas('Category', function ($query) use ($categoryAcara) {
             $query->where('name', $categoryAcara);
         })->orderBy('created_at', 'desc')->get();
-    
+
         $Rilis = ModelsNews::whereHas('Category', function ($query) use ($categoryRilis) {
             $query->where('name', $categoryRilis);
         })->orderBy('created_at', 'desc')->get();
-    
+
+        $Umum = ModelsNews::whereHas('Category', function ($query) use ($categoryUmum) {
+            $query->where('name', $categoryUmum);
+        })->orderBy('created_at', 'desc')->get();
+
         // Calculate totals
         $totalBerita = $Berita->count();
         $totalAcara = $Acara->count();
         $totalRilis = $Rilis->count();
-    
+
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
-    
-        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan'));
 
-       
+        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'Umum', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan'));
     }
     public function index_berita()
     {
+        // dd(Auth::user()->hasRole('admin'));
+
         // return view('dashboard', compact('category'));
         return view('pages.dashboard.index_berita');
     }
     public function get_berita(Request $request)
     {
         if ($request->ajax()) {
-            $data = ModelsNews::latest()->get();
+            // Ambil role pengguna saat ini
+            $user = Auth::user();
+            $role = $user->getRoleNames()->first(); // Ambil role pertama pengguna
+
+            if ($role === 'admin') {
+                // Jika pengguna adalah admin, ambil seluruh data
+                $data = ModelsNews::latest()->get();
+            } else {
+                // Jika bukan admin, ambil hanya data yang dibuat oleh pengguna
+                $data = ModelsNews::where('author_id', $user->uuid)->latest()->get();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -111,6 +132,12 @@ class News extends Controller
     public function input_berita()
     {
         $categories = Category::get();
+        $userRole = 'user'; // Anda dapat mengganti ini sesuai kebutuhan
+        if (auth()->check() && auth()->user()->hasRole($userRole)) {
+            $categories = $categories->filter(function ($category) {
+                return $category->name === 'Umum';
+            });
+        }
         // return view('dashboard', compact('category'));
         return view('pages.dashboard.input_berita', compact('categories'));
     }
@@ -141,20 +168,34 @@ class News extends Controller
         }
 
 
+        DB::beginTransaction();
+
         try {
-            DB::beginTransaction();
-
-            // $uploadedFiles = [];
+            // Ambil file dari request
             $file = $request->file('gambar');
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            if (!$file) {
+                throw new \Exception('No file uploaded');
+            }
 
+            // Generate nama file unik
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            // Upload file ke S3
+            $uploadSuccess = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            if (!$uploadSuccess) {
+                throw new \Exception('Failed to upload file to S3');
+            }
+
+            // Simpan informasi file
             $uploadedFile = [
                 'name' => $filename,
                 'url' => Storage::disk('s3')->url($filename),
             ];
+
+            // Ambil data author
             $author = Auth::user();
-            // return response()->json($author);
+
+            // Simpan data berita ke database
             $news_data = ModelsNews::create([
                 'id' => Str::uuid(),
                 'title' => $request->judul_berita,
@@ -166,6 +207,7 @@ class News extends Controller
                 'category_id' => $request->category
             ]);
 
+            // Commit transaksi jika semua berhasil
             DB::commit();
 
             return response()->json([
@@ -176,7 +218,9 @@ class News extends Controller
                 'uploadedFiles' => $uploadedFile
             ], 201);
         } catch (\Throwable $th) {
+            // Rollback transaksi jika terjadi kesalahan
             DB::rollback();
+
             return response()->json([
                 'error_code' => 500,
                 'success' => false,

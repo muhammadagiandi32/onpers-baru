@@ -477,6 +477,31 @@
         </div>
     </div>
     {{-- end RIlis --}}
+    {{-- Umum --}}
+    <div class="cat-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Umum</h2>
+                    <div class="row cn-slider">
+                        @foreach ($Umum as $umum)
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src="{{ $umum->image_url }}" alt="{{ $umum->title }}">
+                                    <div class="cn-title">
+                                        <a href="{{ route('news-details', $umum->slug) }}">
+                                            {{ $umum->title }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Main News Start-->
     {{-- <div class="main-news">
         <div class="container">
