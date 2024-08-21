@@ -15,6 +15,7 @@ class User extends Authenticatable
         'uuid',
         'name', // Tambahkan 'name' ke dalam properti fillable
         'email',
+        'role',
         'password',
     ];
     /**
