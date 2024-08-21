@@ -19,7 +19,7 @@ class SeederRoles extends Seeder
     {
         Category::create([
             'id' => Str::uuid(),
-            'name' => 'Umum',
+            'name' => 'Adv',
         ]);
         // Buat role jika belum ada
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
