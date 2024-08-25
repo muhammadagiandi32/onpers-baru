@@ -90,7 +90,7 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="{{url('/')}}" class="nav-item nav-link">Home</a>
                         {{-- <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
                             <div class="dropdown-menu">
@@ -100,7 +100,7 @@
                         </div>
                         <a href="single-page.html" class="nav-item nav-link active">Single Page</a> --}}
                         @if (!Auth::check())
-                            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
                         @endif
                     </div>
                     <div class="social ml-auto">
@@ -148,15 +148,14 @@
                         <h2>Berita Lainnya</h2>
                         <div class="row sn-slider">
                             @foreach ($Berita as $beritas)
-                                <div class="col-md-4">
-                                    <div class="sn-img">
-                                        <img src="{{ $beritas->image_url }}" />
-                                        <div class="sn-title">
-                                            <a
-                                                href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
-                                        </div>
+                            <div class="col-md-4">
+                                <div class="sn-img">
+                                    <img src="{{ $beritas->image_url }}" />
+                                    <div class="sn-title">
+                                        <a href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -214,7 +213,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                        {{-- 
+                        {{--
                         <div class="sidebar-widget">
                             <div class="image">
                                 <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image" /></a>
@@ -407,9 +406,8 @@
                             <div class="category">
                                 <ul>
                                     @foreach ($jumlahBerita as $berita)
-                                        <li><a
-                                                href="">{{ $berita->category_name }}</a><span>({{ $berita->total }})</span>
-                                        </li>
+                                    <li><a href="">{{ $berita->category_name }}</a><span>({{ $berita->total }})</span>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
