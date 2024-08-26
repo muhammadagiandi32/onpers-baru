@@ -128,9 +128,9 @@
                         </div>
                         <a href="single-page.html" class="nav-item nav-link">Single Page</a> --}}
                         @if (!Auth::check())
-                            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
                         @else
-                            <a href="{{ route('dashboards') }}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{{ route('dashboards') }}" class="nav-item nav-link">Dashboard</a>
                         @endif
                     </div>
                     <div class="social ml-auto">
@@ -164,14 +164,14 @@
                 <div class="col-md-6 tn-left">
                     <div class="row tn-slider">
                         @foreach ($kiri as $kiri)
-                            <div class="col-md-6">
-                                <div class="tn-img">
-                                    <img src="{{ $kiri->image_url }}" />
-                                    {{-- <div class="tn-title">
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ $kiri->image_url }}" />
+                                {{-- <div class="tn-title">
                                     <a href="">Lorem ipsum dolor sit amet</a>
                                 </div> --}}
-                                </div>
                             </div>
+                        </div>
                         @endforeach
                         {{-- <div class="col-md-6">
                             <div class="tn-img">
@@ -184,46 +184,35 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 tn-right">
-                    <div class="row">
-                        {{-- @foreach ($kanan as $kanan) --}}
-                        <div class="col-md-6">
-                            <div class="">
-                                <img style="width:500px;" src="{{ $kanan->image_url }}" />
-                                {{-- <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div> --}}
-                            </div>
+
+                {{-- <div class="col-md-6">
+                    <div class="tn-img">
+                        <img src="{{ asset('img/news-350x223-2.jpg') }}" />
+                        <div class="tn-title">
+                            <a href="">Lorem ipsum dolor sit</a>
                         </div>
-                        {{-- @endforeach --}}
-                        {{-- <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="tn-img">
+                        <img src="{{ asset('img/news-350x223-3.jpg') }}" />
+                        <div class="tn-title">
+                            <a href="">Lorem ipsum dolor sit</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tn-img">
+                        <img src="{{ asset('img/news-350x223-4.jpg') }}" />
+                        <div class="tn-title">
+                            <a href="">Lorem ipsum dolor sit</a>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <!-- Top News End-->
 
@@ -324,8 +313,7 @@
                                         <div class="card border-dark">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                                                    fill="#ff6f61"
-                                                    class="bi bi-clipboard-check-fill text-primary mb-4"
+                                                    fill="#ff6f61" class="bi bi-clipboard-check-fill text-primary mb-4"
                                                     viewBox="0 0 16 16">
                                                     <path
                                                         d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
@@ -389,15 +377,18 @@
                 <div class="col-md-12">
                     <h2>Advertorial</h2>
                     <div class="row cn-slider">
-                        <!-- Mengelompokkan setiap 3 berita -->
+                        <!-- Mengelompokkan setiap 3 Iklans -->
                         @foreach ($adv as $item)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $item->image_url }}">
-                                    <div class="cn-title">
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $item->image_url }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $item->category_name) }}">
+                                        {{ $item->image_name}}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -408,16 +399,16 @@
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($Berita as $beritas)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $beritas->slug) }}">
-                                            {{ $beritas->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $beritas->slug) }}">
+                                        {{ $beritas->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -435,16 +426,16 @@
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($Acara as $acaras)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $acaras->slug) }}">
-                                            {{ $acaras->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $acaras->slug) }}">
+                                        {{ $acaras->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -460,16 +451,16 @@
                     <h2>Rilis</h2>
                     <div class="row cn-slider">
                         @foreach ($Rilis as $riliss)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $riliss->slug) }}">
-                                            {{ $riliss->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $riliss->slug) }}">
+                                        {{ $riliss->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -486,16 +477,16 @@
                     <h2>Umum</h2>
                     <div class="row cn-slider">
                         @foreach ($Umum as $umum)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $umum->image_url }}" alt="{{ $umum->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $umum->slug) }}">
-                                            {{ $umum->title }}
-                                        </a>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $umum->image_url }}" alt="{{ $umum->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $umum->slug) }}">
+                                        {{ $umum->title }}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
