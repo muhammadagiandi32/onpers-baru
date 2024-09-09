@@ -27,6 +27,7 @@ class News extends Controller
         $categoryAcara = 'Acara';
         $categoryRilis = 'Rilis';
         $categoryUmum = 'Umum';
+        $categoryAdvertorial = 'Advertorial';
 
         $category =  \App\Models\Category::where('name', $categoryBerita)->first();
 
@@ -46,12 +47,16 @@ class News extends Controller
             $query->where('name', $categoryUmum);
         })->orderBy('created_at', 'desc')->get();
 
+        $Advertorial = ModelsNews::whereHas('Category', function ($query) use ($categoryAdvertorial) {
+            $query->where('name', $categoryAdvertorial);
+        })->orderBy('created_at', 'desc')->get();
+        
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv' , 'Advertorial'));
     }
     public function dashboard()
     {
@@ -67,6 +72,7 @@ class News extends Controller
         $categoryAcara = 'Acara';
         $categoryRilis = 'Rilis';
         $categoryUmum = 'Umum';
+        $categoryAdvertorial = 'Advertorial';
 
 
         // Get news items for each category
@@ -85,6 +91,9 @@ class News extends Controller
         $Umum = ModelsNews::whereHas('Category', function ($query) use ($categoryUmum) {
             $query->where('name', $categoryUmum);
         })->orderBy('created_at', 'desc')->get();
+        $Advertorial = ModelsNews::whereHas('Category', function ($query) use ($categoryAdvertorial) {
+            $query->where('name', $categoryAdvertorial);
+        })->orderBy('created_at', 'desc')->get();
 
         // Calculate totals
         $totalBerita = $Berita->count();
@@ -95,7 +104,7 @@ class News extends Controller
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
 
-        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'Umum', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan'));
+        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'Umum', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan' , 'Advertorial'));
     }
     public function index_berita()
     {
@@ -239,10 +248,14 @@ class News extends Controller
      */
     public function show(string $id)
     {
-
-        //
         $data = ModelsNews::where('slug', $id)->first();
-        $readingTime = $data->readingTime();
+    // Check if the news item is found
+    if (!$data) {
+        // Handle the case where the news is not found
+        return redirect()->back()->with('error', 'News not found');
+    }
+    // Calculate the reading time
+    $readingTime = $data->readingTime();
         $jumlahBerita = \App\Models\News::selectRaw('categories.name as category_name, count(*) as total')
             ->join('categories', 'news.category_id', '=', 'categories.id')
             ->groupBy('categories.name')
@@ -258,6 +271,7 @@ class News extends Controller
         $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
             $query->where('name', $categoryBerita);
         })->get();
+        
 
         return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Berita'));
     }
