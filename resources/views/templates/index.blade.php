@@ -184,6 +184,20 @@
                     </div>
                 </div>
 
+                <div class="col-md-6 tn-left">
+                    <div class="row tn-slider">
+                        {{-- @foreach ($kanan as $kanan) --}}
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ @$kanan->image_url }}" />
+                                {{-- <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit amet</a>
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{-- @endforeach --}}
+                    </div>
+                </div>
 
                 {{-- <div class="col-md-6">
                     <div class="tn-img">

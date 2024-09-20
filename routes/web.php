@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\IklanController;
 use App\Http\Controllers\News;
 use App\Http\Controllers\ProfileController;
@@ -51,6 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    // chat
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat', [ChatController::class,'store'])->name('chat.store');
+    Route::get('/chat/fetch-messages', [ChatController::class, 'fetchMessages'])->name('chat.fetch-messages');
 });
 
 require __DIR__ . '/auth.php';
