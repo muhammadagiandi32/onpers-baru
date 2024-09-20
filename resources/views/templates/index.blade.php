@@ -184,49 +184,46 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 tn-left">
-                    <div class="row tn-slider">
+                <div class="col-md-6 tn-right">
+                    <div class="row">
                         {{-- @foreach ($kanan as $kanan) --}}
                         <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ @$kanan->image_url }}" />
+                            <div class="">
+                                <img style="width:500px;" src="{{ $kanan->image_url }}" />
                                 {{-- <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
+                                    <a href="">Lorem ipsum dolor sit</a>
                                 </div> --}}
                             </div>
                         </div>
-                        {{-- @endforeach --}}
-                    </div>
-                </div>
 
-                {{-- <div class="col-md-6">
-                    <div class="tn-img">
-                        <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                        <div class="tn-title">
-                            <a href="">Lorem ipsum dolor sit</a>
+                        {{-- <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
+                                <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
+                                <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
+                                <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="tn-img">
-                        <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                        <div class="tn-title">
-                            <a href="">Lorem ipsum dolor sit</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="tn-img">
-                        <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                        <div class="tn-title">
-                            <a href="">Lorem ipsum dolor sit</a>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <!-- Top News End-->
 
