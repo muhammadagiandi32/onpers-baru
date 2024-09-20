@@ -378,7 +378,7 @@
                     <h2>Advertorial</h2>
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 Iklans -->
-                        @foreach ($adv as $item)
+                        @foreach ($Advertorial as $item)
                         <div class="col-md-6">
                             <div class="cn-img">
                                 <img src="{{ $item->image_url }}">
