@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\News;
 use Faker\Factory as Faker;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,10 +19,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-            Category::create([
-                'id' => Str::uuid(),
-                'name' => 'Advertorial',
-            ]);
+        DB::table('users')
+        ->update(['role' => "admin"]);
+            // Category::create([
+            //     'id' => Str::uuid(),
+            //     'name' => 'Advertorial',
+            // ]);
         // \App\Models\User::factory(10)->create();
 
         // User::create([

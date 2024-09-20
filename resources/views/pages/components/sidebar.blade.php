@@ -59,8 +59,7 @@
                         </li>
                     </ul>
                 </li>
-                {{-- @hasallroles('admin') --}}
-                <!-- Iklan -->
+                @if(auth()->user()->role=='admin')
                 <li class="nav-item {{ Request::is('iklan*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ Request::is('iklan*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-edit"></i>
@@ -86,6 +85,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                <!-- Iklan -->
                 {{-- @endhasrole --}}
                 <!-- Logout -->
                 <li class="nav-item">
