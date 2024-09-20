@@ -383,7 +383,7 @@
                             <div class="cn-img">
                                 <img src="{{ $item->image_url }}">
                                 <div class="cn-title">
-                                    <a href="{{ route('news-details', $item->category_name) }}">
+                                    <a href="{{ route('news-details', $item->slug) }}">
                                         {{ $item->image_name}}
                                     </a>
                                 </div>
