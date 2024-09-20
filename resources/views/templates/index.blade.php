@@ -373,7 +373,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12">
                     <h2>Advertorial</h2>
                     <div class="row cn-slider">
@@ -384,7 +384,27 @@
                                 <img src="{{ $item->image_url }}">
                                 <div class="cn-title">
                                     <a href="{{ route('news-details', $item->slug) }}">
-                                        {{ $item->image_name}}
+                                        {{ $item->title}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div> --}}
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Advertorial</h2>
+                    <div class="row cn-slider">
+                        <!-- Mengelompokkan setiap 3 berita -->
+                        @foreach ($Advertorial as $adv)
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $adv->image_url }}" alt="{{ $adv->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $adv->slug) }}">
+                                        {{ $adv->title }}
                                     </a>
                                 </div>
                             </div>
