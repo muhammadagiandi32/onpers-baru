@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Dashboard</h1>
+                <h1>Inbox</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -43,7 +43,6 @@
                                     <li class="nav-item active">
                                         <a href="#" class="nav-link">
                                             <i class="fas fa-inbox"></i> Inbox
-                                            <span class="badge bg-primary float-right">12</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -59,45 +58,11 @@
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="fas fa-filter"></i> Junk
-                                            <span class="badge bg-warning float-right">65</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="far fa-trash-alt"></i> Trash
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Labels</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body p-0">
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle text-danger"></i>
-                                            Important
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle text-warning"></i> Promotions
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle text-primary"></i>
-                                            Social
                                         </a>
                                     </li>
                                 </ul>
@@ -145,19 +110,6 @@
                                     <button type="button" class="btn btn-default btn-sm">
                                         <i class="fas fa-sync-alt"></i>
                                     </button>
-                                    <div class="float-right">
-                                        1-50/200
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <i class="fas fa-chevron-left"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </button>
-                                        </div>
-
-                                    </div>
-
                                 </div>
                                 <div class="table-responsive mailbox-messages">
                                     <table class="table table-hover table-striped">
