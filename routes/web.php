@@ -56,8 +56,11 @@ Route::middleware('auth')->group(function () {
 
     // chat
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-    Route::post('/chat', [ChatController::class,'store'])->name('chat.store');
+    Route::post('/chat', [ChatController::class, 'store'])->name('chat.store'); // untuk menyimpan pesan
     Route::get('/chat/fetch-messages', [ChatController::class, 'fetchMessages'])->name('chat.fetch-messages');
+    Route::get('/chat/compose', [ChatController::class, 'compose'])->name('chat.compose'); // Rute untuk menyusun pesan
+    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send'); // Rute untuk mengirim pesan
+    
 });
 
 require __DIR__ . '/auth.php';

@@ -15,60 +15,42 @@ class ChatController extends Controller
         return view('pages.chat.index');
     }
 
+    /**
+     * Show the form for composing a message.
+     */
+    public function compose()
+    {
+        return view('pages.chat.compose'); // Mengarahkan ke tampilan compose
+    }
+
+    /**
+     * Store a newly created message in storage.
+     */
+    public function sendMessage(Request $request)
+    {
+        // Validasi data pesan
+        $request->validate([
+            'message' => 'required|string|max:255', // Misalnya, validasi untuk pesan
+        ]);
+
+        // Simpan pesan baru ke database
+        Chat::create([
+            'message' => $request->message,
+            // Tambahkan kolom lain sesuai dengan struktur tabel Anda
+        ]);
+
+        // Redirect atau mengembalikan tampilan setelah pengiriman
+        return redirect()->route('chat.index')->with('success', 'Pesan berhasil dikirim!');
+    }
+
     public function fetchMessages()
     {
         // Ambil semua pesan dari tabel chat
         $messages = Chat::all();
 
         // Kembalikan tampilan dengan data pesan
-        return view('pages.chat.chat_detail', compact('messages'));
+        return view('pages.chat.chat_detail');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    // Metode lain...
 }
