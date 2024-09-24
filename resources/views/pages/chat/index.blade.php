@@ -28,7 +28,7 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-3">
-
+                        <a href="{{ route('chat.fetch-messages') }}" class="btn btn-primary btn-block mb-3">Compose</a>
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Folders</h3>
