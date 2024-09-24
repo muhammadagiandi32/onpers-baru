@@ -32,6 +32,14 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('chat.index') }}" class="nav-link {{ Request::is('chat*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Chat</p>
+                    </a>
+                </li>
+
+
 
                 <!-- Berita -->
                 <li class="nav-item {{ Request::is('berita*') ? 'menu-open' : '' }}">

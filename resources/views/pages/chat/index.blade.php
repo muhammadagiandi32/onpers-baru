@@ -28,7 +28,7 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
+
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Folders</h3>
@@ -123,7 +123,8 @@
                                                 </td>
                                                 <td class="mailbox-star"><a href="#"><i
                                                             class="fas fa-star text-warning"></i></a></td>
-                                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a>
+                                                <td class="mailbox-name">
+                                                    <a href="{{ route('chat.fetch-messages') }}">Alexander Pierce</a>
                                                 </td>
                                                 <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a
                                                     solution to this problem...
@@ -133,8 +134,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
+
 
                             </div>
 

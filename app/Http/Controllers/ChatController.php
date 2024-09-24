@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Chat; // Menggunakan model Chat
 
 class ChatController extends Controller
 {
@@ -11,8 +12,16 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
         return view('pages.chat.index');
+    }
+
+    public function fetchMessages()
+    {
+        // Ambil semua pesan dari tabel chat
+        $messages = Chat::all();
+
+        // Kembalikan tampilan dengan data pesan
+        return view('pages.chat.chat_detail', compact('messages'));
     }
 
     /**
