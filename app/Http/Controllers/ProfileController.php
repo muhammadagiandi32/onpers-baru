@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -36,6 +37,14 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+    public function index()
+    {
+        $user = auth()->user(); // Ambil user yang sedang login
+        return view('profile.index', compact('user')); 
+        // Tampilkan halaman profile
+    }
+    
+
 
     /**
      * Delete the user's account.

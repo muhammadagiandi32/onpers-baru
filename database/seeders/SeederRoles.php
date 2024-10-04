@@ -24,7 +24,7 @@ class SeederRoles extends Seeder
         // Buat role jika belum ada
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $userRole = Role::firstOrCreate(['name' => 'user']);
-
+        Role::firstOrCreate(['name' => 'Wartawan', 'guard_name' => 'web']);
         // Buat permission jika belum ada
         $editArticlesPermission = Permission::firstOrCreate(['name' => 'edit articles']);
         $deleteArticlesPermission = Permission::firstOrCreate(['name' => 'delete articles']);

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
-
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -23,6 +23,14 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         return view('auth.register');
+    }
+    public function index()
+    {
+        // Ambil semua data pengguna dari database
+        $users = User::all(); 
+        
+        // Kirim data ke view
+        return view('your-view-name', compact('users')); 
     }
 
     /**
@@ -35,6 +43,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
+            'media' => ['required', 'string', 'max:255'], // Validasi untuk media
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -44,17 +53,19 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'media' => $request->media,
             'password' => Hash::make($request->password),
         ]);
 
 
         // Menetapkan role default untuk pengguna baru
-        $user->assignRole('user');
+        $user->assignRole($request->role);
 
+        // Proses lanjut
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
+
 }

@@ -122,33 +122,37 @@
                         </div>
 
                     </div>
+                    @php
+                    use App\Models\User;
+
+                    // Ambil semua data user
+                    $users = User::all();
+                    @endphp
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <tbody>
+                                @foreach($users as $user)
                                 <tr>
                                     <td>
                                         <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check1">
-                                            <label for="check1"></label>
+                                            <input type="checkbox" value="" id="check{{ $user->id }}">
+                                            <label for="check{{ $user->id }}"></label>
                                         </div>
                                     </td>
                                     <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a>
                                     </td>
-                                    <td class="mailbox-name"><a href="{{route('chat.fetch-messages')}}">Alexander
-                                            Pierce</a>
-                                    </td>
-                                    <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to
-                                        this problem...
-                                    </td>
-                                    <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date">5 mins ago</td>
-                                </tr>
-                                <tr>
+                                    <td class="mailbox-name"><a href="{{route('profile.index') }}">{{ $user->name
+                                            }}</a></td>
 
+                                    <td class="mailbox-subject"> <b>{{ $user->media }}</b></td>
+                                    <td class="mailbox-attachment"></td>
+                                    <td class="mailbox-date"><b>{{ $user->email }}</b></td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-
                     </div>
+
 
                 </div>
 

@@ -13,8 +13,8 @@
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -30,6 +30,16 @@
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
+
+        {{-- Media/instansi --}}
+        <!-- Media -->
+        <div class="mt-4">
+            <x-input-label for="media" :value="__('Media/Instansi')" />
+            <x-text-input id="media" class="block mt-1 w-full" type="text" name="media" :value="old('media')" required
+                autocomplete="media" />
+            <x-input-error :messages="$errors->get('media')" class="mt-2" />
+        </div>
+        {{-- End media --}}
 
         <!-- Password -->
         <div class="mt-4">
