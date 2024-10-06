@@ -9,4 +9,3 @@ class Chat extends Model
 {
     use HasFactory;
 }
-asdasdasdasdadssadasd
