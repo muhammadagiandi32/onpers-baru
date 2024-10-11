@@ -5,7 +5,7 @@ use App\Http\Controllers\IklanController;
 use App\Http\Controllers\News;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +62,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/fetch-messages', [ChatController::class, 'fetchMessages'])->name('chat.fetch-messages');
     Route::get('/chat/compose', [ChatController::class, 'compose'])->name('chat.compose'); // Rute untuk menyusun pesan
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send'); // Rute untuk mengirim pesan
-    
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('/chat', [MessageController::class, 'index'])->name('chat.index');
+    // Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('/chat/fetch-messages', [ChatController::class, 'fetchMessages'])->name('chat.fetch-messages');
+    //wartawan
+    Route::get('/wartawan', [App\Http\Controllers\UserController::class, 'wartawanIndex'])->name('wartawan.index');
+
+    //narasumber
+    Route::get('/narasumber', [App\Http\Controllers\UserController::class, 'narasumberIndex'])->name('narasumber.index');
+    //humas
+    Route::get('/humas', [App\Http\Controllers\UserController::class, 'humasIndex'])->name('humas.index');
+    //Jasa
+    Route::get('/jasa', [App\Http\Controllers\UserController::class, 'jasaIndex'])->name('jasa.index');
+    //umum
+    Route::get('/umum', [App\Http\Controllers\UserController::class, 'umumIndex'])->name('umum.index');
+    //info
+    Route::get('/info', [App\Http\Controllers\UserController::class, 'umumIndex'])->name('info.index');
+
 });
 
 require __DIR__ . '/auth.php';

@@ -1,14 +1,14 @@
 <?php
 
+// Model Message
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chat extends Model
+class Message extends Model
 {
     use HasFactory;
 
-    // Menambahkan kolom 'message' ke dalam $fillable
-    protected $fillable = ['message']; // Tambahkan kolom message
+    protected $fillable = ['sender', 'to', 'message'];
 }

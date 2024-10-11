@@ -292,7 +292,7 @@
                                 <div class="row gy-3 gy-md-4">
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card border-dark"
-                                            onclick="window.location='{{ route('chat.index') }}';"
+                                            onclick="window.location='{{ route('profile.index') }}';"
                                             style="cursor: pointer;">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="48" height="48"
@@ -307,7 +307,10 @@
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="card border-dark">
+                                        <div class="card border-dark"
+                                            onclick="window.location='{{ route('profile.index') }}';"
+                                            style="cursor: pointer;">
+
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -322,7 +325,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="card border-dark">
+                                        <div class="card border-dark"
+                                            onclick="window.location='{{ route('profile.index') }}';"
+                                            style="cursor: pointer;">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                     fill="#ff6f61" class="bi bi-clipboard-check-fill text-primary mb-4"
@@ -338,7 +343,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="card border-dark">
+                                        <div class="card border-dark"
+                                            onclick="window.location='{{ route('jasa.index') }}';"
+                                            style="cursor: pointer;">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                     fill="#ff6f61" class="bi bi-diamond-half text-primary mb-4"
@@ -352,7 +359,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="card border-dark">
+                                        <div class="card border-dark"
+                                            onclick="window.location='{{ route('profile.index') }}';"
+                                            style="cursor: pointer;">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                     fill="#ff6f61" class="bi bi-eraser-fill text-primary mb-4"
@@ -366,8 +375,10 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="card border-dark">
-                                            <div class="card-body text-center p-4 p-xxl-5">
+                                        <div class="card border-dark"
+                                            onclick="window.location='{{ route('info.index') }}';"
+                                            style="cursor: pointer;">>
+                                            <div class=" card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="48" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">

@@ -21,11 +21,12 @@
         </div>
     </div>
 </section>
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <a href="{{route('chat.index')}}" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
+                <a href="{{ route('chat.index') }}" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Folders</h3>
@@ -66,11 +67,7 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
-
-
-
             </div>
 
             <div class="col-md-9">
@@ -80,23 +77,21 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="form-group">
-                            <input class="form-control" placeholder="To:">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Subject:">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                        </textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="btn btn-default btn-file">
-                                <i class="fas fa-paperclip"></i> Attachment
-                                <input type="file" name="attachment">
+                        <form id="compose-form" action="{{ route('messages.store') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="email" value="{{ $email }}">
+                            <div class="form-group">
+                                <textarea id="compose-textarea" name="message" class="form-control"
+                                    style="height: 300px" required></textarea>
                             </div>
-                            <p class="help-block">Max. 32MB</p>
-                        </div>
+                            <div class="form-group">
+                                <div class="btn btn-default btn-file">
+                                    <i class="fas fa-paperclip"></i> Attachment
+                                    <input type="file" name="attachment">
+                                </div>
+                                <p class="help-block">Max. 32MB</p>
+                            </div>
                     </div>
 
                     <div class="card-footer">
@@ -107,17 +102,12 @@
                         </div>
                         <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
                     </div>
-
+                    </form>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </section>
-
-</div>
 
 @endsection
 

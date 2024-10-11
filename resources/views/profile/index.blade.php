@@ -31,8 +31,8 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="{{ $user->profile_picture }}"
-                                alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" {{-- src="{{ $user->profile_picture }}"
+                                --}} alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">{{ $user->name }}</h3>
                         <h4 class="text-muted text-center">{{ $user->media }}</h4>
@@ -41,7 +41,10 @@
                         <ul class="list-group list-group-unbordered mb-3">
                             <!-- Tambahkan informasi lain jika perlu -->
                         </ul>
-                        <a href="{{ route('chat.compose') }}" class="btn btn-primary btn-block"><b>Send Message</b></a>
+                        {{-- {{dd()}} --}}
+                        <a href="{{ route('chat.compose',['email'=>request()->route()->parameters['id']->email] ) }}"
+                            class="btn btn-primary btn-block"><b>Send
+                                Message</b></a>
                     </div>
                 </div>
 
@@ -76,6 +79,62 @@
                 </div>
 
             </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Messages</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="direct-chat-messages">
+                            <!-- Menampilkan pesan -->
+                            @if (isset($messages) && $messages->isNotEmpty())
+                            @foreach ($messages as $message)
+                            {{-- <img class="direct-chat-img"
+                                src="{{ $message->sender == $user->email? asset('customs/adminlte/dist/img/user1-128x128.jpg') : asset('customs/adminlte/dist/img/user2-160x160.jpg') }}"
+                                alt="User"> {{$message->name}}
+                            <div class="direct-chat-msg {{ $message->sender == $user->email?'right' : '' }}">
+                                <div class="direct-chat-info clearfix">
+                                    <span class="direct-chat-name float-left">{{ $message->message }}</span>
+                                    <span class="direct-chat-timestamp float-right">{{
+                                        $message->created_at->format('d-m-Y H:i') }}</span>
+                                </div>
+                            </div> --}}
+                            <div class="direct-chat-msg {{ $message->sender == $user->email ? 'right' : '' }}">
+                                <div class="direct-chat-info clearfix">
+                                    <!-- Menampilkan "You" jika pengirim adalah user yang sedang login -->
+                                    <span class="direct-chat-name float-left">
+                                        {{ $message->sender == $user->email ? 'You' : $message->name }}
+                                    </span>
+                                    <span class="direct-chat-timestamp float-right">
+                                        {{ $message->created_at->format('d-m-Y H:i') }}
+                                    </span>
+                                </div>
+                                <div class="direct-chat-text">
+                                    {{ $message->message }}
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
+                        </div>
+                        <div class="direct-chat-input">
+                            <form action="{{ route('messages.store') }}" method="post">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="hidden" name="sender" value="{{ auth()->user()->email }}">
+                                    <input type="hidden" name="to" value="{{ $to->email }}">
+                                    <input type="text" name="message" placeholder="Type message..."
+                                        class="form-control">
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">Send</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="
+            </div>
 
 
 
@@ -86,24 +145,38 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('customs/adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script src=" {{ asset('customs/adminlte/plugins/datatables/jquery.dataTables.min.js') }}">
+                    </script>
+                    <script
+                        src="{{ asset('customs/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
+                    </script>
+                    <script
+                        src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}">
+                    </script>
+                    <script
+                        src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}">
+                    </script>
+                    <script
+                        src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}">
+                    </script>
+                    <script
+                        src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}">
+                    </script>
+                    <script src="{{ asset('customs/adminlte/plugins/jszip/jszip.min.js') }}"></script>
+                    <script src="{{ asset('customs/adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+                    <script src="{{ asset('customs/adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+                    <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}">
+                    </script>
+                    <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}">
+                    </script>
+                    <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}">
+                    </script>
 
-<script>
-    $(document).ready(function() {
+                    <script>
+                        $(document).ready(function() {
         $('#table1').DataTable({
             // DataTable options
         });
     });
-</script>
-@endsection
+                    </script>
+                    @endsection

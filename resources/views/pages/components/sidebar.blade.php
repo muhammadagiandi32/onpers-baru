@@ -33,6 +33,45 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('wartawan.index') }}"
+                        class="nav-link {{ Request::is('wartawan*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Wartawan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('narasumber.index') }}"
+                        class="nav-link {{ Request::is('narasumber*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Narasumber</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('humas.index') }}" class="nav-link {{ Request::is('humas*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Humas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('jasa.index') }}" class="nav-link {{ Request::is('jasa*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Jasa</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('info.index') }}" class="nav-link {{ Request::is('info*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Info</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('profile.index') }}"
+                        class="nav-link {{ Request::is('profile*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('chat.index') }}" class="nav-link {{ Request::is('chat*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Chat</p>

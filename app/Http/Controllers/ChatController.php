@@ -18,30 +18,34 @@ class ChatController extends Controller
     /**
      * Show the form for composing a message.
      */
-    public function compose()
+    public function compose(Request $request)
     {
-        return view('pages.chat.compose'); // Mengarahkan ke tampilan compose
+        $email = $request->query(); // Ambil semua query string
+
+        // // atau spesifik ke email
+        $email = $request->get('email');
+        // dd($email);
+        return view('pages.chat.compose', ['email' => $email]);
     }
 
     /**
      * Store a newly created message in storage.
      */
     public function sendMessage(Request $request)
-    {
-        // Validasi data pesan
-        $request->validate([
-            'message' => 'required|string|max:255', // Misalnya, validasi untuk pesan
-        ]);
+{
+    // Validasi data pesan
+    $request->validate([
+        'message' => 'required|string|max:255', // Validasi pesan
+    ]);
 
-        // Simpan pesan baru ke database
-        Chat::create([
-            'message' => $request->message,
-            // Tambahkan kolom lain sesuai dengan struktur tabel Anda
-        ]);
+    // Simpan pesan baru ke database
+    Chat::create([
+        'message' => $request->message, // Isi kolom message
+    ]);
 
-        // Redirect atau mengembalikan tampilan setelah pengiriman
-        return redirect()->route('chat.index')->with('success', 'Pesan berhasil dikirim!');
-    }
+    // Redirect atau mengembalikan tampilan setelah pengiriman
+    return redirect()->route('chat.index')->with('success', 'Pesan berhasil dikirim!');
+}
 
     public function fetchMessages()
     {
