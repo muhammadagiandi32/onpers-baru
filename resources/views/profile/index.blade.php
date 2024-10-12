@@ -3,6 +3,25 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customs/adminlte/dist/css/adminlte.min.css') }}">
+<style>
+    .direct-chat-text.sender {
+    background-color: #8d9aff; /* warna hijau muda */
+    color: #000;
+}
+
+.direct-chat-text.receiver {
+    background-color: #004145; /* warna kuning muda */
+    color: #ffffff;
+}
+
+.direct-chat-name.sender {
+    color: #2eaacc; /* warna hijau tua */
+}
+
+.direct-chat-name.receiver {
+    color: #F1C40F; /* warna kuning tua */
+}
+</style>
 @endsection
 
 @section('content')
@@ -109,7 +128,7 @@
                                         {{ $message->created_at->format('d-m-Y H:i') }}
                                     </span>
                                 </div>
-                                <div class="direct-chat-text">
+                                <div class="direct-chat-text {{ $message->sender == $user->email ? 'sender' : 'receiver' }}">
                                     {{ $message->message }}
                                 </div>
                             </div>
@@ -132,8 +151,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="
             </div>
 
 
@@ -145,38 +162,78 @@
 @endsection
 
 @section('scripts')
-<script src=" {{ asset('customs/adminlte/plugins/datatables/jquery.dataTables.min.js') }}">
-                    </script>
-                    <script
-                        src="{{ asset('customs/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
-                    </script>
-                    <script
-                        src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}">
-                    </script>
-                    <script
-                        src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}">
-                    </script>
-                    <script
-                        src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}">
-                    </script>
-                    <script
-                        src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}">
-                    </script>
-                    <script src="{{ asset('customs/adminlte/plugins/jszip/jszip.min.js') }}"></script>
-                    <script src="{{ asset('customs/adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
-                    <script src="{{ asset('customs/adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
-                    <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}">
-                    </script>
-                    <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}">
-                    </script>
-                    <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}">
-                    </script>
+<script src="{{ asset('customs/adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script
+    src="{{ asset('customs/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
+</script>
+<script
+    src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}">
+</script>
+<script
+    src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}">
+</script>
+<script
+    src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}">
+</script>
+<script
+    src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}">
+</script>
+<script src="{{ asset('customs/adminlte/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('customs/adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('customs/adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}">
+</script>
+<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}">
+</script>
+<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}">
+</script>
+<!-- Include jQuery (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-                    <script>
-                        $(document).ready(function() {
-        $('#table1').DataTable({
-            // DataTable options
+<!-- Include Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    var chatMessages = $('.direct-chat-messages');
+    chatMessages.scrollTop(chatMessages[0].scrollHeight);
+
+    $('form').submit(function(event) {
+        event.preventDefault(); // prevent page reload
+        var formData = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('messages.store') }}",
+            data: formData,
+            success: function(data) {
+                // append the new message to the chat log
+                // console.log(data)
+                // return
+                var messageHTML = '<div class="direct-chat-msg ' + (data.sender == '{{ $user->email }}' ? 'right' : '') + '">' +
+                    '<div class="direct-chat-info clearfix">' +
+                    '<span class="direct-chat-name float-left">' +
+                        (data.sender == '{{ $user->email }}' ? 'You' : data.name) +
+                    '</span>' +
+                    '<span class="direct-chat-timestamp float-right">' + moment().format('D-M-YYYY H:mm') + '</span>' +
+                    '</div>' +
+                    '<div class="direct-chat-text ' + (data.sender == '{{ $user->email }}' ? 'sender' : 'receiver') + '">' +
+                        data.message +
+                    '</div>' +
+                    '</div>';
+                $('.direct-chat-messages').append(messageHTML);
+
+                  // Scroll ke bagian paling bawah
+    var chatMessages = $('.direct-chat-messages');
+    chatMessages.scrollTop(chatMessages[0].scrollHeight);
+                // clear the input field
+                $('input[name="message"]').val('');
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
         });
     });
-                    </script>
-                    @endsection
+});
+</script>
+@endsection

@@ -41,10 +41,10 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user(); // Ambil user yang sedang login
-        return view('profile.index', compact('user')); 
+        return view('profile.index', compact('user'));
         // Tampilkan halaman profile
     }
-    
+
     public function show(User $id)
     {
         // Ambil data user yang sedang login
@@ -54,21 +54,21 @@ class ProfileController extends Controller
         $messages = Message::where(function ($query) use ($user, $id) {
                 // Ambil pesan yang dikirim oleh user atau yang diterima oleh user
                 $query->where('sender', $user->email)
-                      ->where('to', $id->email);
+                    ->where('to', $id->email);
             })
             ->orWhere(function ($query) use ($user, $id) {
                 // Ambil pesan yang dikirim oleh orang lain ke user atau diterima oleh orang lain dari user
                 $query->where('sender', $id->email)
-                      ->where('to', $user->email);
+                    ->where('to', $user->email);
             })
             ->join('users', 'messages.sender', '=', 'users.email')  // Join untuk mendapatkan data nama pengirim
             ->orderBy('messages.created_at', 'asc')  // Urutkan pesan berdasarkan waktu
             ->get();
-    
+
         return view('profile.index', compact('user', 'messages', 'to'));
     }
-    
-    
+
+
 
 
     /**

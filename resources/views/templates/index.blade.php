@@ -153,8 +153,10 @@
                 <div class="col-12">
                     <div class="embed-responsive custom-video-height embed-responsive-4by3">
                         <video class="embed-responsive-item" controls>
+                            @if(isset($video))
                             <source src="{{ $video->url }}" type="video/mp4">
                             Your browser does not support the video tag.
+                            @endif
                         </video>
                     </div>
                 </div>
@@ -189,7 +191,9 @@
                         {{-- @foreach ($kanan as $kanan) --}}
                         <div class="col-md-6">
                             <div class="">
+                                @if(isset($kanan))
                                 <img style="width:500px;" src="{{ $kanan->image_url }}" />
+                                @endif
                                 {{-- <div class="tn-title">
                                     <a href="">Lorem ipsum dolor sit</a>
                                 </div> --}}

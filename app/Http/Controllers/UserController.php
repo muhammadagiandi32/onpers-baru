@@ -9,7 +9,7 @@ class UserController extends Controller
     public function wartawanIndex()
     {
         // Ambil semua user dengan role 'Wartawan'
-        $wartawanUsers = User::where('role', 'Wartawan')->get();
+        $wartawanUsers = User::where('role', 'Wartawan')->whereNot('email', auth()->user()->email)->get();
 
         // Kembalikan ke view 'index.blade.php' dengan data user Wartawan
         return view('wartawan.index', compact('wartawanUsers'));

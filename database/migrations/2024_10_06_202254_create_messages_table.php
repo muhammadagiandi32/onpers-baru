@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('sender'); // Untuk menyimpan pengirim
-            $table->string('to'); // Untuk menyimpan pengirim
+            // $table->string('to'); // Untuk menyimpan pengirim
             $table->text('message'); // Untuk menyimpan isi pesan
             $table->timestamps();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.
