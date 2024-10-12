@@ -348,7 +348,7 @@
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card border-dark"
-                                            onclick="window.location='{{ route('jasa.index') }}';"
+                                            {{-- onclick="window.location='{{ route('jasa.index') }}';" --}}
                                             style="cursor: pointer;">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
