@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/wartawan', [App\Http\Controllers\UserController::class, 'wartawanIndex'])->name('wartawan.index');
 
     //narasumber
-    Route::get('/narasumber', [App\Http\Controllers\UserController::class, 'narasumberIndex'])->name('narasumber.index');
+    Route::get('/narasumber', [App\Http\Controllers\UserController::class, 'narasumber'])->name('narasumber.index');
     //humas
     Route::get('/humas', [App\Http\Controllers\UserController::class, 'humasIndex'])->name('humas.index');
     //Jasa

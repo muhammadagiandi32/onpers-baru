@@ -15,11 +15,15 @@ class UserController extends Controller
         return view('wartawan.index', compact('wartawanUsers'));
 
     }
-    public function narasumberIndex()
-{
-    $narasumberUsers = User::where('role', 'Narasumber')->get();
-    return view('narasumber.index', compact('narasumberUsers'));
-}
+    public function narasumber()
+    {
+        // Ambil data user dengan role 'Narasumber'
+        $narasumber = User::where('role', 'Narasumber')->get();
+    
+        // Kirim data ke view
+        return view('narasumber.index', compact('narasumber'));
+    }
+    
 public function humasIndex()
 {
     $humasUsers = User::where('role', 'Humas')->get();

@@ -160,7 +160,24 @@
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <tbody>
-
+                                @if($narasumber->isEmpty())
+                                <tr>
+                                    <td colspan="4" class="text-center">Tidak ada data wartawan.</td>
+                                </tr>
+                                @else
+                                @foreach($narasumber as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td>
+                                        <a href="{{ route('profile.show', $user->id) }}">
+                                            {{ $user->name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
+                                </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
 

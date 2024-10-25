@@ -5,22 +5,26 @@
 <link rel="stylesheet" href="{{ asset('customs/adminlte/dist/css/adminlte.min.css') }}">
 <style>
     .direct-chat-text.sender {
-    background-color: #8d9aff; /* warna hijau muda */
-    color: #000;
-}
+        background-color: #8d9aff;
+        /* warna hijau muda */
+        color: #000;
+    }
 
-.direct-chat-text.receiver {
-    background-color: #004145; /* warna kuning muda */
-    color: #ffffff;
-}
+    .direct-chat-text.receiver {
+        background-color: #004145;
+        /* warna kuning muda */
+        color: #ffffff;
+    }
 
-.direct-chat-name.sender {
-    color: #2eaacc; /* warna hijau tua */
-}
+    .direct-chat-name.sender {
+        color: #2eaacc;
+        /* warna hijau tua */
+    }
 
-.direct-chat-name.receiver {
-    color: #F1C40F; /* warna kuning tua */
-}
+    .direct-chat-name.receiver {
+        color: #F1C40F;
+        /* warna kuning tua */
+    }
 </style>
 @endsection
 
@@ -61,9 +65,10 @@
                             <!-- Tambahkan informasi lain jika perlu -->
                         </ul>
                         {{-- {{dd()}} --}}
-                        <a href="{{ route('chat.compose',['email'=>request()->route()->parameters['id']->email] ) }}"
-                            class="btn btn-primary btn-block"><b>Send
-                                Message</b></a>
+                        <a href="{{ route('chat.compose', ['email' => $user ? $user->email : 'default@example.com'] ) }}"
+                            class="btn btn-primary btn-block">
+                            <b>Kirim Pesan</b>
+                        </a>
                     </div>
                 </div>
 
@@ -128,7 +133,8 @@
                                         {{ $message->created_at->format('d-m-Y H:i') }}
                                     </span>
                                 </div>
-                                <div class="direct-chat-text {{ $message->sender == $user->email ? 'sender' : 'receiver' }}">
+                                <div
+                                    class="direct-chat-text {{ $message->sender == $user->email ? 'sender' : 'receiver' }}">
                                     {{ $message->message }}
                                 </div>
                             </div>
@@ -140,7 +146,12 @@
                                 @csrf
                                 <div class="input-group">
                                     <input type="hidden" name="sender" value="{{ auth()->user()->email }}">
+                                    @if(isset($to))
                                     <input type="hidden" name="to" value="{{ $to->email }}">
+                                    @else
+                                    <p>User tidak ditemukan.</p>
+                                    @endif
+
                                     <input type="text" name="message" placeholder="Type message..."
                                         class="form-control">
                                     <span class="input-group-append">
@@ -163,20 +174,15 @@
 
 @section('scripts')
 <script src="{{ asset('customs/adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script
-    src="{{ asset('customs/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
+<script src="{{ asset('customs/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
 </script>
-<script
-    src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}">
+<script src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}">
 </script>
-<script
-    src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}">
+<script src="{{ asset('customs/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}">
 </script>
-<script
-    src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}">
+<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}">
 </script>
-<script
-    src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}">
+<script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}">
 </script>
 <script src="{{ asset('customs/adminlte/plugins/jszip/jszip.min.js') }}"></script>
 <script src="{{ asset('customs/adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
@@ -194,7 +200,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
     var chatMessages = $('.direct-chat-messages');
     chatMessages.scrollTop(chatMessages[0].scrollHeight);
 
