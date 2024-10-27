@@ -17,10 +17,68 @@
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+
 
     <link rel="stylesheet" href="{{ asset('customs/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
+    <style>
+       .story-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: black;
+        }
+        .story-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .progress-bar-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-bar-inner {
+            height: 100%;
+            background-color: white;
+            width: 0;
+            transition: width linear;
+        }
+        /* Styling panah back dan next */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+            user-select: none;
+        }
+        .arrow-left {
+            left: 10px;
+        }
+        .arrow-right {
+            right: 10px;
+        }
+    </style>
     <style>
         .card-img-top {
             width: 100%;
@@ -300,8 +358,8 @@
                                             style="cursor: pointer;">
                                             <div class="card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="48" height="48"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
                                                     <path
                                                         d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                                                 </svg>
@@ -316,10 +374,9 @@
                                             style="cursor: pointer;">
 
                                             <div class="card-body text-center p-4 p-xxl-5">
-                                                <svg fill="#ff6f61" width="" height="48"
+                                                <svg fill="#ff6f61" width="48" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
-                                                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                     <path
                                                         d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM609.3 512l-137.8 0c5.4-9.4 8.6-20.3 8.6-32l0-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2l61.4 0C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
                                                 </svg>
@@ -386,7 +443,6 @@
                                                 <svg fill="#ff6f61" width="48" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
-                                                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                     <path
                                                         d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                                                 </svg>
@@ -420,6 +476,25 @@
                     </div>
                 </div>
             </div> --}}
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Video Story</h2>
+                    <div class="story-container">
+                        <!-- Progress Bars -->
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                            <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                            <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                        </div>
+                        <!-- Video Story -->
+                        <video id="story-video" class="story-video" autoplay muted playsinline></video>
+
+                        <!-- Tombol Panah Kiri dan Kanan -->
+                        <i class="bi bi-chevron-left arrow-btn arrow-left" id="back-btn"></i>
+                        <i class="bi bi-chevron-right arrow-btn arrow-right" id="next-btn"></i>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <h2>Advertorial</h2>
@@ -769,6 +844,55 @@
                 });
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const videos = [
+                'https://is3.cloudhost.id/onpers-storage/onpers-storage/3833491-hd_1080_1920_30fps.mp4?AWSAccessKeyId=3Z3FY08F21R6YIBH8S5O&Expires=1730059777&Signature=LYiIrl4uuggMM1QDU6qK9C07oJg%3D',
+                'https://is3.cloudhost.id/onpers-storage/onpers-storage/15826249-hd_1920_1080_30fps.mp4?AWSAccessKeyId=3Z3FY08F21R6YIBH8S5O&Expires=1730643643&Signature=syl44zFdv9q73eLvYFyFOz5v4Hk%3D',
+                'https://is3.cloudhost.id/onpers-storage/onpers-storage/3833491-hd_1080_1920_30fps.mp4?AWSAccessKeyId=3Z3FY08F21R6YIBH8S5O&Expires=1730059777&Signature=LYiIrl4uuggMM1QDU6qK9C07oJg%3D'
+            ];
+            let currentVideoIndex = 0;
+            const videoElement = document.getElementById('story-video');
+            const progressBars = document.querySelectorAll('.progress-bar-inner');
+            const backBtn = document.getElementById('back-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            function loadVideo(index) {
+                videoElement.src = videos[index];
+                videoElement.play();
+                updateProgress(index);
+            }
+
+            function updateProgress(index) {
+                // Reset all progress bars
+                progressBars.forEach(bar => bar.style.width = '0');
+                // Animate the current progress bar
+                const currentBar = progressBars[index];
+                currentBar.style.transitionDuration = `${videoElement.duration}s`;
+                currentBar.style.width = '100%';
+                // Handle when the video ends
+                videoElement.onended = nextVideo;
+            }
+
+            function nextVideo() {
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                loadVideo(currentVideoIndex);
+            }
+
+            function previousVideo() {
+                // Handle back navigation, wrapping around if at the start
+                currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+                loadVideo(currentVideoIndex);
+            }
+
+            // Start with the first video
+            loadVideo(currentVideoIndex);
+
+            // Event listeners for buttons
+            nextBtn.addEventListener('click', nextVideo);
+            backBtn.addEventListener('click', previousVideo);
+        });
+
     </script>
 
 
