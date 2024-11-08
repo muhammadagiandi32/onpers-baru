@@ -55,6 +55,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
+    Route::get('/upload-video-news', [IklanController::class, 'upload_video_news'])->name('iklan.video');
+    Route::post('/upload-video-news-post', [IklanController::class, 'upload_video_news_post'])->name('iklan.video_news');
+
+
 
     // chat
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');

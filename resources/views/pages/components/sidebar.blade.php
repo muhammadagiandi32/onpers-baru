@@ -130,6 +130,13 @@
                                 <p>Upload Iklan</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('iklan.video') }}"
+                                class="nav-link {{ Request::is('post-berita/upload-video-news') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Upload Video News</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 @endif

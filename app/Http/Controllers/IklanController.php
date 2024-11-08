@@ -31,6 +31,26 @@ class IklanController extends Controller
         return view('pages.dashboard.iklan');
     }
 
+    public function upload_video_news(Request $request){
+        return view('pages.dashboard.video_news');
+    }
+    public function upload_video_news_post(Request $request){
+
+        // $path = $request->file('file')->store('s3');
+        // $url = Storage::disk('s3')->url($path);
+
+        $file = $request->file('file');
+        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+        Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+
+        // Simpan informasi file ke database
+        $file = new Video();
+        $file->filename = $request->file('file')->getClientOriginalName();
+        $file->url = Storage::disk('s3')->url($filename);
+        $file->save();
+
+        return back()->with('success', 'File uploaded successfully')->with('file_id', $file->id);
+    }
     /**
      * Store a newly created resource in storage.
      */
