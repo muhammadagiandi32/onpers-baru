@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Iklan;
 use App\Models\Video;
+use App\Models\VideoNewsIklan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -44,9 +45,10 @@ class IklanController extends Controller
         Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
 
         // Simpan informasi file ke database
-        $file = new Video();
-        $file->filename = $request->file('file')->getClientOriginalName();
-        $file->url = Storage::disk('s3')->url($filename);
+        $file = new VideoNewsIklan();
+        $file->id = Str::uuid();
+        $file->video_name = $request->file('file')->getClientOriginalName();
+        $file->video_url = Storage::disk('s3')->url($filename);
         $file->save();
 
         return back()->with('success', 'File uploaded successfully')->with('file_id', $file->id);
@@ -132,6 +134,14 @@ class IklanController extends Controller
 
         return back()->with('success', 'File uploaded successfully')->with('file_id', $file->id);
     }
+
+    public function getVideoNews()
+    {
+        $videos = VideoNewsIklan::orderBy('created_at', 'desc')->take(5)->pluck('video_url');
+
+        return response()->json($videos);
+    }
+
     /**
      * Display the specified resource.
      */

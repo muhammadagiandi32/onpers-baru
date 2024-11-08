@@ -482,9 +482,6 @@
                     <div class="story-container">
                         <!-- Progress Bars -->
                         <div class="progress-bar-container">
-                            <div class="progress-bar"><div class="progress-bar-inner"></div></div>
-                            <div class="progress-bar"><div class="progress-bar-inner"></div></div>
-                            <div class="progress-bar"><div class="progress-bar-inner"></div></div>
                         </div>
                         <!-- Video Story -->
                         <video id="story-video" class="story-video" autoplay muted playsinline></video>
@@ -846,51 +843,56 @@
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            const videos = [
-                'https://is3.cloudhost.id/onpers-storage/onpers-storage/3833491-hd_1080_1920_30fps.mp4?AWSAccessKeyId=3Z3FY08F21R6YIBH8S5O&Expires=1730059777&Signature=LYiIrl4uuggMM1QDU6qK9C07oJg%3D',
-                'https://is3.cloudhost.id/onpers-storage/onpers-storage/15826249-hd_1920_1080_30fps.mp4?AWSAccessKeyId=3Z3FY08F21R6YIBH8S5O&Expires=1730643643&Signature=syl44zFdv9q73eLvYFyFOz5v4Hk%3D',
-                'https://is3.cloudhost.id/onpers-storage/onpers-storage/3833491-hd_1080_1920_30fps.mp4?AWSAccessKeyId=3Z3FY08F21R6YIBH8S5O&Expires=1730059777&Signature=LYiIrl4uuggMM1QDU6qK9C07oJg%3D'
-            ];
-            let currentVideoIndex = 0;
-            const videoElement = document.getElementById('story-video');
-            const progressBars = document.querySelectorAll('.progress-bar-inner');
-            const backBtn = document.getElementById('back-btn');
-            const nextBtn = document.getElementById('next-btn');
 
-            function loadVideo(index) {
-                videoElement.src = videos[index];
-                videoElement.play();
-                updateProgress(index);
-            }
+            $.get(@json(route('iklan.getVideoNews')), {}).done(function (data) {
 
-            function updateProgress(index) {
-                // Reset all progress bars
-                progressBars.forEach(bar => bar.style.width = '0');
-                // Animate the current progress bar
-                const currentBar = progressBars[index];
-                currentBar.style.transitionDuration = `${videoElement.duration}s`;
-                currentBar.style.width = '100%';
-                // Handle when the video ends
-                videoElement.onended = nextVideo;
-            }
+                data.forEach(function(item) {
+                    $('.progress-bar-container').append('<div class="progress-bar"><div class="progress-bar-inner"></div></div>');
+                });
 
-            function nextVideo() {
-                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                const videos = data;
+                let currentVideoIndex = 0;
+                const videoElement = document.getElementById('story-video');
+                const progressBars = document.querySelectorAll('.progress-bar-inner');
+                const backBtn = document.getElementById('back-btn');
+                const nextBtn = document.getElementById('next-btn');
+
+                function loadVideo(index) {
+                    videoElement.src = videos[index];
+                    videoElement.play();
+                    updateProgress(index);
+                }
+
+                function updateProgress(index) {
+                    // Reset all progress bars
+                    progressBars.forEach(bar => bar.style.width = '0');
+                    // Animate the current progress bar
+                    const currentBar = progressBars[index];
+                    currentBar.style.transitionDuration = `${videoElement.duration}s`;
+                    currentBar.style.width = '100%';
+                    // Handle when the video ends
+                    videoElement.onended = nextVideo;
+                }
+
+                function nextVideo() {
+                    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                    loadVideo(currentVideoIndex);
+                }
+
+                function previousVideo() {
+                    // Handle back navigation, wrapping around if at the start
+                    currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+                    loadVideo(currentVideoIndex);
+                }
+
+                // Start with the first video
                 loadVideo(currentVideoIndex);
-            }
 
-            function previousVideo() {
-                // Handle back navigation, wrapping around if at the start
-                currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-                loadVideo(currentVideoIndex);
-            }
+                // Event listeners for buttons
+                nextBtn.addEventListener('click', nextVideo);
+                backBtn.addEventListener('click', previousVideo);
+            })
 
-            // Start with the first video
-            loadVideo(currentVideoIndex);
-
-            // Event listeners for buttons
-            nextBtn.addEventListener('click', nextVideo);
-            backBtn.addEventListener('click', previousVideo);
         });
 
     </script>

@@ -84,6 +84,8 @@ Route::middleware('auth')->group(function () {
     //info
     Route::get('/info', [App\Http\Controllers\UserController::class, 'umumIndex'])->name('info.index');
 
+    Route::get('/get-video-news', [IklanController::class, 'getVideoNews'])->name('iklan.getVideoNews');
+
 });
 
 require __DIR__ . '/auth.php';
