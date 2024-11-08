@@ -35,7 +35,7 @@
                         <label for="file">Upload file</label>
                         <input type="file" class="form-control-file" id="file" name="file" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit">Upload</button>
                 </form>
             </div>
         </div>
@@ -84,9 +84,12 @@
 
 
             $("#videoUpload").on("submit", function(e) {
-                e.preventDefault(); // Mencegah form submit secara default
-                // console.log('ini video');
-                // return;
+                e.preventDefault();
+
+                $('#btn-submit').attr('type', 'button');
+                $('#btn-submit').html('Loading...');
+                $('#btn-submit').addClass('btn-info');
+
                 let formData = new FormData(this);
 
                 $.ajax({
@@ -96,6 +99,10 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
+                        $('#btn-submit').attr('type', 'submit');
+                        $('#btn-submit').html('Upload');
+                        $('#btn-submit').removeClass('btn-secondary');
+
                         // Berhasil
                         alert("Berita berhasil ditambahkan!");
 
