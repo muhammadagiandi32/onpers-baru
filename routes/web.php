@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/compose', [ChatController::class, 'compose'])->name('chat.compose'); // Rute untuk menyusun pesan
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send'); // Rute untuk mengirim pesan
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
-    Route::get('/chat', [MessageController::class, 'index'])->name('chat.index');
+    // Route::get('/chat', [MessageController::class, 'index'])->name('chat.index');
     // Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
     Route::get('/chat/fetch-messages', [ChatController::class, 'fetchMessages'])->name('chat.fetch-messages');
     //wartawan

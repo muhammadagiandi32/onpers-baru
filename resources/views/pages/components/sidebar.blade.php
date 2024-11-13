@@ -65,14 +65,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('profile.index') }}"
-                        class="nav-link {{ Request::is('profile*') ? 'active' : '' }}">
+                    <a href="{{ route('chat.index') }}" class="nav-link {{ Request::is('chat*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Umum</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('chat.index') }}" class="nav-link {{ Request::is('chat*') ? 'active' : '' }}">
+                    <a href="{{ route('profile.index') }}"
+                        class="nav-link {{ Request::is('profile*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Chat</p>
                     </a>

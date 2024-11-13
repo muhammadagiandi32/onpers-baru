@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Inbox</h1>
+                <h1>Profile</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -22,10 +22,11 @@
     </div>
 </section>
 
+
 <section class="content">
     <div class="row">
         <div class="col-md-3">
-            <a href="{{ route('chat.compose') }}" class="btn btn-primary btn-block mb-3">Send Message</a>
+            <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Folders</h3>
@@ -40,17 +41,14 @@
                         <li class="nav-item active">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-inbox"></i> Inbox
-                                <span class="badge bg-primary float-right">{{ $messages->count() }}</span>
+                                <span class="badge bg-primary float-right">12</span>
                             </a>
                         </li>
-                        {{-- @foreach ($messages as $message)
                         <li class="nav-item">
-                            <a href="{{ route('chat.fetch-messages', ['id' => $message->id]) }}" class="nav-link">
-                                <i class="far fa-envelope"></i> {{ $message->subject }}
-                                <span class="float-right">{{ $message->sender }}</span>
+                            <a href="#" class="nav-link">
+                                <i class="far fa-envelope"></i> Sent
                             </a>
                         </li>
-                        @endforeach --}}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-file-alt"></i> Drafts
@@ -71,6 +69,40 @@
                 </div>
 
             </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Labels</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle text-danger"></i>
+                                Important
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle text-warning"></i> Promotions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle text-primary"></i>
+                                Social
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
         </div>
 
         <div class="col-md-9">
@@ -87,54 +119,69 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="card-body p-0">
                     <div class="mailbox-controls">
-                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
-                                class="far fa-square"></i></button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm"><i
-                                    class="far fa-trash-alt"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
-                        </div>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
-                        <div class="float-right">
-                            {{ $messages->count() }} Messages
-                        </div>
-                    </div>
 
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
+                                class="far fa-square"></i>
+                        </button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-reply"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
+
+                        <button type="button" class="btn btn-default btn-sm">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="float-right">
+                            1-50/200
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <tbody>
-                                @foreach($messages as $message)
+
+                                @if(empty($wartawanUsers))
                                 <tr>
+                                    <td colspan="4" class="text-center">Tidak ada data wartawan.</td>
+                                </tr>
+                                @else
+                                @foreach($wartawanUsers as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+
                                     <td>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check{{ $message->id }}">
-                                            <label for="check{{ $message->id }}"></label>
-                                        </div>
-                                    </td>
-                                    <td class="mailbox-name">
-                                        <a href="{{ route('chat.fetch-messages', ['id' => $message->id]) }}">
-                                            <b>{{ $message->sender }}</b>
+                                        <a href="{{ route('profile.show', $user->id) }}">
+                                            {{ $user->name }}
                                         </a>
+                                        <br>
+                                        <small>{{ $user->media }}</small>
                                     </td>
-                                    <td class="mailbox-subject">
-                                        {{-- <a href="{{ route('chat.fetch-messages', ['id' => $message->id]) }}"> --}}
-                                            {{ Str::limit($message->message, 50, '...') }}
-                                            <!-- Singkatkan isi pesan di sini -->
-                                        </a>
-                                    </td>
-                                    <td class="mailbox-attachment">
-                                        @if ($message->attachments && $message->attachments->isNotEmpty())
-                                        <i class="fas fa-paperclip"></i>
-                                        @endif
-                                    </td>
-                                    <td class="mailbox-date">{{ $message->created_at->format('d M Y H:i') }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
                                 </tr>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
 
@@ -144,23 +191,46 @@
 
                 <div class="card-footer p-0">
                     <div class="mailbox-controls">
-                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
-                                class="far fa-square"></i></button>
+
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                            <i class="far fa-square"></i>
+                        </button>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm"><i
-                                    class="far fa-trash-alt"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-reply"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-share"></i>
+                            </button>
                         </div>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+
+                        <button type="button" class="btn btn-default btn-sm">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
                         <div class="float-right">
-                            {{ $messages->count() }} Messages
+                            1-50/200
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
+
 </section>
 @endsection
 
