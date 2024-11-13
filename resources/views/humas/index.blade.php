@@ -160,6 +160,8 @@
                                     <td>
                                         <a href="{{ route('profile.show', $user->id) }}">
                                             {{ $user->name }}
+                                             <br>
+                                        <small>{{ $user->media }}</small>
                                         </a>
                                     </td>
                                     <td>{{ $user->email }}</td>
