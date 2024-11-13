@@ -41,7 +41,7 @@ class ProfileController extends Controller
     public function index()
     {
         // $wartawanUsers = auth()->user(); // Ambil user yang sedang login
-        $narasumber = User::where('role', 'Umum')->get();
+        $wartawanUsers = User::where('role', 'Umum')->get();
 
         return view('profile.index', compact('wartawanUsers'));
         // Tampilkan halaman profile
