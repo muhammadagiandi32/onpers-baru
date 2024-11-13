@@ -174,6 +174,7 @@
                                         <a href="{{ route('profile.show', $user->id) }}">
                                             {{ $user->name }}
                                         </a>
+                                        <br>
                                         <small>{{ $user->media }}</small>
                                     </td>
                                     <td>{{ $user->email }}</td>
