@@ -40,8 +40,8 @@ class ProfileController extends Controller
     }
     public function index()
     {
-        $wartawan = auth()->user(); // Ambil user yang sedang login
-        return view('profile.index', compact('wartawan'));
+        $wartawanUsers = auth()->user(); // Ambil user yang sedang login
+        return view('profile.index', compact('wartawanUsers'));
         // Tampilkan halaman profile
     }
 
