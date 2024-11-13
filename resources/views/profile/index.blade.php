@@ -161,7 +161,7 @@
                         <table class="table table-hover table-striped">
                             <tbody>
 
-                                @if($wartawanUsers->isEmpty())
+                                @if(empty($wartawanUsers))
                                 <tr>
                                     <td colspan="4" class="text-center">Tidak ada data wartawan.</td>
                                 </tr>
