@@ -142,6 +142,7 @@ class News extends Controller
     {
         // Ambil role pengguna saat ini
         $role = Auth::user()->getRoleNames()->first();
+        // dd($role);
 
         // Filter kategori berdasarkan role pengguna
         $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa']), function ($query) {

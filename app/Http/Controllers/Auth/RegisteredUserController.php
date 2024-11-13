@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
 
 
         // Menetapkan role default untuk pengguna baru
-        // $user->assignRole($request->role);
+        $user->assignRole($request->role);
 
         // Proses lanjut
         event(new Registered($user));
