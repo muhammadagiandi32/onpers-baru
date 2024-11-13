@@ -27,10 +27,10 @@ class RegisteredUserController extends Controller
     public function index()
     {
         // Ambil semua data pengguna dari database
-        $users = User::all(); 
-        
+        $users = User::all();
+
         // Kirim data ke view
-        return view('your-view-name', compact('users')); 
+        return view('your-view-name', compact('users'));
     }
 
     /**
@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
 
 
         // Menetapkan role default untuk pengguna baru
-        $user->assignRole($request->role);
+        // $user->assignRole($request->role);
 
         // Proses lanjut
         event(new Registered($user));

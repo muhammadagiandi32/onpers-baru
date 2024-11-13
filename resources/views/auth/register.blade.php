@@ -27,6 +27,8 @@
                 <option value="Wartawan">Wartawan</option>
                 <option value="Narasumber">Narasumber</option>
                 <option value="Jasa">Jasa</option>
+                <option value="Humas">Humas</option>
+
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
