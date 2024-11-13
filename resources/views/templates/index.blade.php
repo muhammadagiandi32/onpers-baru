@@ -27,8 +27,8 @@
        .story-container {
             position: relative;
             width: 100%;
-            max-width: 400px;
-            height: 700px;
+            max-width: 1000px;
+            height: 400px;
             margin: 0 auto;
             overflow: hidden;
             border-radius: 10px;
@@ -478,7 +478,7 @@
             </div> --}}
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Video Story</h2>
+                    <h2>Video News</h2>
                     <div class="story-container">
                         <!-- Progress Bars -->
                         <div class="progress-bar-container">
