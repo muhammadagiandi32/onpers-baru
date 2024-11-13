@@ -12,7 +12,11 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('pages.chat.index');
+        // Tampilkan halaman profile
+        // $wartawanUsers = auth()->user(); // Ambil user yang sedang login
+        $wartawanUsers = User::where('role', 'Umum')->get();
+
+        return view('pages.chat.index', compact('wartawanUsers'));
     }
 
     /**

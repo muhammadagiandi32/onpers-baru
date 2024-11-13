@@ -40,11 +40,8 @@ class ProfileController extends Controller
     }
     public function index()
     {
-        // $wartawanUsers = auth()->user(); // Ambil user yang sedang login
-        $wartawanUsers = User::where('role', 'Umum')->get();
-
-        return view('profile.index', compact('wartawanUsers'));
-        // Tampilkan halaman profile
+        $user = auth()->user(); // Ambil user yang sedang login
+        return view('profile.index', compact('user'));
     }
 
     public function show(User $id)
