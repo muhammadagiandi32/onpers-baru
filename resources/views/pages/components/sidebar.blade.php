@@ -59,15 +59,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('info.index') }}" class="nav-link {{ Request::is('info*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Info</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('chat.index') }}" class="nav-link {{ Request::is('chat*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Umum</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('info.index') }}" class="nav-link {{ Request::is('info*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Info</p>
                     </a>
                 </li>
                 <li class="nav-item">
