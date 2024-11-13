@@ -145,7 +145,7 @@ class News extends Controller
         // dd($role);
 
         // Filter kategori berdasarkan role pengguna
-        $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa']), function ($query) {
+        $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa', 'Humas']), function ($query) {
                 return $query->whereIn('name', ['Acara', 'Rilis']); // Kategori yang ditampilkan untuk role user
             })
             ->when($role === 'admin', function ($query) {
