@@ -168,7 +168,7 @@
                                 @else
                                 @foreach($wartawanUsers as $user)
                                 <tr>
-                                    {{-- <td>{{ $user->id }}</td> --}}
+                                    <td>{{ $user->id }}</td>
 
                                     <td>
                                         <a href="{{ route('profile.show', $user->id) }}">
