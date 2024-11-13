@@ -169,9 +169,11 @@
                                 @foreach($wartawanUsers as $user)
                                 <tr>
                                     <td>{{ $user->id }}</td>
+
                                     <td>
                                         <a href="{{ route('profile.show', $user->id) }}">
                                             {{ $user->name }}
+                                            {{ $user->media }}
                                         </a>
                                     </td>
                                     <td>{{ $user->email }}</td>

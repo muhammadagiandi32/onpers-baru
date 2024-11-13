@@ -65,10 +65,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('profile.index') }}"
+                    <a href="{{ route('story-video') }}"
                         class="nav-link {{ Request::is('profile*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Profile</p>
+                        <p>Umum</p>
                     </a>
                 </li>
                 <li class="nav-item">
