@@ -50,7 +50,7 @@ class News extends Controller
         $Advertorial = ModelsNews::whereHas('Category', function ($query) use ($categoryAdvertorial) {
             $query->where('name', $categoryAdvertorial);
         })->orderBy('created_at', 'desc')->get();
-        
+
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
@@ -145,13 +145,13 @@ class News extends Controller
 
         // Filter kategori berdasarkan role pengguna
         $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa']), function ($query) {
-                return $query->whereIn('name', ['Acara', 'Rilis', 'Berita']); // Kategori yang ditampilkan untuk role user
+                return $query->whereIn('name', ['Acara', 'Rilis']); // Kategori yang ditampilkan untuk role user
             })
             ->when($role === 'admin', function ($query) {
                 return $query; // Tampilkan semua kategori untuk admin
             })
             ->get();
-        
+
         return view('pages.dashboard.input_berita', compact('categories'));
     }
 
@@ -272,7 +272,7 @@ class News extends Controller
         $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
             $query->where('name', $categoryBerita);
         })->get();
-        
+
 
         return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Berita'));
     }
