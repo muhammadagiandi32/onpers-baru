@@ -104,6 +104,10 @@
 <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('customs/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
+<script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('customs/adminlte/dist/js/adminlte.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $('#table1').DataTable({
