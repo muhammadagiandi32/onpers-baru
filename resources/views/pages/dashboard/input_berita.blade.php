@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customs/adminlte/dist/css/adminlte.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/summernote/summernote-bs4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/summernote/summernote.min.css') }}">
+<!-- Summernote CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote.min.css" rel="stylesheet">
+
 @endsection
 @section( 'content')
 <!-- Content Header (Page header) -->
@@ -718,15 +722,15 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('customs/adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('customs/adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
-<!-- Page specific script -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+
+  <script>
+        document.addEventListener("DOMContentLoaded", function() {
             if (typeof $ !== 'undefined') {
                 $("#summernote").summernote();
             } else {
@@ -739,7 +743,6 @@
                 };
                 reader.readAsDataURL(this.files[0]);
             });
-
             $('#exampleInputFile').change(function() {
                 let reader = new FileReader();
                 reader.onload = function(e) {
@@ -747,26 +750,20 @@
                     $('#removeImage').show();
                 };
                 reader.readAsDataURL(this.files[0]);
-
                 // Update the label with the file name
                 let fileName = this.files[0].name;
                 $(this).next('.custom-file-label').html(fileName);
             });
-
             $('#removeImage').click(function() {
                 $('#exampleInputFile').val(null);
                 $('#previewImage').hide();
                 $(this).hide();
-
                 // Reset custom file input label
                 $('.custom-file-label').html('Choose file');
             });
-
             $('#newsForm').on('submit', function(e) {
                 e.preventDefault(); // Mencegah form submit secara default
-
                 let formData = new FormData(this);
-
                 $.ajax({
                     url: $(this).attr('action'),
                     method: $(this).attr('method'),
@@ -776,18 +773,14 @@
                     success: function(response) {
                         // Berhasil
                         alert('Berita berhasil ditambahkan!');
-
                         // Reset form
                         $('#newsForm')[0].reset();
-
                         // Reset Summernote
                         $('#summernote').summernote('reset');
-
                         // Reset custom file input label
                         $('#exampleInputFile').val(null);
                         $('#previewImage').hide();
                         $(this).hide();
-
                         // Reset custom file input label
                         $('.custom-file-label').html('Choose file');
                     },
@@ -803,5 +796,5 @@
                 });
             });
         });
-</script>
+    </script>
 @endsection
