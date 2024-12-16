@@ -534,33 +534,7 @@
             </div>
         </div>
     </div>
-
     {{-- end berita --}}
-    {{-- Acara --}}
-    <div class="cat-news">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Acara</h2>
-                    <div class="row cn-slider">
-                        <!-- Mengelompokkan setiap 3 berita -->
-                        @foreach ($Acara as $acaras)
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $acaras->slug) }}">
-                                        {{ $acaras->title }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     {{-- Berita --}}
     <div class="cat-news">
         <div class="container">
@@ -586,6 +560,31 @@
         </div>
     </div>
     {{-- end Berita --}}
+    {{-- Acara --}}
+    <div class="cat-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Acara</h2>
+                    <div class="row cn-slider">
+                        <!-- Mengelompokkan setiap 3 berita -->
+                        @foreach ($Acara as $acaras)
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $acaras->slug) }}">
+                                        {{ $acaras->title }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- end Acara --}}
     {{-- Umum --}}
     {{-- <div class="cat-news">
