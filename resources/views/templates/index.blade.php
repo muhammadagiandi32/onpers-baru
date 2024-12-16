@@ -250,7 +250,7 @@
                         <div class="col-md-6">
                             <div class="">
                                 @if(isset($kanan))
-                                <img style="width:500px;" src="{{ $kanan->image_url }}" />
+                                <img src="{{ $kanan->image_url }}" />
                                 @endif
                                 {{-- <div class="tn-title">
                                     <a href="">Lorem ipsum dolor sit</a>
