@@ -248,7 +248,7 @@
                     <div class="row">
                         {{-- @foreach ($kanan as $kanan) --}}
                         <div class="col-md-6">
-                            <div class="">
+                            <div class="tn-img">
                                 @if(isset($kanan))
                                 <img src="{{ $kanan->image_url }}" />
                                 @endif
