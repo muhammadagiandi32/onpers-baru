@@ -77,9 +77,23 @@
                         <p>Chat</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('index_berita') }}"
+                        class="nav-link {{ Request::is('berita/index') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Edit / Hapus Berita</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('input_berita') }}"
+                        class="nav-link {{ Request::is('berita/input_berita') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tulis Berita</p>
+                    </a>
+                </li>
 
 
-
+{{--
                 <!-- Berita -->
                 <li class="nav-item {{ Request::is('berita*') ? 'menu-open' : '' }}">
                     <a href="{{ route('index_berita') }}" class="nav-link {{ Request::is('berita*') ? 'active' : '' }}">
@@ -90,22 +104,9 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('index_berita') }}"
-                                class="nav-link {{ Request::is('berita/index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard Berita</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('input_berita') }}"
-                                class="nav-link {{ Request::is('berita/input_berita') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tulis Berita</p>
-                            </a>
-                        </li>
+
                     </ul>
-                </li>
+                </li> --}}
                 @if(auth()->user()->role=='admin')
                 <li class="nav-item {{ Request::is('iklan*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ Request::is('iklan*') ? 'active' : '' }}">

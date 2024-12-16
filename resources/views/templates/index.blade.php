@@ -514,7 +514,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Berita</h2>
+                    <h2>Headline</h2>
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
                         @foreach ($Berita as $beritas)
@@ -561,13 +561,12 @@
             </div>
         </div>
     </div>
-    {{-- end Acara --}}
-    {{-- Rilis --}}
+    {{-- Berita --}}
     <div class="cat-news">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Rilis</h2>
+                    <h2>Berita</h2>
                     <div class="row cn-slider">
                         @foreach ($Rilis as $riliss)
                         <div class="col-md-6">
@@ -583,11 +582,11 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    {{-- end RIlis --}}
+    {{-- end Berita --}}
+    {{-- end Acara --}}
     {{-- Umum --}}
     {{-- <div class="cat-news">
         <div class="container">
