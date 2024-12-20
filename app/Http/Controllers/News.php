@@ -56,7 +56,7 @@ class News extends Controller
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv' , 'Advertorial'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
     }
     public function dashboard()
     {
@@ -104,7 +104,7 @@ class News extends Controller
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->limit(4)->get();
 
-        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'Umum', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan' , 'Advertorial'));
+        return view('pages.dashboard.dashboards', compact('Berita', 'Acara', 'Rilis', 'Umum', 'totalBerita', 'totalAcara', 'totalRilis', 'kiri', 'kanan', 'Advertorial'));
     }
     public function index_berita()
     {
@@ -138,7 +138,7 @@ class News extends Controller
                 ->make(true);
         }
     }
-        public function input_berita()
+    public function input_berita()
     {
         // Ambil role pengguna saat ini
         $role = Auth::user()->getRoleNames()->first();
@@ -146,8 +146,8 @@ class News extends Controller
 
         // Filter kategori berdasarkan role pengguna
         $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa', 'Humas']), function ($query) {
-                return $query->whereIn('name', ['Acara', 'Rilis']); // Kategori yang ditampilkan untuk role user
-            })
+            return $query->whereIn('name', ['Acara', 'Berita']); // Kategori yang ditampilkan untuk role user
+        })
             ->when($role === 'admin', function ($query) {
                 return $query; // Tampilkan semua kategori untuk admin
             })
@@ -251,13 +251,13 @@ class News extends Controller
     public function show(string $id)
     {
         $data = ModelsNews::where('slug', $id)->first();
-    // Check if the news item is found
-    if (!$data) {
-        // Handle the case where the news is not found
-        return redirect()->back()->with('error', 'News not found');
-    }
-    // Calculate the reading time
-    $readingTime = $data->readingTime();
+        // Check if the news item is found
+        if (!$data) {
+            // Handle the case where the news is not found
+            return redirect()->back()->with('error', 'News not found');
+        }
+        // Calculate the reading time
+        $readingTime = $data->readingTime();
         $jumlahBerita = \App\Models\News::selectRaw('categories.name as category_name, count(*) as total')
             ->join('categories', 'news.category_id', '=', 'categories.id')
             ->groupBy('categories.name')
