@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -13,14 +14,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class NewsController extends Controller
+class NewsControllers extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $news = News::with(['author', 'category'])->get();
+        $news = News::with([
+            'author' => function ($query) {
+                $query->select('uuid', 'name');
+            },
+            'category' => function ($query) {
+                $query->select('id', 'name');
+            },
+        ])->get();
         foreach ($news as $item) {
             $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
                 $item->image_name,

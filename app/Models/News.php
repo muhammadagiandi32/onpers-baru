@@ -44,7 +44,7 @@ class News extends Model
     // Relasi dengan tabel penulis (Authors)
     public function author()
     {
-        return $this->belongsTo(Author::class, 'author_id', 'id');
+        return $this->belongsTo(User::class, 'author_id', 'uuid');
     }
 
     // Relasi dengan tabel kategori (Categories)
