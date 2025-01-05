@@ -38,3 +38,11 @@ Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
 Route::get('/messages', [Chat::class, 'getAllUsers'])->middleware('auth:sanctum');
 Route::post('/messages/post', [Chat::class, 'postMessages']);
 Route::get('/messages/{sender}/{receiver}', [Chat::class, 'fetchMessagesBetween']);
+
+/**
+ * Api for Breaking News
+ * and list news by category
+ */
+Route::get('/breaking-news', [News::class, 'breakingNews']);
+Route::get('/news/category', [News::class, 'newsByCategory']);
+Route::get('/news/search', [News::class, 'searchByName']);

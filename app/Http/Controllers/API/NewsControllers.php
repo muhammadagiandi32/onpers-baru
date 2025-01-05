@@ -25,7 +25,7 @@ class NewsControllers extends Controller
             'category' => function ($query) {
                 $query->select('id', 'name');
             },
-        ])->get();
+        ])->limit(10)->get();
         foreach ($news as $item) {
             $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
                 $item->image_name,
@@ -37,6 +37,61 @@ class NewsControllers extends Controller
             'error_code' => 200,
             'success' => true,
             'message' => 'List data news',
+            'data' => $news,
+        ], 200);
+    }
+
+    public function breakingNews()
+    {
+        $news = News::join('categories as c', 'news.category_id', '=', 'c.id')
+            ->select('news.*')
+            ->orderBy('news.created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        foreach ($news as $item) {
+            $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
+                $item->image_name,
+                Carbon::now()->addMinutes(10) // URL valid for 10 minutes
+            );
+        }
+
+        return response()->json([
+            'error_code' => 200,
+            'success' => true,
+            'message' => 'List data news',
+            'data' => $news,
+        ], 200);
+    }
+
+    public function newsByCategory(Request $request)
+    {
+        $categoryName = $request->query('category');
+        $viewAll = $request->query('viewAll');
+
+        $query = News::join('categories as c', 'news.category_id', '=', 'c.id')
+        ->select('news.*', 'c.name')
+        ->orderBy('news.created_at', 'desc')
+        ->where('c.name', '=', $categoryName);
+
+        // Jika category bukan "all", tambahkan kondisi where dan limit
+        if ($viewAll !== 'y' || $viewAll == null) {
+        $query->limit(3);
+        }
+
+        $news = $query->get();
+
+        foreach ($news as $item) {
+            $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
+                $item->image_name,
+                Carbon::now()->addMinutes(10) // URL valid for 10 minutes
+            );
+        }
+
+        return response()->json([
+            'error_code' => 200,
+            'success' => true,
+            'message' => 'List data news for category: ' . $categoryName,
             'data' => $news,
         ], 200);
     }
@@ -84,7 +139,7 @@ class NewsControllers extends Controller
             ], 400);
         }
         $author_id = Author::where('user_uuid', Auth::user()->uuid)->first();
-        // dd();
+
         try {
             DB::beginTransaction();
             $file = $request->file('image');
@@ -184,7 +239,6 @@ class NewsControllers extends Controller
 
     public function update(Request $request, $uuid)
     {
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'slug' => 'required',
@@ -224,12 +278,11 @@ class NewsControllers extends Controller
 
         return response()->json(null, 204);
     }
+
     public function searchByName(Request $request)
     {
         $search = $request->name;
-        // dd($search);
         $news = News::where('title', 'like', '%' . $search . '%')->get();
-        // dd($news);
         return response()->json([
             'error_code' => 200,
             'success' => true,
