@@ -102,7 +102,7 @@ class ChatController extends Controller
                 $query->where('sender', $receiver)
                     ->where('to', $sender);
             })
-            ->orderBy('created_at', 'asc') // Urutkan berdasarkan waktu
+            ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu
             ->get();
 
         // Kembalikan respons

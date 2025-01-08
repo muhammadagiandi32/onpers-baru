@@ -30,13 +30,13 @@ class AuthController extends Controller
         $user = Auth::user();
 
         // Periksa role atau permission (jika menggunakan Spatie)
-        if (!$user->hasRole('admin')) {
-            return response()->json([
-                'error_code' => 403,
-                'success' => false,
-                'message' => 'Access denied',
-            ], 403);
-        }
+        // if (!$user->hasRole('admin')) {
+        //     return response()->json([
+        //         'error_code' => 403,
+        //         'success' => false,
+        //         'message' => 'Access denied',
+        //     ], 403);
+        // }
 
         // Buat token
         $token = $user->createToken('auth_token')->plainTextToken;
