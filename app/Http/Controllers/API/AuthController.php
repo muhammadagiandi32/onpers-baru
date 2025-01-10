@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
@@ -67,5 +70,36 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Logged out successfully',
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'max:255'],
+            'media' => ['required', 'string', 'max:255'], // Validasi untuk media
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'uuid' => Str::uuid(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'media' => $request->media,
+            'password' => Hash::make($request->password),
+        ]);
+
+
+        // Menetapkan role default untuk pengguna baru
+        $user->assignRole($request->role);
+
+        return response()->json([
+            'error_code' => 200,
+            'success' => true,
+            'message' => 'Register successfully '.$request->email,
+        ]);
+
     }
 }
