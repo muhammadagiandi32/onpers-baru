@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Models\News as ModelsNews;
 
 class NewsControllers extends Controller
 {
@@ -290,4 +291,88 @@ class NewsControllers extends Controller
             'data' => $news
         ]);
     }
+    
+    public function storeMobile(Request $request)
+    {
+        // Validasi data input
+        $validator = Validator::make($request->all(), [
+            'judul_berita' => 'required',
+            'category' => 'required',
+            'content' => 'required|string',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        // Pastikan pengguna terautentikasi
+        $author = Auth::user();
+        if (!$author) {
+            return response()->json([
+                'error_code' => 401,
+                'success' => false,
+                'message' => 'Unauthorized. User is not authenticated.'
+            ], 401);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Ambil file dari request
+            $file = $request->file('gambar');
+            if (!$file) {
+                throw new \Exception('No file uploaded');
+            }
+
+            // Generate nama file unik
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            // Upload file ke S3
+            $uploadSuccess = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            if (!$uploadSuccess) {
+                throw new \Exception('Failed to upload file to S3');
+            }
+
+            // Simpan informasi file
+            $uploadedFile = [
+                'name' => $filename,
+                'url' => Storage::disk('s3')->url($filename),
+            ];
+
+            // Simpan data berita ke database
+            $news_data = ModelsNews::create([
+                'id' => Str::uuid(),
+                'title' => $request->judul_berita,
+                'slug' => Str::slug($request->judul_berita),
+                'content' => $request->content,
+                'image_name' => $uploadedFile['name'],
+                'image_url' => $uploadedFile['url'],
+                'author_id' => $author->uuid, // Pastikan $author valid
+                'category_id' => $request->category
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'error_code' => 200,
+                'success' => true,
+                'message' => 'Files uploaded successfully',
+                'data' => $news_data,
+                'uploadedFiles' => $uploadedFile
+            ], 201);
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json([
+                'error_code' => 500,
+                'success' => false,
+                'message' => 'Error uploading files',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+
 }

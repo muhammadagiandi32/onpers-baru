@@ -38,6 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/news', [News::class, 'index']);
 Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
+Route::post('/post-berita', [News::class, 'storeMobile'])->name('news.storeMobile')->middleware('auth:sanctum');
+
 
 Route::get('/messages', [Chat::class, 'getAllUsers'])->middleware('auth:sanctum');
 Route::post('/messages/post', [Chat::class, 'postMessages']);
