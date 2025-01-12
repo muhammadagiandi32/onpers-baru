@@ -119,7 +119,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('iklan.index') }}"
-                                class="nav-link {{ Request::is('dashboard/index') ? 'active' : '' }}">
+                                class="nav-link {{ Request::is('dashboard/iklan') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Dashboard Iklan</p>
                             </a>
