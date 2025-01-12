@@ -20,7 +20,25 @@ class IklanController extends Controller
      */
     public function index()
     {
-        //
+        $iklan = Iklan::all();
+        return view('pages.dashboard.index_iklan', compact('iklan'));
+    }
+
+    public function getData()
+    {
+        $iklan = Iklan::select(['id', 'image_name', 'image_url', 'category_name', 'created_at', 'content_type', 'video_url']);
+
+        return DataTables::of($iklan)
+            ->addIndexColumn()
+            ->editColumn('image_url', function ($iklan) {
+                if ($iklan->content_type == 'video') {
+                    return '<video width="150" controls><source src="' . $iklan->video_url . '" type="video/mp4">Your browser does not support the video tag.</video>';
+                } else {
+                    return '<img src="' . $iklan->image_url . '" alt="Gambar" style="width: 100px; height: auto;" />';
+                }
+            })
+            ->rawColumns(['image_url'])
+            ->make(true);
     }
 
     /**
@@ -32,10 +50,12 @@ class IklanController extends Controller
         return view('pages.dashboard.iklan');
     }
 
-    public function upload_video_news(Request $request){
+    public function upload_video_news(Request $request)
+    {
         return view('pages.dashboard.video_news');
     }
-    public function upload_video_news_post(Request $request){
+    public function upload_video_news_post(Request $request)
+    {
 
         // $path = $request->file('file')->store('s3');
         // $url = Storage::disk('s3')->url($path);
@@ -171,6 +191,11 @@ class IklanController extends Controller
      */
     public function destroy(Iklan $iklan)
     {
-        //
+        try {
+            $iklan->delete();
+            return redirect()->route('iklan.index')->with('success', 'Iklan berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('iklan.index')->with('error', 'Terjadi kesalahan saat menghapus data.');
+        }
     }
 }

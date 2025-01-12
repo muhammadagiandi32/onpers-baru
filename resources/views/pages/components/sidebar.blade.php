@@ -93,7 +93,7 @@
                 </li>
 
 
-{{--
+                {{--
                 <!-- Berita -->
                 <li class="nav-item {{ Request::is('berita*') ? 'menu-open' : '' }}">
                     <a href="{{ route('index_berita') }}" class="nav-link {{ Request::is('berita*') ? 'active' : '' }}">
@@ -119,7 +119,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('iklan.index') }}"
-                                class="nav-link {{ Request::is('iklan') ? 'active' : '' }}">
+                                class="nav-link {{ Request::is('dashboard/index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Dashboard Iklan</p>
                             </a>
