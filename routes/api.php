@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ChatController as Chat;
-use App\Http\Controllers\API\NewsControllers as News;
+use App\Http\Controllers\API\NewsControllers as Newss;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,15 +31,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return response()->json([
             'user' => $request->user()->only([
-               'uuid', 'name', 'email', 'role', 'media'
+                'uuid',
+                'name',
+                'email',
+                'role',
+                'media'
             ]),
         ]);
     });
 });
 
-Route::get('/news', [News::class, 'index']);
-Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
-Route::post('/post-berita', [News::class, 'storeMobile'])->name('news.storeMobile')->middleware('auth:sanctum');
+Route::get('/news', [Newss::class, 'index']);
+Route::get('/news-details/{id}', [Newss::class, 'show'])->name('news-details');
+Route::post('/post-berita', [Newss::class, 'storeMobile'])->name('news.storeMobile')->middleware('auth:sanctum');
 
 
 Route::get('/messages', [Chat::class, 'getAllUsers'])->middleware('auth:sanctum');
@@ -46,9 +51,18 @@ Route::post('/messages/post', [Chat::class, 'postMessages']);
 Route::get('/messages/{sender}/{receiver}', [Chat::class, 'fetchMessagesBetween']);
 
 /**
- * Api for Breaking News
+ * Api for Breaking Newss
  * and list news by category
  */
-Route::get('/breaking-news', [News::class, 'breakingNews']);
-Route::get('/news/category', [News::class, 'newsByCategory']);
-Route::get('/news/search', [News::class, 'searchByName']);
+Route::get('/breaking-news', [Newss::class, 'breakingNews']);
+Route::get('/news/category', [Newss::class, 'newsByCategory']);
+Route::get('/news/search', [Newss::class, 'searchByName']);
+Route::get('/category-name', function () {
+    $category = Category::get();
+    return response()->json([
+        'error_code' => 200,
+        'success' => true,
+        'message' => 'List Category',
+        'data' => $category,
+    ]);
+});
