@@ -25,7 +25,7 @@ class News extends Controller
         //
         $categoryBerita = 'Berita';
         $categoryAcara = 'Acara';
-        $categoryRilis = 'Rilis';
+        $categoryRilis = 'Headline';
         $categoryUmum = 'Umum';
         $categoryAdvertorial = 'Advertorial';
 
