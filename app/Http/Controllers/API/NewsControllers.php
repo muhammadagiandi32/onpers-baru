@@ -46,10 +46,10 @@ class NewsControllers extends Controller
     public function breakingNews()
     {
         $news = News::join('categories as c', 'news.category_id', '=', 'c.id')
-            ->select('news.*')
-            ->orderBy('news.created_at', 'desc')
-            ->limit(5)
-            ->get();
+        ->select('news.*', 'c.name as category_name')
+        ->orderBy('news.created_at', 'desc')
+        ->limit(5)
+        ->get();
 
         foreach ($news as $item) {
             $item->image_signed_url = Storage::disk('s3')->temporaryUrl(

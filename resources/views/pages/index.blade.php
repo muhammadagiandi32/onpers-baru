@@ -141,6 +141,7 @@
                             <h1 class="sn-title">
                                 {{ $data->title }}
                             </h1>
+                            <h3>{{ $data->created_at }}</h3>
                             {!! $data->content !!}
                         </div>
                     </div>
