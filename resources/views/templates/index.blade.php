@@ -517,7 +517,7 @@
                     <h2>Headline</h2>
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
-                        @foreach ($Berita as $beritas)
+                        @foreach ($Headline as $beritas)
                         <div class="col-md-6">
                             <div class="cn-img">
                                 <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
@@ -542,7 +542,7 @@
                 <div class="col-md-12">
                     <h2>Berita</h2>
                     <div class="row cn-slider">
-                        @foreach ($Rilis as $riliss)
+                        @foreach ($Berita as $riliss)
                         <div class="col-md-6">
                             <div class="cn-img">
                                 <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
