@@ -56,7 +56,7 @@ class News extends Controller
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Headline', 'Umum', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
     }
     public function dashboard()
     {
