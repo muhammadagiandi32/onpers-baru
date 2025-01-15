@@ -141,7 +141,7 @@
                             <h1 class="sn-title">
                                 {{ $data->title }}
                             </h1>
-                            <h3>{{ $data->created_at->translatedFormat('l, d F Y') }}</h3>
+                            <h6>{{ $data->created_at->translatedFormat('l, d F Y') }}</h6>
                             {!! $data->content !!}
                         </div>
                     </div>
