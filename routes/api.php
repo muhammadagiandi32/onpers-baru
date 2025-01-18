@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/news', [Newss::class, 'index']);
 Route::get('/news-details/{id}', [Newss::class, 'show'])->name('news-details');
 Route::post('/post-berita', [Newss::class, 'storeMobile'])->name('news.storeMobile')->middleware('auth:sanctum');
+Route::post('/update-berita/{id}', [Newss::class, 'updateMobile'])->name('news.updateMobile')->middleware('auth:sanctum');
 Route::post('/list-by-author', [Newss::class, 'searchByAuthor'])->name('news.searchByAuthor')->middleware('auth:sanctum');
 
 

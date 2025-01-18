@@ -453,4 +453,96 @@ class NewsControllers extends Controller
             ], 500);
         }
     }
+    public function updateMobile(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'judul_berita' => 'required',
+            'category' => 'required',
+            'content' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:51200', // gambar tidak wajib
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Cari data berita berdasarkan slug
+            $news = ModelsNews::where('slug', $id)->first();
+            if (!$news) {
+                return response()->json([
+                    'error_code' => 404,
+                    'success' => false,
+                    'message' => 'News not found',
+                ], 404);
+            }
+
+            // Jika ada file gambar baru yang diunggah
+            $uploadedFile = null;
+            if ($request->hasFile('gambar')) {
+                $file = $request->file('gambar');
+
+                // Generate nama file unik
+                $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+                // Upload file ke S3
+                $uploadSuccess = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+                if (!$uploadSuccess) {
+                    throw new \Exception('Failed to upload file to S3');
+                }
+
+                // Simpan informasi file
+                $uploadedFile = [
+                    'name' => $filename,
+                    'url' => Storage::disk('s3')->url($filename),
+                ];
+
+                // Hapus file lama dari S3 jika ada
+                if ($news->image_name && Storage::disk('s3')->exists($news->image_name)) {
+                    Storage::disk('s3')->delete($news->image_name);
+                }
+
+                // Update nama dan URL gambar pada data berita
+                $news->image_name = $uploadedFile['name'];
+                $news->image_url = $uploadedFile['url'];
+            }
+
+            // Update data berita hanya jika ada perubahan
+            if (
+                $request->judul_berita !== $news->title ||
+                $request->content !== $news->content ||
+                $request->category !== $news->category_id ||
+                $uploadedFile
+            ) {
+                $news->title = $request->judul_berita;
+                $news->slug = Str::slug($request->judul_berita);
+                $news->content = $request->content;
+                $news->category_id = $request->category;
+                $news->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'error_code' => 200,
+                'success' => true,
+                'message' => 'News updated successfully',
+                'data' => $news,
+                'uploadedFiles' => $uploadedFile
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json([
+                'error_code' => 500,
+                'success' => false,
+                'message' => 'Error updating news',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
