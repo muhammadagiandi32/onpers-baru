@@ -74,7 +74,7 @@ class NewsControllers extends Controller
         $query = News::join('categories as c', 'news.category_id', '=', 'c.id')
             ->select('news.*', 'c.name')
             ->orderBy('news.created_at', 'desc');
-          
+
 
         if($categoryName != 'All'){
             $query->where('c.name', '=', $categoryName);
@@ -218,7 +218,7 @@ class NewsControllers extends Controller
     public function show(string $slug)
     {
         try {
-            $news = News::where('slug', $slug)->firstOrFail();
+            $news = News::with('category')->where('slug', $slug)->firstOrFail();
             return response()->json([
                 'error_code' => 200,
                 'success' => true,
