@@ -46,10 +46,10 @@ class NewsControllers extends Controller
     public function breakingNews()
     {
         $news = News::join('categories as c', 'news.category_id', '=', 'c.id')
-        ->select('news.*', 'c.name as category_name')
-        ->orderBy('news.created_at', 'desc')
-        ->limit(5)
-        ->get();
+            ->select('news.*', 'c.name as category_name')
+            ->orderBy('news.created_at', 'desc')
+            ->limit(5)
+            ->get();
 
         foreach ($news as $item) {
             $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
@@ -76,7 +76,7 @@ class NewsControllers extends Controller
             ->orderBy('news.created_at', 'desc');
 
 
-        if($categoryName != 'All'){
+        if ($categoryName != 'All') {
             $query->where('c.name', '=', $categoryName);
         }
 
@@ -327,6 +327,37 @@ class NewsControllers extends Controller
             'message' => 'List data news',
             'data' => $news
         ]);
+    }
+
+
+    public function searchByAuthor(Request $request)
+    {
+        // Mendapatkan pengguna yang sedang login melalui Sanctum
+        $user = $request->user(); // User otomatis diambil berdasarkan token
+
+        // Pastikan user sudah terautentikasi
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        // Ambil author_id dari user yang terautentikasi
+        $author_id = $user->uuid; // Pastikan kolom author_id ada di tabel users
+        // return response()->json($author_id);
+
+        // Validasi jika author_id tidak tersedia
+        if (!$author_id) {
+            return response()->json(['error' => 'Author ID not found'], 400);
+        }
+
+        // Ambil data berita berdasarkan author_id
+        $news = News::where('author_id', $author_id)->get();
+
+        return response()->json([
+            'error_code' => 200,
+            'success' => true,
+            'message' => 'Data List',
+            'data' => $news,
+        ], 201);
     }
 
     public function storeMobile(Request $request)
