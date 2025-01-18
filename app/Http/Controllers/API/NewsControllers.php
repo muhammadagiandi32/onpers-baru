@@ -73,8 +73,12 @@ class NewsControllers extends Controller
 
         $query = News::join('categories as c', 'news.category_id', '=', 'c.id')
             ->select('news.*', 'c.name')
-            ->orderBy('news.created_at', 'desc')
-            ->where('c.name', '=', $categoryName);
+            ->orderBy('news.created_at', 'desc');
+          
+
+        if($categoryName != 'All'){
+            $query->where('c.name', '=', $categoryName);
+        }
 
         // Jika category bukan "all", tambahkan kondisi where dan limit
         if ($viewAll !== 'y' || $viewAll == null) {
