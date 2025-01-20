@@ -25,6 +25,74 @@
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
     <style>
+        /* Styling untuk Navbar */
+        .navbar {
+            background-color: #28a745;
+            /* Ganti warna latar belakang menjadi hijau */
+            padding: 15px 30px;
+            /* Perbesar padding untuk panjang navbar */
+        }
+
+        .nav-item.nav-link {
+            font-size: 16px;
+            /* Ukuran font yang lebih kecil */
+            font-weight: 500;
+            /* Menggunakan font tebal agar lebih jelas */
+            color: #ffffff;
+            /* Warna teks putih */
+            margin-left: 20px;
+            /* Memberikan jarak antar item */
+            text-transform: uppercase;
+            /* Membuat semua huruf besar */
+            transition: color 0.3s ease;
+            /* Efek transisi saat hover */
+        }
+
+        .nav-item.nav-link:hover {
+            color: #ffb300;
+            /* Warna teks saat hover */
+        }
+
+        .nav-item.nav-link.active {
+            color: #ffb300;
+            /* Warna untuk item aktif */
+            font-weight: bold;
+            /* Memberikan penekanan pada item aktif */
+        }
+
+        .social {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .social-icon {
+            color: #ffffff;
+            font-size: 20px;
+            margin-left: 20px;
+            /* Memberikan jarak antar ikon */
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #ffb300;
+            /* Warna ikon saat hover */
+        }
+
+        @media (max-width: 767px) {
+            .navbar-nav {
+                text-align: center;
+                /* Menata menu di layar kecil agar tampil lebih rapi */
+                margin-top: 10px;
+            }
+
+            .social {
+                justify-content: center;
+                margin-top: 10px;
+                /* Memberikan jarak di bawah social icons */
+            }
+        }
+
         .story-container {
             position: relative;
             width: 100%;
@@ -121,29 +189,6 @@
 </head>
 
 <body>
-    <!-- Top Bar Start -->
-    {{-- <div class="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="tb-contact">
-                        <p><i class="fas fa-envelope"></i>info@mail.com</p>
-                        <p><i class="fas fa-phone-alt"></i>+012 345 6789</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="tb-menu">
-                        <a href="">About</a>
-                        <a href="">Privacy</a>
-                        <a href="">Terms</a>
-                        <a href="">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Top Bar Start -->
-
     <!-- Brand Start -->
     <div class="brand">
         <div class="container">
@@ -185,28 +230,25 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
                         <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                        {{-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
-                            </div>
-                        </div>
-                        <a href="single-page.html" class="nav-item nav-link">Single Page</a> --}}
+
+                        <!-- Jika pengguna sudah login, tampilkan Dashboard -->
                         @if (!Auth::check())
                         <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
                         @else
                         <a href="{{ route('dashboards') }}" class="nav-item nav-link">Dashboard</a>
                         @endif
                     </div>
-                    <div class="social ml-auto">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
+
+                    <!-- Ikon Media Sosial -->
+                    <div class="social ml-auto d-flex">
+                        <a href="" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="" class="social-icon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+
             </nav>
         </div>
     </div>
@@ -255,8 +297,8 @@
                 <div class="col-md-6 tn-right">
                     <div class="row">
                         {{-- @foreach ($kanan as $kanan) --}}
-                        <div class="col-md-6">
-                            <div class="">
+                        <div class="col-md-12">
+                            <div class="tn-img">
                                 @if(isset($kanan))
                                 <img src="{{ $kanan->image_url }}" />
                                 @endif
@@ -265,31 +307,6 @@
                                 </div> --}}
                             </div>
                         </div>
-
-                        {{-- <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -300,60 +317,7 @@
     <!-- Berita News Start-->
     <div class="cat-news">
         <div class="container">
-            {{-- <div class="container-fluid">
-                <div class="row gy-3 gy-md-4">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card border-dark">
-                            <div class="card-body text-center p-4 p-xxl-5">
-                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
-                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
-                                    <path
-                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                                </svg>
-                                <h4 class="mb-4">Wartawan</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card border-dark">
-                            <div class="card-body text-center p-4 p-xxl-5">
-                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
-                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
-                                    <path
-                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                                </svg>
-                                <h4 class="mb-4">Wartawan</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card border-dark">
-                            <div class="card-body text-center p-4 p-xxl-5">
-                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
-                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
-                                    <path
-                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                                </svg>
-                                <h4 class="mb-4">Wartawan</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card border-dark">
-                            <div class="card-body text-center p-4 p-xxl-5">
-                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
-                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
-                                    <path
-                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                                </svg>
-                                <h4 class="mb-4">Wartawan</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tambahkan card lain dengan cara yang sama -->
 
-                </div>
-            </div> --}}
             <div class="row">
                 <div class="col-12">
                     <div class="row">
@@ -464,26 +428,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-md-12">
-                    <h2>Advertorial</h2>
-                    <div class="row cn-slider">
-                        <!-- Mengelompokkan setiap 3 Iklans -->
-                        @foreach ($Advertorial as $item)
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ $item->image_url }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $item->slug) }}">
-                                        {{ $item->title}}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div> --}}
             <div class="row">
                 <div class="col-md-12">
                     <h2>Video News</h2>
@@ -604,237 +548,7 @@
                 </div>
             </div>
         </div>
-        {{-- end Acara --}}
-        {{-- Umum --}}
-        {{-- <div class="cat-news">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Umum</h2>
-                        <div class="row cn-slider">
-                            @foreach ($Umum as $umum)
-                            <div class="col-md-6">
-                                <div class="cn-img">
-                                    <img src="{{ $umum->image_url }}" alt="{{ $umum->title }}">
-                                    <div class="cn-title">
-                                        <a href="{{ route('news-details', $umum->slug) }}">
-                                            {{ $umum->title }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div> --}}
-        <!-- Main News Start-->
-        {{-- <div class="main-news">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-5.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-1.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-2.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-3.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mn-img">
-                                    <img src="{{ asset('img/news-350x223-4.jpg') }}" />
-                                    <div class="mn-title">
-                                        <a href="">Lorem ipsum dolor sit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="mn-list">
-                            <h2>Read More</h2>
-                            <ul>
-                                <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="">Pellentesque tincidunt enim libero</a></li>
-                                <li><a href="">Morbi id finibus diam vel pretium enim</a></li>
-                                <li><a href="">Duis semper sapien in eros euismod sodales</a></li>
-                                <li><a href="">Vestibulum cursus lorem nibh</a></li>
-                                <li><a href="">Morbi ullamcorper vulputate metus non eleifend</a></li>
-                                <li><a href="">Etiam vitae elit felis sit amet</a></li>
-                                <li><a href="">Nullam congue massa vitae quam</a></li>
-                                <li><a href="">Proin sed ante rutrum</a></li>
-                                <li><a href="">Curabitur vel lectus</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Main News End-->
-
-        <!-- Footer Start -->
-        {{-- <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <h3 class="title">Get in Touch</h3>
-                            <div class="contact-info">
-                                <p><i class="fa fa-map-marker"></i>123 News Street, NY, USA</p>
-                                <p><i class="fa fa-envelope"></i>info@example.com</p>
-                                <p><i class="fa fa-phone"></i>+123-456-7890</p>
-                                <div class="social">
-                                    <a href=""><i class="fab fa-twitter"></i></a>
-                                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                    <a href=""><i class="fab fa-instagram"></i></a>
-                                    <a href=""><i class="fab fa-youtube"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <h3 class="title">Useful Links</h3>
-                            <ul>
-                                <li><a href="#">Lorem ipsum</a></li>
-                                <li><a href="#">Pellentesque</a></li>
-                                <li><a href="#">Aenean vulputate</a></li>
-                                <li><a href="#">Vestibulum sit amet</a></li>
-                                <li><a href="#">Nam dignissim</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <h3 class="title">Quick Links</h3>
-                            <ul>
-                                <li><a href="#">Lorem ipsum</a></li>
-                                <li><a href="#">Pellentesque</a></li>
-                                <li><a href="#">Aenean vulputate</a></li>
-                                <li><a href="#">Vestibulum sit amet</a></li>
-                                <li><a href="#">Nam dignissim</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <h3 class="title">Newsletter</h3>
-                            <div class="newsletter">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui.
-                                    Class
-                                    aptent taciti sociosqu
-                                </p>
-                                <form>
-                                    <input class="form-control" type="email" placeholder="Your email here">
-                                    <button class="btn">Submit</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Footer End -->
-
-        <!-- Footer Menu Start -->
-        {{-- <div class="footer-menu">
-            <div class="container">
-                <div class="f-menu">
-                    <a href="">Terms of use</a>
-                    <a href="">Privacy policy</a>
-                    <a href="">Cookies</a>
-                    <a href="">Accessibility help</a>
-                    <a href="">Advertise with us</a>
-                    <a href="">Contact us</a>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Menu End -->
-
-        <!-- Footer Bottom Start -->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="">Your Site Name</a>. All Rights Reserved</p>
-                    </div>
-
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    <div class="col-md-6 template-by">
-                        <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Footer Bottom End -->
-
-        <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
         <!-- JavaScript Libraries -->

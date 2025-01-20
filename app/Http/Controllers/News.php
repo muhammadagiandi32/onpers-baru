@@ -51,6 +51,7 @@ class News extends Controller
             $query->where('name', $categoryAdvertorial);
         })->orderBy('created_at', 'desc')->get();
 
+
         // iklan
         $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
@@ -149,6 +150,7 @@ class News extends Controller
             return $query->whereIn('name', ['Acara', 'Berita']); // Kategori yang ditampilkan untuk role user
         })
             ->when($role === 'admin', function ($query) {
+
                 return $query; // Tampilkan semua kategori untuk admin
             })
             ->get();

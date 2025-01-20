@@ -41,6 +41,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        <!-- Table -->
                         <table id="iklan-table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -75,7 +76,6 @@
                             </tbody>
                         </table>
                     </div>
-
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -111,7 +111,7 @@
 <!-- Page specific script -->
 <script>
     $(document).ready(function() {
-        $('#iklan-table').DataTable({
+        var table = $('#iklan-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: '{{ route("iklan.data") }}',
@@ -129,7 +129,9 @@
                 },
                 { data: 'category_name', name: 'category_name' },
                 { data: 'created_at', name: 'created_at' }
-            ]
+            ],
+            dom: '<"top"f>rt<"bottom"lp><"clear">',  // Adjusted to display search box (f) at top
+            stateSave: true  // Save table state (pagination, search, etc)
         });
     });
 </script>

@@ -4,11 +4,20 @@
 <head>
     <meta charset="utf-8" />
     <title>onPers | Mulai Pemberitaan</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ $data->description }}">
+    <meta name="keywords" content="berita, onPers, publikasi, informasi, berita terbaru">
+    <meta name="author" content="onPers Team">
     <meta property="og:title" content="{{ $data->title }}">
+    <meta property="og:description" content="{{ $data->description }}">
     <meta property="og:image" content="{{ $data->image_url }}">
     <meta property="og:url" content="{{ url()->current() }}">
-
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $data->title }}">
+    <meta name="twitter:description" content="{{ $data->description }}">
+    <meta name="twitter:image" content="{{ $data->image_url }}">
+    <link rel="canonical" href="{{ url()->current() }}">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon" />
 
@@ -20,11 +29,35 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/css/style.css') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "{{ $data->title }}",
+        "image": "{{ $data->image_url }}",
+        "datePublished": "{{ $data->published_at }}",
+        "dateModified": "{{ $data->updated_at }}",
+        "author": {
+            "@type": "Person",
+            "name": "onPers Team"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "onPers",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "img/logo.png"
+            }
+        }
+    }
+    </script>
 </head>
+
 
 <body>
     <!-- Top Bar Start -->
@@ -140,7 +173,10 @@
                         <div class="sn-content">
                             <h1 class="sn-title">
                                 {{ $data->title }}
+
                             </h1>
+                            <p><em>{{ \Carbon\Carbon::parse($data->published_at)->translatedFormat('l, d F Y, H:i')
+                                    }}</em></p>
                             {!! $data->content !!}
                         </div>
                     </div>
