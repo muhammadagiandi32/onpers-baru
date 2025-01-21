@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Berita;
 use App\Models\Iklan;
 use App\Models\News as ModelsNews;
 use App\Models\Video;
@@ -150,13 +151,25 @@ class News extends Controller
             return $query->whereIn('name', ['Acara', 'Berita']); // Kategori yang ditampilkan untuk role user
         })
             ->when($role === 'admin', function ($query) {
-
-                return $query; // Tampilkan semua kategori untuk admin
+                return $query->whereIn('name', ['Rilis', 'berita']); // Tampilkan kategori 'rilis' dan 'berita' untuk admin
             })
             ->get();
 
+        // Transformasi kategori untuk admin
+        if ($role === 'admin') {
+            $categories = $categories->map(function ($category) {
+                if ($category->name === 'Rilis') {
+                    $category->name = 'Berita';
+                } elseif ($category->name === 'Berita') {
+                    $category->name = 'Headline';
+                }
+                return $category;
+            });
+        }
+
         return view('pages.dashboard.input_berita', compact('categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -276,8 +289,8 @@ class News extends Controller
             $query->where('name', $categoryBerita);
         })->get();
 
-
-        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Berita'));
+        $beritaTerbaru = ModelsNews::orderBy('published_at', 'desc')->take(3)->get();
+        return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'Berita'));
     }
 
     /**

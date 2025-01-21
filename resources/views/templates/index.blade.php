@@ -3,10 +3,29 @@
 
 <head>
     <meta charset="utf-8">
+    <meta charset="utf-8">
     <title>onPers | Mulai Pemberitaan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="onPers | Mulai Pemberitaan" name="keywords">
     <meta content="onPers | Mulai Pemberitaan" name="description">
+    <meta name="robots" content="index, follow">
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="your_verification_code_here" />
+
+    <!-- Open Graph (OG) Meta Tags -->
+    <meta property="og:title" content="onPers | Mulai Pemberitaan">
+    <meta property="og:description"
+        content="Temukan berita terbaru, informasi penting, dan cerita inspiratif di onPers. Mulai pemberitaan Anda hari ini!">
+    <meta property="og:image" content="{{ asset('img/logo/onpers-share.jpg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:title" content="onPers | Mulai Pemberitaan">
+    <meta name="twitter:description"
+        content="Temukan berita terbaru, informasi penting, dan cerita inspiratif di onPers. Mulai pemberitaan Anda hari ini!">
+    <meta name="twitter:image" content="{{ asset('img/logo/onpers-share.jpg') }}">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.ico') }}" rel="icon">

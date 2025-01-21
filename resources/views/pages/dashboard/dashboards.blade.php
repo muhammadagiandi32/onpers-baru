@@ -3,92 +3,105 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('customs/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customs/adminlte/dist/css/adminlte.min.css') }}">
+<style>
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        border-radius: 10px 10px 0 0;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .card-body {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+
+    .card-number {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .card-footer {
+        background-color: #f4f6f9;
+        border-radius: 0 0 10px 10px;
+    }
+</style>
 @endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Dashboard</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <!-- Menampilkan Berita -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="card bg-info">
+                    <div class="card-header">
                         <h3>Berita Terbaru</h3>
-                        <ul>
-                            @foreach($Berita as $beritas)
-                            {{-- <li><a href="">{{ $beritas->title }}</a></li> --}}
-                            @endforeach
-                        </ul>
-                        <p>Total: {{ $totalBerita }}</p>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="card-number">{{ $totalBerita }}</div>
                     </div>
-
-                    {{-- <a href="{{ route('news-details', $beritas->slug) }}" class="small-box-footer">More info <i
-                            class="fas fa-arrow-circle-right"></i></a> --}}
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-light btn-block">Lihat Detail</a>
+                    </div>
                 </div>
             </div>
 
             <!-- Menampilkan Acara -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
-                    <div class="inner">
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="card bg-success">
+                    <div class="card-header">
                         <h3>Acara Terbaru</h3>
-                        <ul>
-                            @foreach($Acara as $item)
-                            {{-- <li><a href="">{{ $item->title }}</a></li> --}}
-                            @endforeach
-                        </ul>
-                        <p>Total: {{ $totalAcara }}</p>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="card-number">{{ $totalAcara }}</div>
                     </div>
-                    {{-- <a href="{{ route('news-details', $item->slug) }}" class="small-box-footer">More info <i
-                            class="fas fa-arrow-circle-right"></i></a> --}}
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-light btn-block">Lihat Detail</a>
+                    </div>
                 </div>
             </div>
 
             <!-- Menampilkan Rilis -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-warning">
-                    <div class="inner">
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="card bg-warning">
+                    <div class="card-header">
                         <h3>Rilis Terbaru</h3>
-                        <ul>
-                            @foreach($Rilis as $item)
-                            {{-- <li><a href="">{{ $item->title }}</a></li> --}}
-                            @endforeach
-                        </ul>
-                        <p>Total: {{ $totalRilis }}</p>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="card-number">{{ $totalRilis }}</div>
                     </div>
-                    {{-- <a href="{{ route('news-details', $item->slug) }}" class="small-box-footer">More info <i
-                            class="fas fa-arrow-circle-right"></i></a> --}}
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-light btn-block">Lihat Detail</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 @endsection
+
 
 @section('scripts')
 <script src="{{ asset('customs/adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
