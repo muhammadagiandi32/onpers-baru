@@ -9,7 +9,9 @@
     <meta content="onPers | Mulai Pemberitaan" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo/logo-onpers.png') }}?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/logo-onpers.png') }}">
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">

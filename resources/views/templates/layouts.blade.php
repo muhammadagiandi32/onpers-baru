@@ -7,6 +7,11 @@
     <title>onPers | Mulai Pemberitaan</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+      <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('img/logo/logo-onpers.png') }}?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/logo-onpers.png') }}">
+
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
