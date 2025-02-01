@@ -5,7 +5,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- SEO Meta Tags -->
+        <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
+        <meta name="description" content="{{ $description ?? 'Deskripsi default website' }}">
+        <meta name="keywords" content="{{ $keywords ?? 'keyword1, keyword2, keyword3' }}">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="{{ url()->current() }}">
+
+        <!-- Open Graph Meta Tags (for Social Media) -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ $title ?? config('app.name', 'Laravel') }}">
+        <meta property="og:description" content="{{ $description ?? 'Deskripsi default website' }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:image" content="{{ $og_image ?? asset('default-image.jpg') }}">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $title ?? config('app.name', 'Laravel') }}">
+        <meta name="twitter:description" content="{{ $description ?? 'Deskripsi default website' }}">
+        <meta name="twitter:image" content="{{ $og_image ?? asset('default-image.jpg') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,7 +46,9 @@
             @endif
 
             <!-- Page Content -->
-                
+            <main>
+                @yield('content')
+            </main>
         </div>
     </body>
 </html>
