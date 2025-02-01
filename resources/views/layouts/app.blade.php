@@ -30,7 +30,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
          <!-- Favicon -->
-         <link rel="icon" type="img/logo/logo-onpers.png" href="{{ asset('favicon.png') }}">
+         <link rel="icon" type="img/logo" href="{{ asset('img/logo/logo-onpers.png') }}">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
