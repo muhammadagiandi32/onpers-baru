@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>onPers | Mulai Pemberitaan</title>
+    <!-- <title>onPers | Mulai Pemberitaan</title> -->
+    <title>onPers - Portal Berita Terpercaya</title>
+    <meta name="description" content="onPers adalah platform berita terbaru yang menyajikan informasi akurat dan terkini.">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta property="og:title" content="{{ $data->title }}">
     <meta property="og:image" content="{{ $data->image_url }}">

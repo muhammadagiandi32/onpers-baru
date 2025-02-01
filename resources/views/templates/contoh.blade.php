@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>onPers | Mulai Pemberitaan</title>
+    <!-- <title>onPers | Mulai Pemberitaan</title> -->
+    <title>onPers - Portal Berita Terpercaya</title>
+    <meta name="description" content="onPers adalah platform berita terbaru yang menyajikan informasi akurat dan terkini.">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="Bootstrap News Template - Free HTML Templates" name="keywords" />
-    <meta content="Bootstrap News Template - Free HTML Templates" name="description" />
+    <meta content="onPers - Portal Berita Terpercaya" name="keywords" />
+    <meta content="onPers - Portal Berita Terpercaya" name="description" />
 
      <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('img/logo/logo-onpers.png') }}?v=3">
