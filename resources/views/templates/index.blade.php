@@ -154,7 +154,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4">
                     <div class="b-logo">
-                        <a href="index.html">
+                        <a href="#">
                             <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
                         </a>
                     </div>
