@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\NewsControllers;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\IklanController;
 use App\Http\Controllers\News;
@@ -42,6 +43,8 @@ Route::delete('/berita/{id}', [News::class, 'destroy'])->middleware(['auth', 've
 // Iklan
 Route::resource('iklan', IklanController::class);
 Route::post('/iklan/input_iklan', [IklanController::class, 'store_video'])->middleware(['auth', 'verified'])->name('video.upload');
+Route::get('/dashboard/iklan', [IklanController::class, 'index'])->name('iklan.index');
+Route::get('/dashboard/iklan/data', [IklanController::class, 'getData'])->name('iklan.data');
 
 
 
@@ -86,6 +89,19 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/get-video-news', [IklanController::class, 'getVideoNews'])->name('iklan.getVideoNews');
 
+    //API
+    Route::prefix('api')->group(function () {
+        Route::get('/news', [NewsControllers::class, 'index']);
+        Route::get('/news/breaking', [NewsControllers::class, 'breakingNews']);
+        Route::get('/news/category', [NewsControllers::class, 'newsByCategory']);
+        Route::get('/news/iklan/{name}', [NewsControllers::class, 'newsIklan']);
+        Route::get('/news/{slug}', [NewsControllers::class, 'show']);
+        Route::post('/news', [NewsControllers::class, 'store']);
+        Route::put('/news/{uuid}', [NewsControllers::class, 'update']);
+        Route::delete('/news/{id}', [NewsControllers::class, 'destroy']);
+        Route::get('/news/search', [NewsControllers::class, 'searchByName']);
+        Route::post('/news/store-mobile', [NewsControllers::class, 'storeMobile']);
+    });
 });
 
 require __DIR__ . '/auth.php';

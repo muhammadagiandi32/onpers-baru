@@ -4,8 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>onPers | Mulai Pemberitaan</title>
+    <!-- <title>onPers | Mulai Pemberitaan</title> -->
+    <title>onPers - Portal Berita Terpercaya</title>
+    <meta name="description" content="onPers adalah platform berita terbaru yang menyajikan informasi akurat dan terkini.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+      <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('img/logo/logo-onpers.png') }}?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/logo-onpers.png') }}">
+
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

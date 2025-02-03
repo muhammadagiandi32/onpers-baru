@@ -3,14 +3,18 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>onPers | Mulai Pemberitaan</title>
+    <!-- <title>onPers | Mulai Pemberitaan</title> -->
+    <title>onPers - Portal Berita Terpercaya</title>
+    <meta name="description" content="onPers adalah platform berita terbaru yang menyajikan informasi akurat dan terkini.">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta property="og:title" content="{{ $data->title }}">
     <meta property="og:image" content="{{ $data->image_url }}">
     <meta property="og:url" content="{{ url()->current() }}">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon" />
+    <link rel="icon" type="image/png" href="{{ asset('img/logo/logo-onpers.png') }}?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/logo-onpers.png') }}">
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
