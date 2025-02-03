@@ -83,7 +83,7 @@ class NewsControllers extends Controller
 
         // Jika viewAll bukan "y"/true, batasi hasilnya 3 item
         if (!$viewAll) {
-            $query->limit(3);
+            $query->limit(10);
         }
 
         $news = $query->get();
