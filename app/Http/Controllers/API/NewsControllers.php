@@ -69,38 +69,46 @@ class NewsControllers extends Controller
     public function newsByCategory(Request $request)
     {
         $categoryName = $request->query('category');
-        $viewAll = $request->query('viewAll');
+        $viewAll = filter_var($request->query('viewAll'), FILTER_VALIDATE_BOOLEAN);
 
+        // Mulai query tanpa filter category terlebih dahulu
         $query = News::join('categories as c', 'news.category_id', '=', 'c.id')
             ->select('news.*', 'c.name')
             ->orderBy('news.created_at', 'desc');
 
 
-        if ($categoryName != 'All') {
+        // Jika categoryName bukan "all" dan bukan kosong, tambahkan filter kategori
+        if (!empty($categoryName) && strtolower($categoryName) !== 'all') {
             $query->where('c.name', '=', $categoryName);
         }
 
-        // Jika category bukan "all", tambahkan kondisi where dan limit
-        if ($viewAll !== 'y' || $viewAll == null) {
-            $query->limit(3);
+        // Jika viewAll bukan "y"/true, batasi hasilnya 3 item
+        if (!$viewAll) {
+            $query->limit(10);
         }
 
         $news = $query->get();
 
+        // Tambahkan Signed URL dari S3 hanya jika image_name tersedia
         foreach ($news as $item) {
-            $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
-                $item->image_name,
-                Carbon::now()->addMinutes(10) // URL valid for 10 minutes
-            );
+            if (!empty($item->image_name)) {
+                $item->image_signed_url = Storage::disk('s3')->temporaryUrl(
+                    $item->image_name,
+                    Carbon::now()->addMinutes(10) // URL valid for 10 minutes
+                );
+            } else {
+                $item->image_signed_url = null;
+            }
         }
 
         return response()->json([
             'error_code' => 200,
             'success' => true,
-            'message' => 'List data news for category: ' . $categoryName,
+            'message' => 'List data news for category: ' . ($categoryName ?? 'all'),
             'data' => $news,
         ], 200);
     }
+
 
     public function newsIklan($name)
     {
