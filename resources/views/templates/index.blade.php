@@ -8,8 +8,8 @@
     <meta content="onPers | Mulai Pemberitaan" name="keywords">
     <meta content="onPers | Mulai Pemberitaan" name="description">
 
-    <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon">
+    <!-- Favicon Jika menggunakan PNG -->
+    <link rel="icon" href="{{ asset('/img/logo/logo-onpers.png') }}" type="image/png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
@@ -487,7 +487,16 @@
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-    <!-- JavaScript Libraries -->
+    <div class="footer bg-white text-white py-5">
+        <div class="container">
+            <hr class="bg-dark">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2025 onPers. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
