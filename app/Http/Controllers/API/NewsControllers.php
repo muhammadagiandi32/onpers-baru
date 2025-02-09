@@ -46,7 +46,7 @@ class NewsControllers extends Controller
     public function breakingNews()
     {
         $news = News::join('categories as c', 'news.category_id', '=', 'c.id')
-            ->select('news.*')
+            ->select('news.*', 'c.name as category_name')
             ->orderBy('news.created_at', 'desc')
             ->limit(5)
             ->get();
@@ -75,6 +75,7 @@ class NewsControllers extends Controller
         $query = News::join('categories as c', 'news.category_id', '=', 'c.id')
             ->select('news.*', 'c.name')
             ->orderBy('news.created_at', 'desc');
+
 
         // Jika categoryName bukan "all" dan bukan kosong, tambahkan filter kategori
         if (!empty($categoryName) && strtolower($categoryName) !== 'all') {
@@ -336,6 +337,37 @@ class NewsControllers extends Controller
         ]);
     }
 
+
+    public function searchByAuthor(Request $request)
+    {
+        // Mendapatkan pengguna yang sedang login melalui Sanctum
+        $user = $request->user(); // User otomatis diambil berdasarkan token
+
+        // Pastikan user sudah terautentikasi
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        // Ambil author_id dari user yang terautentikasi
+        $author_id = $user->uuid; // Pastikan kolom author_id ada di tabel users
+        // return response()->json($author_id);
+
+        // Validasi jika author_id tidak tersedia
+        if (!$author_id) {
+            return response()->json(['error' => 'Author ID not found'], 400);
+        }
+
+        // Ambil data berita berdasarkan author_id
+        $news = News::where('author_id', $author_id)->get();
+
+        return response()->json([
+            'error_code' => 200,
+            'success' => true,
+            'message' => 'Data List',
+            'data' => $news,
+        ], 201);
+    }
+
     public function storeMobile(Request $request)
     {
         Log::info('storeMobile request initiated.', ['request' => $request->all()]);
@@ -425,6 +457,98 @@ class NewsControllers extends Controller
                 'error_code' => 500,
                 'success' => false,
                 'message' => 'Error uploading files',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+    public function updateMobile(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'judul_berita' => 'required',
+            'category' => 'required',
+            'content' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:51200', // gambar tidak wajib
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Cari data berita berdasarkan slug
+            $news = ModelsNews::where('slug', $id)->first();
+            if (!$news) {
+                return response()->json([
+                    'error_code' => 404,
+                    'success' => false,
+                    'message' => 'News not found',
+                ], 404);
+            }
+
+            // Jika ada file gambar baru yang diunggah
+            $uploadedFile = null;
+            if ($request->hasFile('gambar')) {
+                $file = $request->file('gambar');
+
+                // Generate nama file unik
+                $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+                // Upload file ke S3
+                $uploadSuccess = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+                if (!$uploadSuccess) {
+                    throw new \Exception('Failed to upload file to S3');
+                }
+
+                // Simpan informasi file
+                $uploadedFile = [
+                    'name' => $filename,
+                    'url' => Storage::disk('s3')->url($filename),
+                ];
+
+                // Hapus file lama dari S3 jika ada
+                if ($news->image_name && Storage::disk('s3')->exists($news->image_name)) {
+                    Storage::disk('s3')->delete($news->image_name);
+                }
+
+                // Update nama dan URL gambar pada data berita
+                $news->image_name = $uploadedFile['name'];
+                $news->image_url = $uploadedFile['url'];
+            }
+
+            // Update data berita hanya jika ada perubahan
+            if (
+                $request->judul_berita !== $news->title ||
+                $request->content !== $news->content ||
+                $request->category !== $news->category_id ||
+                $uploadedFile
+            ) {
+                $news->title = $request->judul_berita;
+                $news->slug = Str::slug($request->judul_berita);
+                $news->content = $request->content;
+                $news->category_id = $request->category;
+                $news->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'error_code' => 200,
+                'success' => true,
+                'message' => 'News updated successfully',
+                'data' => $news,
+                'uploadedFiles' => $uploadedFile
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json([
+                'error_code' => 500,
+                'success' => false,
+                'message' => 'Error updating news',
                 'error' => $th->getMessage()
             ], 500);
         }

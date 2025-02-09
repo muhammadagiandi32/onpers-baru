@@ -395,8 +395,8 @@
         </div>
     </div>
 
-    <!-- Category News yang digunakan -->
-    <div class="cat-news">
+  <!-- Category News yang digunakan -->
+  <div class="cat-news">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
@@ -483,7 +483,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
