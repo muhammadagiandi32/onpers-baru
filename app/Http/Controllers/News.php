@@ -23,9 +23,9 @@ class News extends Controller
     public function index()
     {
         //
-        $categoryHeadline = 'Headline';
-        $categoryAcara = 'Acara';
         $categoryBerita = 'Berita';
+        $categoryAcara = 'Acara';
+        $categoryRilis = 'Rilis';
         $categoryUmum = 'Umum';
         $categoryAdvertorial = 'Advertorial';
 
@@ -39,8 +39,8 @@ class News extends Controller
             $query->where('name', $categoryAcara);
         })->orderBy('created_at', 'desc')->get();
 
-        $Headline = ModelsNews::whereHas('Category', function ($query) use ($categoryHeadline) {
-            $query->where('name', $categoryHeadline);
+        $Rilis = ModelsNews::whereHas('Category', function ($query) use ($categoryRilis) {
+            $query->where('name', $categoryRilis);
         })->orderBy('created_at', 'desc')->get();
 
         $Umum = ModelsNews::whereHas('Category', function ($query) use ($categoryUmum) {
@@ -56,8 +56,9 @@ class News extends Controller
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Headline', 'Umum', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
+        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
     }
+    
     public function dashboard()
     {
         $categories = Category::get();
