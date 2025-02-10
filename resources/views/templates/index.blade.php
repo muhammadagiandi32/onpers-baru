@@ -405,12 +405,12 @@
                         <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
                     </h2>
                     <div class="row slider">
-                        @foreach ($Berita as $beritas)
+                        @foreach ($Rilis as $riliss)
                         <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
                             <div class="cn-img">
-                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
+                                <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
                                 <div class="cn-title">
-                                    <a href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
+                                    <a href="{{ route('news-details', $riliss->slug) }}">{{ $riliss->title }}</a>
                                 </div>
                             </div>
                         </div>
@@ -426,12 +426,12 @@
                         <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
                     </h2>
                     <div class="row slider">
-                        @foreach ($Rilis as $riliss)
+                        @foreach ($Berita as $beritas)
                         <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
                             <div class="cn-img">
-                                <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
+                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
                                 <div class="cn-title">
-                                    <a href="{{ route('news-details', $riliss->slug) }}">{{ $riliss->title }}</a>
+                                    <a href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
                                 </div>
                             </div>
                         </div>
