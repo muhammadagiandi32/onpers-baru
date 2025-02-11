@@ -152,6 +152,25 @@ class News extends Controller
         return view('pages.dashboard.input_berita', compact('categories'));
     }
 
+
+    public function form_news()
+    {
+        // Ambil role pengguna saat ini
+        $role = Auth::user()->getRoleNames()->first();
+        // dd($role);
+
+        // Filter kategori berdasarkan role pengguna
+        $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa', 'Humas']), function ($query) {
+            return $query->whereIn('name', ['Acara', 'Berita']); // Kategori yang ditampilkan untuk role user
+        })
+            ->when($role === 'admin', function ($query) {
+                return $query; // Tampilkan semua kategori untuk admin
+            })
+            ->get();
+
+        return view('pages.public.form_berita', compact('categories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -240,6 +259,85 @@ class News extends Controller
             ], 500);
         }
     }
+
+    public function add_news(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'judul_berita' => 'required',
+            'category' => 'required',
+            'content' => 'required|string',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        // dd($request);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+
+        DB::beginTransaction();
+
+        try {
+            // Ambil file dari request
+            $file = $request->file('gambar');
+            if (!$file) {
+                throw new \Exception('No file uploaded');
+            }
+
+            // Generate nama file unik
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            // Upload file ke S3
+            $uploadSuccess = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            if (!$uploadSuccess) {
+                throw new \Exception('Failed to upload file to S3');
+            }
+
+            // Simpan informasi file
+            $uploadedFile = [
+                'name' => $filename,
+                'url' => Storage::disk('s3')->url($filename),
+            ];
+
+            // Ambil data author
+            $author = Auth::user();
+
+            // Simpan data berita ke database
+            $news_data = ModelsNews::create([
+                'id' => Str::uuid(),
+                'title' => $request->judul_berita,
+                'slug' => Str::slug($request->judul_berita),
+                'content' => $request->content,
+                'image_name' => $uploadedFile['name'],
+                'image_url' => $uploadedFile['url'],
+                'author_id' => $author->uuid,
+                'category_id' => $request->category
+            ]);
+
+            // Commit transaksi jika semua berhasil
+            DB::commit();
+
+            return response()->json([
+                'error_code' => 200,
+                'success' => true,
+                'message' => 'Files uploaded successfully',
+                'data' => $news_data,
+                'uploadedFiles' => $uploadedFile
+            ], 201);
+        } catch (\Throwable $th) {
+            // Rollback transaksi jika terjadi kesalahan
+            DB::rollback();
+
+            return response()->json([
+                'error_code' => 500,
+                'success' => false,
+                'message' => 'Error uploading files',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+
 
     /**
      * Display the specified resource.

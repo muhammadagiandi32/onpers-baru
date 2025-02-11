@@ -151,71 +151,96 @@
             padding: 10px;
             font-size: 14px;
         }
-        
+        /* ini untuk nav bar dan header */
+        body {
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #000;
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar-custom {
+            background-color: #d32f2f;
+        }
+        .navbar-custom .nav-link {
+            color: white;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #ffcccc;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #d32f2f;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-success {
+            background-color: #d32f2f;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #a52828;
+        }
+
+  
     </style>
 </head>
 
 <body>
-    <!-- Brand Start -->
-    <div class="brand">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-                        <a href="index.html">
-                            <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-search">
-                        <input type="text" placeholder="Search">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
+   <!-- Header Start -->
+   <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold">
+                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px;"> onPers
+            </a>
+            <div class="b-search d-flex align-items-center">
+                <input type="text" class="form-control mr-2" placeholder="Search">
+                <button class="btn btn-light"><i class="fa fa-search"></i></button>
             </div>
         </div>
-    </div>
-    <!-- Brand End -->
+    </header>
+    <!-- Header End -->
 
-    <!-- Nav Bar Start -->
-    <div class="nav-bar">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-md navbar-custom sticky-top shadow-sm">
         <div class="container">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
-                        <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                        {{-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
-                            </div>
-                        </div>
-                        <a href="single-page.html" class="nav-item nav-link">Single Page</a> --}}
-                        @if (!Auth::check())
-                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-                        @else
-                        <a href="{{ route('dashboards') }}" class="nav-item nav-link">Dashboard</a>
-                        @endif
-                    </div>
-                    <div class="social ml-auto">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </nav>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link">Login</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('dashboards') }}" class="nav-link">Dashboard</a>
+                        </li>
+                    @endif
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('add-news') }}" class="nav-link">
+                                <i class="fa fa-upload"></i> Upload Berita
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </div>
         </div>
-    </div>
-    <!-- Nav Bar End -->
+    </nav>
+    <!-- Navbar End -->
 
     <!-- Top News Start-->
     <div class="top-news">
@@ -396,7 +421,7 @@
     </div>
 
   <!-- Category News yang digunakan -->
-  <div class="cat-news">
+    <div class="cat-news">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
@@ -479,20 +504,6 @@
                         </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Back to Top -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-    <div class="footer bg-white text-white py-5">
-        <div class="container">
-            <hr class="bg-dark">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2025 onPers. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

@@ -28,7 +28,8 @@ Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verif
 Route::get('/dashboards', [News::class, 'dashboards'])->middleware(['auth', 'verified'])->name('dashboards');
 
 
-
+// public
+Route::get('/add-news', [News::class, 'form_news'])->middleware(['auth', 'verified'])->name('add-news');
 
 // Berita
 Route::get('/berita/input_berita', [News::class, 'input_berita'])->middleware(['auth', 'verified'])->name('input_berita');
