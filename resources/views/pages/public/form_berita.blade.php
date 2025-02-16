@@ -24,40 +24,67 @@
     <!-- Summernote CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote.min.css" rel="stylesheet">
     <style>
+
+        /* start css untuk nav dan header */
         body {
             background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
         }
 
         .header {
+            padding: 10px 0;
             background-color: #000;
             color: white;
-            padding: 10px 0;
+            border-bottom: 1px solid #222;
         }
 
         .navbar-custom {
             background-color: #d32f2f;
+            padding: 0.5rem 0;
         }
 
         .navbar-custom .nav-link {
             color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
         }
 
         .navbar-custom .nav-link:hover {
             color: #ffcccc;
         }
 
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .navbar-custom .nav-link.active {
+            color: white;
+            border-bottom: 2px solid #ffcccc;
         }
 
-        .card-header {
-            background-color: #d32f2f;
-            color: white;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            padding: 5px 10px;
         }
+
+        .navbar-toggler-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .b-search {
+            max-width: 300px;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-toggler {
+                display: none; /* Sembunyikan tombol burger di layar besar */
+            }
+
+            .b-search {
+                display: flex; /* Tampilkan search bar di layar besar */
+            }
+        }
+        /* end css untuk nav dan header */
+
 
         .btn-success {
             background-color: #d32f2f;
@@ -78,26 +105,24 @@
 </head>
 
 <body>
-    <!-- Header Start -->
-    <header class="header">
+   <!-- Header Start -->
+   <header class="header">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold">
-                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px;"> onPers
+            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold d-flex align-items-center">
+                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px; margin-right: 8px;"> onPers
             </a>
-            <div class="b-search d-flex align-items-center">
+            <form class="b-search d-none d-md-flex">
                 <input type="text" class="form-control mr-2" placeholder="Search">
                 <button class="btn btn-light"><i class="fa fa-search"></i></button>
-            </div>
+            </form>
+            <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+            </button>
         </div>
     </header>
-    <!-- Header End -->
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-md navbar-custom sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-custom">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -113,6 +138,13 @@
                         </li>
                     @endif
                 </ul>
+                @if (Auth::check())
+                    <!-- <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="{{ route('add-news') }}" class="nav-link"><i class="fa fa-upload"></i> Upload Berita</a>
+                        </li>
+                    </ul> -->
+                @endif
             </div>
         </div>
     </nav>
