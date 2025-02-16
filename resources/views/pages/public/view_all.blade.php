@@ -30,6 +30,9 @@
         body {
             background-color: #f4f4f4;
             font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
@@ -71,8 +74,13 @@
         }
 
         .b-search {
-            max-width: 300px;
             display: none;
+        }
+
+        .navbar-collapse.show .b-search {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 0;
         }
 
         @media (min-width: 768px) {
@@ -110,8 +118,12 @@
             color: white;
             padding: 20px 0;
             text-align: center;
+            margin-top: auto; /* Membuat footer berada di bawah */
         }
-        
+
+        .container p {
+            margin: 0;
+        }
 
     </style>
 </head>
@@ -126,8 +138,8 @@
             @php
                 $currentCategory = request()->segment(2); // Mengambil segmen ke-2 dari URL, yaitu 'advertorial'
             @endphp
-            <form class="b-search d-none d-md-flex">
-                <input type="text" class="form-control mr-2" placeholder="Search">
+            <form  action="{{ route('category.viewAll', $category) }}" method="GET" class="b-search d-none d-md-flex">
+                <input type="text" class="form-control mr-2" placeholder="Search" name="search">
                 <button class="btn btn-light"><i class="fa fa-search"></i></button>
             </form>
             <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarCollapse">
@@ -141,8 +153,8 @@
     <nav class="navbar navbar-expand-md navbar-custom">
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form class="b-search mb-2 d-md-none">
-                    <input type="text" class="form-control mb-2" placeholder="Search">
+                <form  action="{{ route('category.viewAll',  $currentCategory) }}" method="GET" class="b-search mb-2 d-md-none">
+                    <input type="text" class="form-control mb-2" placeholder="Search" name="search" value="{{ request('search') }}">
                     <button class="btn btn-light btn-block"><i class="fa fa-search"></i> Search</button>
                 </form>
                 <ul class="navbar-nav mr-auto">
