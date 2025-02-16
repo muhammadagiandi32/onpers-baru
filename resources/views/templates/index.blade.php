@@ -97,97 +97,120 @@
     </style>
     
     <style>
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            /* Ubah sesuai dengan kebutuhan Anda */
-            object-fit: cover;
-            /* Menjaga rasio aspek gambar */
+      body {
+        background-color: #f4f4f4;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .header {
+        padding: 10px 0;
+        background-color: #000;
+        color: white;
+        border-bottom: 1px solid #222;
+    }
+
+    .navbar-custom {
+        background-color: #d32f2f;
+        padding: 0.5rem 0;
+    }
+
+    .navbar-custom .nav-link {
+        color: white;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-custom .nav-link:hover {
+        color: #ffcccc;
+    }
+
+    .navbar-custom .nav-link.active {
+        color: white;
+        border-bottom: 2px solid #ffcccc;
+    }
+
+    .navbar-toggler {
+        border: none;
+        outline: none;
+        padding: 5px 10px;
+    }
+
+    .navbar-toggler-icon {
+        font-size: 24px;
+        color: white;
+    }
+
+    .b-search {
+        max-width: 300px;
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .navbar-toggler {
+            display: none; /* Sembunyikan tombol burger di layar besar */
         }
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            /* Pastikan card memiliki tinggi penuh sesuai dengan konten */
+        .b-search {
+            display: flex; /* Tampilkan search bar di layar besar */
         }
+    }
 
-        .card-body {
-            flex: 1;
-        }
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
 
-        .custom-video-height {
-            height: 300px;
-            /* Atur tinggi sesuai kebutuhan */
-            width: 100%;
-            /* Pastikan video tetap responsif */
-        }
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
 
-        img {
-            height: 200px;
-        }
-        .badge-custom {
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 12px;
-            background-color:rgb(135, 206, 235);
-            color: #333;
-            border: 1px solid #ddd;
-        }
-        .cn-img {
-            position: relative;
-            overflow: hidden;
-        }
-        .cn-img img {
-            height: 300px;
-            object-fit: cover;
-            width: 100%;
-        }
-        .cn-title {
-            position: absolute;
-            bottom: 0;
-            /* background: rgba(255, 255, 255, 0.6); */
-            color: white;
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-        }
-        /* ini untuk nav bar dan header */
-        body {
-            background-color: #f4f4f4;
-        }
-        .header {
-            background-color: #000;
-            color: white;
-            padding: 10px 0;
-        }
-        .navbar-custom {
-            background-color: #d32f2f;
-        }
-        .navbar-custom .nav-link {
-            color: white;
-        }
-        .navbar-custom .nav-link:hover {
-            color: #ffcccc;
-        }
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .card-header {
-            background-color: #d32f2f;
-            color: white;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        .btn-success {
-            background-color: #d32f2f;
-            border: none;
-        }
-        .btn-success:hover {
-            background-color: #a52828;
-        }
+    .card-body {
+        flex: 1;
+    }
+
+    .custom-video-height {
+        height: 300px;
+        width: 100%;
+    }
+
+    img {
+        height: 200px;
+    }
+
+    .badge-custom {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 12px;
+        background-color: rgb(135, 206, 235);
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .cn-img {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cn-img img {
+        height: 300px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .cn-title {
+        position: absolute;
+        bottom: 0;
+        color: white;
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
 
   
     </style>
@@ -197,23 +220,21 @@
    <!-- Header Start -->
    <header class="header">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold">
-                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px;"> onPers
+            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold d-flex align-items-center">
+                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px; margin-right: 8px;"> onPers
             </a>
-            <div class="b-search d-flex align-items-center">
+            <form class="b-search d-none d-md-flex">
                 <input type="text" class="form-control mr-2" placeholder="Search">
                 <button class="btn btn-light"><i class="fa fa-search"></i></button>
-            </div>
+            </form>
+            <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+            </button>
         </div>
     </header>
-    <!-- Header End -->
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-md navbar-custom sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-custom">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -229,18 +250,17 @@
                         </li>
                     @endif
                 </ul>
-                <ul class="navbar-nav ml-auto">
-                    @if (Auth::check())
+                @if (Auth::check())
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href="{{ route('add-news') }}" class="nav-link">
-                                <i class="fa fa-upload"></i> Upload Berita
-                            </a>
+                            <a href="{{ route('add-news') }}" class="nav-link"><i class="fa fa-upload"></i> Upload Berita</a>
                         </li>
-                    @endif
-                </ul>
+                    </ul>
+                @endif
             </div>
         </div>
     </nav>
+
     <!-- Navbar End -->
 
     <!-- Top News Start-->
