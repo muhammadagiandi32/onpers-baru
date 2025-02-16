@@ -95,6 +95,7 @@
             right: 10px;
         }
     </style>
+    
     <style>
         .card-img-top {
             width: 100%;
@@ -425,20 +426,22 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Headline</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Headline</span>
+                            <a href="{{ route('category.viewAll', 'headline') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Headlines as $headline)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $headline->image_url }}" alt="{{ $headline->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $headline->slug) }}">{{ $headline->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $headline->image_url }}" class="h-100 w-100" alt="{{ $headline->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $headline->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($headline->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -446,20 +449,22 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Berita</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Berita</span>
+                            <a href="{{ route('category.viewAll', 'berita') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Berita as $beritas)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $beritas->image_url }}" class="h-100 w-100" alt="{{ $beritas->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $beritas->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($beritas->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -467,20 +472,22 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Acara</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Acara</span>
+                            <a href="{{ route('category.viewAll', 'acara') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Acara as $acaras)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $acaras->slug) }}">{{ $acaras->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $acaras->image_url }}" class="h-100 w-100" alt="{{ $acaras->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $acaras->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($acaras->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -488,20 +495,22 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Advertorial</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Advertorial</span>
+                            <a href="{{ route('category.viewAll', 'advertorial') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Advertorial as $adv)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $adv->image_url }}" alt="{{ $adv->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $adv->slug) }}">{{ $adv->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $adv->image_url }}" class="h-100 w-100" alt="{{ $adv->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $adv->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($adv->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -593,6 +602,37 @@
         });
 
     </script>
+    <script>
+    const slider = document.getElementById('acara-slider');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust scroll speed here
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
 
 
 </body>

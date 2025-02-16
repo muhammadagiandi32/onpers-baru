@@ -184,7 +184,7 @@
     <!-- Footer Start -->
     <footer class="footer">
         <div class="container">
-            <p class="mb-0">&copy; 2025 onPers. All Rights Reserved.</p>
+            <p class="mb-0"> Copyright &copy; <strong style="color:red">onPers</strong>. All Rights Reserved.</p>
         </div>
     </footer>
     <!-- Footer End -->

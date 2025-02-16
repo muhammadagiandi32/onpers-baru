@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/info', [App\Http\Controllers\UserController::class, 'umumIndex'])->name('info.index');
 
     Route::get('/get-video-news', [IklanController::class, 'getVideoNews'])->name('iklan.getVideoNews');
+    Route::get('/category/{category}', [News::class, 'viewAll'])->name('category.viewAll');
 
 });
 
