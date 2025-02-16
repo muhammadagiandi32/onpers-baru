@@ -95,6 +95,7 @@
             right: 10px;
         }
     </style>
+    
     <style>
         .card-img-top {
             width: 100%;
@@ -151,71 +152,96 @@
             padding: 10px;
             font-size: 14px;
         }
-        
+        /* ini untuk nav bar dan header */
+        body {
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #000;
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar-custom {
+            background-color: #d32f2f;
+        }
+        .navbar-custom .nav-link {
+            color: white;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #ffcccc;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #d32f2f;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-success {
+            background-color: #d32f2f;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #a52828;
+        }
+
+  
     </style>
 </head>
 
 <body>
-    <!-- Brand Start -->
-    <div class="brand">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-                        <a href="index.html">
-                            <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-search">
-                        <input type="text" placeholder="Search">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
+   <!-- Header Start -->
+   <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold">
+                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px;"> onPers
+            </a>
+            <div class="b-search d-flex align-items-center">
+                <input type="text" class="form-control mr-2" placeholder="Search">
+                <button class="btn btn-light"><i class="fa fa-search"></i></button>
             </div>
         </div>
-    </div>
-    <!-- Brand End -->
+    </header>
+    <!-- Header End -->
 
-    <!-- Nav Bar Start -->
-    <div class="nav-bar">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-md navbar-custom sticky-top shadow-sm">
         <div class="container">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
-                        <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                        {{-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
-                            </div>
-                        </div>
-                        <a href="single-page.html" class="nav-item nav-link">Single Page</a> --}}
-                        @if (!Auth::check())
-                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-                        @else
-                        <a href="{{ route('dashboards') }}" class="nav-item nav-link">Dashboard</a>
-                        @endif
-                    </div>
-                    <div class="social ml-auto">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </nav>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link">Login</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('dashboards') }}" class="nav-link">Dashboard</a>
+                        </li>
+                    @endif
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('add-news') }}" class="nav-link">
+                                <i class="fa fa-upload"></i> Upload Berita
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </div>
         </div>
-    </div>
-    <!-- Nav Bar End -->
+    </nav>
+    <!-- Navbar End -->
 
     <!-- Top News Start-->
     <div class="top-news">
@@ -396,24 +422,26 @@
     </div>
 
   <!-- Category News yang digunakan -->
-  <div class="cat-news">
+    <div class="cat-news">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Headline</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Headline</span>
+                            <a href="{{ route('category.viewAll', 'headline') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Headlines as $headline)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $headline->image_url }}" alt="{{ $headline->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $headline->slug) }}">{{ $headline->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $headline->image_url }}" class="h-100 w-100" alt="{{ $headline->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $headline->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($headline->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -421,20 +449,22 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Berita</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Berita</span>
+                            <a href="{{ route('category.viewAll', 'berita') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Berita as $beritas)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $beritas->image_url }}" class="h-100 w-100" alt="{{ $beritas->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $beritas->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($beritas->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -442,20 +472,22 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Acara</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Acara</span>
+                            <a href="{{ route('category.viewAll', 'acara') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Acara as $acaras)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $acaras->slug) }}">{{ $acaras->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $acaras->image_url }}" class="h-100 w-100" alt="{{ $acaras->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $acaras->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($acaras->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -463,36 +495,24 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="d-flex justify-content-between align-items-center">
-                        <span>Advertorial</span>
-                        <a href="#"><span class="badge badge-pill badge-custom">View All</span></a>
-                    </h2>
-                    <div class="row slider">
+                        <h2 class="d-flex justify-content-between align-items-center mt-3">
+                            <span>Advertorial</span>
+                            <a href="{{ route('category.viewAll', 'advertorial') }}"><span class="badge badge-pill badge-custom">View All</span></a>
+                        </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
                         @foreach ($Advertorial as $adv)
-                        <div class="col-md-4 col-sm-6 col-12 mb-3"> <!-- 3 item per row di desktop, 2 di tablet, 1 di mobile -->
-                            <div class="cn-img">
-                                <img src="{{ $adv->image_url }}" alt="{{ $adv->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $adv->slug) }}">{{ $adv->title }}</a>
+                            <div class="flex-shrink-0" style="width: 300px;">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 200px; border-radius: 12px;">
+                                    <img src="{{ $adv->image_url }}" class="h-100 w-100" alt="{{ $adv->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                        <a href="{{ route('news-details', $adv->slug) }}">
+                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($adv->title, 50) }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Back to Top -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-    <div class="footer bg-white text-white py-5">
-        <div class="container">
-            <hr class="bg-dark">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2025 onPers. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
@@ -582,6 +602,37 @@
         });
 
     </script>
+    <script>
+    const slider = document.getElementById('acara-slider');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust scroll speed here
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
 
 
 </body>

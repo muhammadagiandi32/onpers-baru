@@ -7,6 +7,10 @@
     <title>onPers | Mulai Pemberitaan</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Favicon Jika menggunakan PNG -->
+    <link rel="icon" href="{{ asset('/img/logo/logo-onpers.png') }}" type="image/png">
+
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

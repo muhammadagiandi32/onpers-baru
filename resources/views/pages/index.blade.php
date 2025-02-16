@@ -25,96 +25,141 @@
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/css/style.css') }}">
 </head>
+<style>
+    
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #000;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .navbar-custom {
+            background-color: #d32f2f;
+        }
+
+        .navbar-custom .nav-link {
+            color: white;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ffcccc;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #d32f2f;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .btn-success {
+            background-color: #d32f2f;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #a52828;
+        }
+
+        .footer {
+            background-color: #000;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        /* for breadcumb-wrap */
+        .breadcrumb-wrap {
+            padding: 10px 0;
+            background-color: transparent;
+        }
+
+        .breadcrumb {
+            padding: 0;
+            margin-bottom: 0;
+            background-color: transparent;
+            list-style: none;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 5px;
+        }
+
+        .breadcrumb-item::after {
+            margin: 0 5px;
+            color: #bbb;
+        }
+
+        .breadcrumb-item:last-child::after {
+            content: ''; /* Menghilangkan '/' di item terakhir */
+        }
+
+        .breadcrumb-item a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item.active {
+            font-weight: bold;
+            color: #d32f2f; /* Warna berbeda untuk item aktif */
+            pointer-events: none;
+        }
+
+
+</style>
 
 <body>
-    <!-- Top Bar Start -->
-    {{-- <div class="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="tb-contact">
-                        <p><i class="fas fa-envelope"></i>info@mail.com</p>
-                        <p><i class="fas fa-phone-alt"></i>+012 345 6789</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="tb-menu">
-                        <a href="">About</a>
-                        <a href="">Privacy</a>
-                        <a href="">Terms</a>
-                        <a href="">Contact</a>
-                    </div>
-                </div>
+    <!-- Header Start -->
+    <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold">
+                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px;"> onPers
+            </a>
+            <div class="b-search d-flex align-items-center">
+                <input type="text" class="form-control mr-2" placeholder="Search">
+                <button class="btn btn-light"><i class="fa fa-search"></i></button>
             </div>
         </div>
-    </div> --}}
-    <!-- Top Bar Start -->
+    </header>
+    <!-- Header End -->
 
-    <!-- Brand Start -->
-    <div class="brand">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-md navbar-custom sticky-top shadow-sm">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-                        <a href="{{ url('/') }}l">
-                            <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
-                        </a>
-                    </div>
-                </div>
-                {{-- <div class="col-lg-6 col-md-4">
-                    <div class="b-ads">
-                        <a href="https://htmlcodex.com">
-                            <img src="img/ads-1.jpg" alt="Ads" />
-                        </a>
-                    </div>
-                </div> --}}
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-search">
-                        <input type="text" placeholder="Search" />
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link">Login</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('dashboards') }}" class="nav-link">Dashboard</a>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
-    </div>
-    <!-- Brand End -->
-
-    <!-- Nav Bar Start -->
-    <div class="nav-bar">
-        <div class="container">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
-                        <a href="{{url('/')}}" class="nav-item nav-link">Home</a>
-                        {{-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
-                            </div>
-                        </div>
-                        <a href="single-page.html" class="nav-item nav-link active">Single Page</a> --}}
-                        @if (!Auth::check())
-                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-                        @endif
-                    </div>
-                    <div class="social ml-auto">
-                        <a href=""><i class="fab fa-twitter">wkwkk</i></a>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Nav Bar End -->
+    </nav>
+    <!-- Navbar End -->
 
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">
@@ -149,11 +194,13 @@
                         <h2>Berita Lainnya</h2>
                         <div class="row sn-slider">
                             @foreach ($Berita as $beritas)
-                            <div class="col-md-4">
-                                <div class="sn-img">
-                                    <img src="{{ $beritas->image_url }}" />
-                                    <div class="sn-title">
-                                        <a href="{{ route('news-details', $beritas->slug) }}">{{ $beritas->title }}</a>
+                            <div class="col-md-4 mb-4">
+                                <div class="card position-relative border-0 overflow-hidden" style="height: 150px; border-radius: 13px;">
+                                    <img src="{{ $beritas->image_url }}" class="h-100 w-100" alt="{{ $beritas->title }}" style="object-fit: cover; border-radius: 12px;">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                    <a href="{{ route('news-details', $beritas->slug) }}">
+                                        <h6 class="card-title text-white fw-bold">{{ Str::limit($beritas->title, 50) }}</h6>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -164,244 +211,6 @@
 
                 <div class="col-lg-4">
                     <div class="sidebar">
-                        {{-- <div class="sidebar-widget">
-                            <h2 class="sw-title">In This Category</h2>
-                            <div class="news-list">
-                                <div class="nl-item">
-                                    <div class="nl-img">
-                                        <img src="img/news-350x223-1.jpg" />
-                                    </div>
-                                    <div class="nl-title">
-                                        <a href="">Lorem ipsum dolor sit amet
-                                            consec adipis elit</a>
-                                    </div>
-                                </div>
-                                <div class="nl-item">
-                                    <div class="nl-img">
-                                        <img src="img/news-350x223-2.jpg" />
-                                    </div>
-                                    <div class="nl-title">
-                                        <a href="">Lorem ipsum dolor sit amet
-                                            consec adipis elit</a>
-                                    </div>
-                                </div>
-                                <div class="nl-item">
-                                    <div class="nl-img">
-                                        <img src="img/news-350x223-3.jpg" />
-                                    </div>
-                                    <div class="nl-title">
-                                        <a href="">Lorem ipsum dolor sit amet
-                                            consec adipis elit</a>
-                                    </div>
-                                </div>
-                                <div class="nl-item">
-                                    <div class="nl-img">
-                                        <img src="img/news-350x223-4.jpg" />
-                                    </div>
-                                    <div class="nl-title">
-                                        <a href="">Lorem ipsum dolor sit amet
-                                            consec adipis elit</a>
-                                    </div>
-                                </div>
-                                <div class="nl-item">
-                                    <div class="nl-img">
-                                        <img src="img/news-350x223-5.jpg" />
-                                    </div>
-                                    <div class="nl-title">
-                                        <a href="">Lorem ipsum dolor sit amet
-                                            consec adipis elit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{--
-                        <div class="sidebar-widget">
-                            <div class="image">
-                                <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image" /></a>
-                            </div>
-                        </div> --}}
-
-                        {{-- <div class="sidebar-widget">
-                            <div class="tab-news">
-                                <ul class="nav nav-pills nav-justified">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="pill" href="#featured">Featured</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#popular">Popular</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#latest">Latest</a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content">
-                                    <div id="featured" class="container tab-pane active">
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-1.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-2.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-3.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-4.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-5.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="popular" class="container tab-pane fade">
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-4.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-3.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-2.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-1.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-2.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="latest" class="container tab-pane fade">
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-3.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-4.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-5.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-4.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                        <div class="tn-news">
-                                            <div class="tn-img">
-                                                <img src="img/news-350x223-3.jpg" />
-                                            </div>
-                                            <div class="tn-title">
-                                                <a href="">Lorem ipsum dolor sit
-                                                    amet consec adipis
-                                                    elit</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-widget">
-                            <div class="image">
-                                <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image" /></a>
-                            </div>
-                        </div> --}}
-
                         <div class="sidebar-widget">
                             <h2 class="sw-title">News Category</h2>
                             <div class="category">
@@ -413,12 +222,6 @@
                                 </ul>
                             </div>
                         </div>
-
-                        {{-- <div class="sidebar-widget">
-                            <div class="image">
-                                <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image" /></a>
-                            </div>
-                        </div> --}}
 
                         <div class="sidebar-widget">
                             <h2 class="sw-title">Tags</h2>
@@ -439,94 +242,7 @@
     </div>
     <!-- Single News End-->
 
-    <!-- Footer Start -->
-    {{-- <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Get in Touch</h3>
-                        <div class="contact-info">
-                            <p>
-                                <i class="fa fa-map-marker"></i>123 News
-                                Street, NY, USA
-                            </p>
-                            <p>
-                                <i class="fa fa-envelope"></i>info@example.com
-                            </p>
-                            <p><i class="fa fa-phone"></i>+123-456-7890</p>
-                            <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Useful Links</h3>
-                        <ul>
-                            <li><a href="#">Lorem ipsum</a></li>
-                            <li><a href="#">Pellentesque</a></li>
-                            <li><a href="#">Aenean vulputate</a></li>
-                            <li><a href="#">Vestibulum sit amet</a></li>
-                            <li><a href="#">Nam dignissim</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Quick Links</h3>
-                        <ul>
-                            <li><a href="#">Lorem ipsum</a></li>
-                            <li><a href="#">Pellentesque</a></li>
-                            <li><a href="#">Aenean vulputate</a></li>
-                            <li><a href="#">Vestibulum sit amet</a></li>
-                            <li><a href="#">Nam dignissim</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Newsletter</h3>
-                        <div class="newsletter">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Vivamus sed porta dui.
-                                Class aptent taciti sociosqu
-                            </p>
-                            <form>
-                                <input class="form-control" type="email" placeholder="Your email here" />
-                                <button class="btn">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Footer End -->
-
-    <!-- Footer Menu Start -->
-    {{-- <div class="footer-menu">
-        <div class="container">
-            <div class="f-menu">
-                <a href="">Terms of use</a>
-                <a href="">Privacy policy</a>
-                <a href="">Cookies</a>
-                <a href="">Accessibility help</a>
-                <a href="">Advertise with us</a>
-                <a href="">Contact us</a>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Footer Menu End -->
+   
 
     <!-- Footer Bottom Start -->
     <div class="footer-bottom">
@@ -538,14 +254,6 @@
                         Rights Reserved
                     </p>
                 </div>
-
-                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                {{-- <div class="col-md-6 template-by">
-                    <p>
-                        onPers
-                        <a href="{{ url('/') }}"></a>
-                    </p>
-                </div> --}}
             </div>
         </div>
     </div>
