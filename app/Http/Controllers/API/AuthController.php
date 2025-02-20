@@ -98,8 +98,7 @@ class AuthController extends Controller
         return response()->json([
             'error_code' => 200,
             'success' => true,
-            'message' => 'Register successfully '.$request->email,
+            'message' => 'Register successfully ' . $request->email,
         ]);
-
     }
 }

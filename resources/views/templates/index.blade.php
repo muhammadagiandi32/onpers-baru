@@ -27,8 +27,8 @@
     <meta name="twitter:image" content="{{ asset('img/logo/onpers-share.jpg') }}">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon">
+    <!-- Favicon Jika menggunakan PNG -->
+    <link rel="icon" href="{{ asset('/img/logo/logo-onpers.png') }}" type="image/png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
@@ -44,74 +44,6 @@
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('customs/lib/slick/slick.css') }}">
     <style>
-        /* Styling untuk Navbar */
-        .navbar {
-            background-color: #28a745;
-            /* Ganti warna latar belakang menjadi hijau */
-            padding: 15px 30px;
-            /* Perbesar padding untuk panjang navbar */
-        }
-
-        .nav-item.nav-link {
-            font-size: 16px;
-            /* Ukuran font yang lebih kecil */
-            font-weight: 500;
-            /* Menggunakan font tebal agar lebih jelas */
-            color: #ffffff;
-            /* Warna teks putih */
-            margin-left: 20px;
-            /* Memberikan jarak antar item */
-            text-transform: uppercase;
-            /* Membuat semua huruf besar */
-            transition: color 0.3s ease;
-            /* Efek transisi saat hover */
-        }
-
-        .nav-item.nav-link:hover {
-            color: #ffb300;
-            /* Warna teks saat hover */
-        }
-
-        .nav-item.nav-link.active {
-            color: #ffb300;
-            /* Warna untuk item aktif */
-            font-weight: bold;
-            /* Memberikan penekanan pada item aktif */
-        }
-
-        .social {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .social-icon {
-            color: #ffffff;
-            font-size: 20px;
-            margin-left: 20px;
-            /* Memberikan jarak antar ikon */
-            transition: color 0.3s ease;
-        }
-
-        .social-icon:hover {
-            color: #ffb300;
-            /* Warna ikon saat hover */
-        }
-
-        @media (max-width: 767px) {
-            .navbar-nav {
-                text-align: center;
-                /* Menata menu di layar kecil agar tampil lebih rapi */
-                margin-top: 10px;
-            }
-
-            .social {
-                justify-content: center;
-                margin-top: 10px;
-                /* Memberikan jarak di bawah social icons */
-            }
-        }
-
         .story-container {
             position: relative;
             width: 100%;
@@ -174,20 +106,79 @@
             right: 10px;
         }
     </style>
+
     <style>
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            /* Ubah sesuai dengan kebutuhan Anda */
-            object-fit: cover;
-            /* Menjaga rasio aspek gambar */
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header {
+            padding: 10px 0;
+            background-color: #000;
+            color: white;
+            border-bottom: 1px solid #222;
+        }
+
+        .navbar-custom {
+            background-color: #d32f2f;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-custom .nav-link {
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ffcccc;
+        }
+
+        .navbar-custom .nav-link.active {
+            color: white;
+            border-bottom: 2px solid #ffcccc;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+        }
+
+        .navbar-toggler-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .b-search {
+            max-width: 300px;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-toggler {
+                display: none;
+                /* Sembunyikan tombol burger di layar besar */
+            }
+
+            .b-search {
+                display: flex;
+                /* Tampilkan search bar di layar besar */
+            }
         }
 
         .card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            /* Pastikan card memiliki tinggi penuh sesuai dengan konten */
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
 
         .card-body {
@@ -196,82 +187,116 @@
 
         .custom-video-height {
             height: 300px;
-            /* Atur tinggi sesuai kebutuhan */
             width: 100%;
-            /* Pastikan video tetap responsif */
         }
 
         img {
             height: 200px;
         }
+
+        .badge-custom {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 12px;
+            background-color: rgb(135, 206, 235);
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .cn-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cn-img img {
+            height: 300px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .cn-title {
+            position: absolute;
+            bottom: 0;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 
 <body>
-    <!-- Brand Start -->
-    <div class="brand">
+    <!-- Top Bar Start -->
+    {{-- <div class="top-bar">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-                        <a href="index.html">
-                            <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo">
-                        </a>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tb-contact">
+                        <p><i class="fas fa-envelope"></i>info@mail.com</p>
+                        <p><i class="fas fa-phone-alt"></i>+012 345 6789</p>
                     </div>
                 </div>
-                {{-- <div class="col-lg-6 col-md-4">
-                    <div class="b-ads">
-                        <a href="https://htmlcodex.com">
-                            <img src="{{ asset('img/ads-1.jpg') }}" alt="Ads">
-                        </a>
-                    </div>
-                </div> --}}
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-search">
-                        <input type="text" placeholder="Search">
-                        <button><i class="fa fa-search"></i></button>
+                <div class="col-md-6">
+                    <div class="tb-menu">
+                        <a href="">About</a>
+                        <a href="">Privacy</a>
+                        <a href="">Terms</a>
+                        <a href="">Contact</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Brand End -->
+    </div> --}}
+    <!-- Top Bar Start -->
 
-    <!-- Nav Bar Start -->
-    <div class="nav-bar">
-        <div class="container">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
-                        <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-
-                        <!-- Jika pengguna sudah login, tampilkan Dashboard -->
-                        @if (!Auth::check())
-                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-                        @else
-                        <a href="{{ route('dashboards') }}" class="nav-item nav-link">Dashboard</a>
-                        @endif
-                    </div>
-
-                    <!-- Ikon Media Sosial -->
-                    <div class="social ml-auto d-flex">
-                        <a href="" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="" class="social-icon"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-            </nav>
+    <!-- Brand Start -->
+    <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ url('/') }}" class="navbar-brand text-white font-weight-bold">
+                <img src="{{ asset('img/logo/logo-onpers.png') }}" alt="Logo" style="height: 40px;"> onPers
+            </a>
+            <div class="b-search d-flex align-items-center">
+                <input type="text" class="form-control mr-2" placeholder="Search">
+                <button class="btn btn-light"><i class="fa fa-search"></i></button>
+            </div>
         </div>
-    </div>
-    <!-- Nav Bar End -->
+    </header>
+
+    <nav class="navbar navbar-expand-md navbar-custom sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    </li>
+                    @if (!Auth::check())
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                        <a href="{{ route('dashboards') }}" class="nav-link">Dashboard</a>
+                    </li>
+                    @endif
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (Auth::check())
+                    <li class="nav-item">
+                        <a href="{{ route('add-news') }}" class="nav-link">
+                            <i class="fa fa-upload"></i> Upload Berita
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navbar End -->
 
     <!-- Top News Start-->
     <div class="top-news">
@@ -292,32 +317,21 @@
             <div class="row">
                 <div class="col-md-6 tn-left">
                     <div class="row tn-slider">
-                        @foreach ($kiri as $kiri)
+                        @foreach ($kiri as $item)
                         <div class="col-md-6">
                             <div class="tn-img">
-                                <img src="{{ $kiri->image_url }}" />
-                                {{-- <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div> --}}
+                                <img src="{{ $item->image_url }}" alt="News Image" class="img-fluid">
                             </div>
                         </div>
                         @endforeach
-                        {{-- <div class="col-md-6">
-                            <div class="tn-img">
-                                <img src="{{ asset('img/news-450x350-2.jpg') }}" />
-                                <div class="tn-title">
-                                    <a href="">Integer hendrerit elit eget purus sodales maximus</a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
 
                 <div class="col-md-6 tn-right">
                     <div class="row">
                         {{-- @foreach ($kanan as $kanan) --}}
-                        <div class="col-md-12">
-                            <div class="tn-img">
+                        <div class="col-md-6">
+                            <div class="">
                                 @if(isset($kanan))
                                 <img src="{{ $kanan->image_url }}" />
                                 @endif
@@ -326,17 +340,96 @@
                                 </div> --}}
                             </div>
                         </div>
+
+                        {{-- <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
+                                <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
+                                <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
+                                <div class="tn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Top News End-->
 
     <!-- Berita News Start-->
     <div class="cat-news">
         <div class="container">
+            {{-- <div class="container-fluid">
+                <div class="row gy-3 gy-md-4">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card border-dark">
+                            <div class="card-body text-center p-4 p-xxl-5">
+                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
+                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                                </svg>
+                                <h4 class="mb-4">Wartawan</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card border-dark">
+                            <div class="card-body text-center p-4 p-xxl-5">
+                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
+                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                                </svg>
+                                <h4 class="mb-4">Wartawan</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card border-dark">
+                            <div class="card-body text-center p-4 p-xxl-5">
+                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
+                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                                </svg>
+                                <h4 class="mb-4">Wartawan</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card border-dark">
+                            <div class="card-body text-center p-4 p-xxl-5">
+                                <svg fill="#ff6f61" width="48" height="48" xmlns="http://www.w3.org/2000/svg"
+                                    class="bi bi-eraser-fill text-primary mb-4" viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                                </svg>
+                                <h4 class="mb-4">Wartawan</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tambahkan card lain dengan cara yang sama -->
 
+                </div>
+            </div> --}}
             <div class="row">
                 <div class="col-12">
                     <div class="row">
@@ -429,7 +522,7 @@
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card border-dark"
                                             onclick="window.location='{{ route('info.index') }}';"
-                                            style="cursor: pointer;">>
+                                            style="cursor: pointer;">
                                             <div class=" card-body text-center p-4 p-xxl-5">
                                                 <svg fill="#ff6f61" width="48" height="48"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -463,19 +556,18 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Headline</h2>
+                    <h2>Advertorial</h2>
                     <div class="row cn-slider">
                         <!-- Mengelompokkan setiap 3 berita -->
-                        @foreach ($Berita as $beritas)
+                        @foreach ($Advertorial as $adv)
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="{{ $beritas->image_url }}" alt="{{ $beritas->title }}">
+                                <img src="{{ $adv->image_url }}" alt="{{ $adv->title }}">
                                 <div class="cn-title">
-                                    <a href="{{ route('news-details', $beritas->slug) }}">
-                                        {{ $beritas->title }}
+                                    <a href="{{ route('news-details', $adv->slug) }}">
+                                        {{ $adv->title }}
                                     </a>
                                 </div>
                             </div>
@@ -484,23 +576,53 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    {{-- end berita --}}
-    {{-- Berita --}}
-    <div class="cat-news">
-        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Berita</h2>
-                    <div class="row cn-slider">
-                        @foreach ($Rilis as $riliss)
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ $riliss->image_url }}" alt="{{ $riliss->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $riliss->slug) }}">
-                                        {{ $riliss->title }}
+                    <h2 class="d-flex justify-content-between align-items-center mt-3">
+                        <span>Berita</span>
+                        <a href="{{ route('category.viewAll', 'berita') }}"><span
+                                class="badge badge-pill badge-custom">View All</span></a>
+                    </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
+                        @foreach ($Berita as $beritas)
+                        <div class="flex-shrink-0" style="width: 300px;">
+                            <div class="card position-relative border-0 overflow-hidden"
+                                style="height: 200px; border-radius: 12px;">
+                                <img src="{{ $beritas->image_url }}" class="h-100 w-100" alt="{{ $beritas->title }}"
+                                    style="object-fit: cover; border-radius: 12px;">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end"
+                                    style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                    <a href="{{ route('news-details', $beritas->slug) }}">
+                                        <h5 class="card-title text-white fw-bold">{{ Str::limit($beritas->title, 50)
+                                            }}</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="d-flex justify-content-between align-items-center mt-3">
+                        <span>Acara</span>
+                        <a href="{{ route('category.viewAll', 'acara') }}"><span
+                                class="badge badge-pill badge-custom">View All</span></a>
+                    </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
+                        @foreach ($Acara as $acaras)
+                        <div class="flex-shrink-0" style="width: 300px;">
+                            <div class="card position-relative border-0 overflow-hidden"
+                                style="height: 200px; border-radius: 12px;">
+                                <img src="{{ $acaras->image_url }}" class="h-100 w-100" alt="{{ $acaras->title }}"
+                                    style="object-fit: cover; border-radius: 12px;">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end"
+                                    style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                    <a href="{{ route('news-details', $acaras->slug) }}">
+                                        <h5 class="card-title text-white fw-bold">{{ Str::limit($acaras->title, 50)
+                                            }}</h5>
                                     </a>
                                 </div>
                             </div>
@@ -511,25 +633,29 @@
             </div>
         </div>
     </div>
-
-    </div>
-
     {{-- end Berita --}}
     {{-- Acara --}}
     <div class="cat-news">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Acara</h2>
-                    <div class="row cn-slider">
-                        <!-- Mengelompokkan setiap 3 berita -->
-                        @foreach ($Acara as $acaras)
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="{{ $acaras->image_url }}" alt="{{ $acaras->title }}">
-                                <div class="cn-title">
-                                    <a href="{{ route('news-details', $acaras->slug) }}">
-                                        {{ $acaras->title }}
+                    <h2 class="d-flex justify-content-between align-items-center mt-3">
+                        <span>Advertorial</span>
+                        <a href="{{ route('category.viewAll', 'advertorial') }}"><span
+                                class="badge badge-pill badge-custom">View All</span></a>
+                    </h2>
+                    <div class="d-flex overflow-hidden" style="gap: 16px; scroll-behavior: smooth;" id="acara-slider">
+                        @foreach ($Advertorial as $adv)
+                        <div class="flex-shrink-0" style="width: 300px;">
+                            <div class="card position-relative border-0 overflow-hidden"
+                                style="height: 200px; border-radius: 12px;">
+                                <img src="{{ $adv->image_url }}" class="h-100 w-100" alt="{{ $adv->title }}"
+                                    style="object-fit: cover; border-radius: 12px;">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end"
+                                    style="background: rgba(0, 0, 0, 0.4); border-radius: 12px;">
+                                    <a href="{{ route('news-details', $adv->slug) }}">
+                                        <h5 class="card-title text-white fw-bold">{{ Str::limit($adv->title, 50) }}
+                                        </h5>
                                     </a>
                                 </div>
                             </div>
@@ -540,56 +666,269 @@
             </div>
         </div>
     </div>
-    <div class="adv">
+    {{-- end Acara --}}
+    {{-- Umum --}}
+    {{-- <div class="cat-news">
         <div class="container">
-            <div class="advertorial">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>Advertorial</h2>
-                            <div class="row cn-slider">
-                                <!-- Mengelompokkan setiap 3 berita -->
-                                @foreach ($Advertorial as $adv)
-                                <div class="col-md-6">
-                                    <div class="cn-img">
-                                        <img src="{{ $adv->image_url }}" alt="{{ $adv->title }}">
-                                        <div class="cn-title">
-                                            <a href="{{ route('news-details', $adv->slug) }}">
-                                                {{ $adv->title }}
-                                            </a>
-                                        </div>
-                                    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Umum</h2>
+                    <div class="row cn-slider">
+                        @foreach ($Umum as $umum)
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="{{ $umum->image_url }}" alt="{{ $umum->title }}">
+                                <div class="cn-title">
+                                    <a href="{{ route('news-details', $umum->slug) }}">
+                                        {{ $umum->title }}
+                                    </a>
                                 </div>
-                                @endforeach
                             </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> --}}
+    <!-- Main News Start-->
+    {{-- <div class="main-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-1.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-5.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-1.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-2.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-3.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mn-img">
+                                <img src="{{ asset('img/news-350x223-4.jpg') }}" />
+                                <div class="mn-title">
+                                    <a href="">Lorem ipsum dolor sit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="mn-list">
+                        <h2>Read More</h2>
+                        <ul>
+                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                            <li><a href="">Pellentesque tincidunt enim libero</a></li>
+                            <li><a href="">Morbi id finibus diam vel pretium enim</a></li>
+                            <li><a href="">Duis semper sapien in eros euismod sodales</a></li>
+                            <li><a href="">Vestibulum cursus lorem nibh</a></li>
+                            <li><a href="">Morbi ullamcorper vulputate metus non eleifend</a></li>
+                            <li><a href="">Etiam vitae elit felis sit amet</a></li>
+                            <li><a href="">Nullam congue massa vitae quam</a></li>
+                            <li><a href="">Proin sed ante rutrum</a></li>
+                            <li><a href="">Curabitur vel lectus</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    <!-- Main News End-->
+
+    <!-- Footer Start -->
+    {{-- <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3 class="title">Get in Touch</h3>
+                        <div class="contact-info">
+                            <p><i class="fa fa-map-marker"></i>123 News Street, NY, USA</p>
+                            <p><i class="fa fa-envelope"></i>info@example.com</p>
+                            <p><i class="fa fa-phone"></i>+123-456-7890</p>
+                            <div class="social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3 class="title">Useful Links</h3>
+                        <ul>
+                            <li><a href="#">Lorem ipsum</a></li>
+                            <li><a href="#">Pellentesque</a></li>
+                            <li><a href="#">Aenean vulputate</a></li>
+                            <li><a href="#">Vestibulum sit amet</a></li>
+                            <li><a href="#">Nam dignissim</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3 class="title">Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Lorem ipsum</a></li>
+                            <li><a href="#">Pellentesque</a></li>
+                            <li><a href="#">Aenean vulputate</a></li>
+                            <li><a href="#">Vestibulum sit amet</a></li>
+                            <li><a href="#">Nam dignissim</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3 class="title">Newsletter</h3>
+                        <div class="newsletter">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui.
+                                Class
+                                aptent taciti sociosqu
+                            </p>
+                            <form>
+                                <input class="form-control" type="email" placeholder="Your email here">
+                                <button class="btn">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div> --}}
+    <!-- Footer End -->
 
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Footer Menu Start -->
+    {{-- <div class="footer-menu">
+        <div class="container">
+            <div class="f-menu">
+                <a href="">Terms of use</a>
+                <a href="">Privacy policy</a>
+                <a href="">Cookies</a>
+                <a href="">Accessibility help</a>
+                <a href="">Advertise with us</a>
+                <a href="">Contact us</a>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Menu End -->
 
-        <!-- JavaScript Libraries -->
+    <!-- Footer Bottom Start -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 copyright">
+                    <p>Copyright &copy; <a href="">Your Site Name</a>. All Rights Reserved</p>
+                </div>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ asset('customs/lib/slick/slick.min.js') }}"></script>
-        <script src="{{ asset('customs/lib/easing/easing.min.js') }}"></script>
-        <script src="{{ asset('customs/js/main.js') }}"></script>
-        <script>
-            $(document).ready(function() {
+                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                <div class="col-md-6 template-by">
+                    <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    <!-- Footer Bottom End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('customs/lib/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('customs/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('customs/js/main.js') }}"></script>
+    <script>
+        $(document).ready(function() {
             // Cek jika layar adalah mobile
-            if ($(window).width() <= 768) {
-                $(".container-fluid .row").slick({
-                    infinite: true,
-                    slidesToShow: 1,
+            if ($(window).width() < 768) {  // Aktifkan slick hanya di mobile
+                $('.slider').slick({
+                    slidesToShow: 1,   // Tampilkan 1 item per slide
                     slidesToScroll: 1,
-                    prevArrow: '<button class="slick-prev">Previous</button>',
-                    nextArrow: '<button class="slick-next">Next</button>',
+                    autoplay: true,    // Otomatis berjalan
+                    autoplaySpeed: 2000,
+                    dots: false,
+                    arrows: false
                 });
             }
+
+            $('.slider').slick({
+                slidesToShow: 3,  // Jumlah item yang ditampilkan
+                slidesToScroll: 1,
+                autoplay: true,   // Slider berjalan otomatis
+                autoplaySpeed: 2000, // Kecepatan dalam milidetik (3000 = 3 detik)
+                dots: false,       // Menampilkan navigasi berupa titik-titik
+                arrows: false     // Hilangkan panah navigasi
+            });
         });
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -645,7 +984,7 @@
 
         });
 
-        </script>
+    </script>
 
 
 </body>

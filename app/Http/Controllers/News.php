@@ -26,8 +26,7 @@ class News extends Controller
         //
         $categoryBerita = 'Berita';
         $categoryAcara = 'Acara';
-        $categoryRilis = 'Rilis';
-        $categoryUmum = 'Umum';
+        $categoryHeadline = 'Headline';
         $categoryAdvertorial = 'Advertorial';
 
         $category =  \App\Models\Category::where('name', $categoryBerita)->first();
@@ -40,12 +39,8 @@ class News extends Controller
             $query->where('name', $categoryAcara);
         })->orderBy('created_at', 'desc')->get();
 
-        $Rilis = ModelsNews::whereHas('Category', function ($query) use ($categoryRilis) {
-            $query->where('name', $categoryRilis);
-        })->orderBy('created_at', 'desc')->get();
-
-        $Umum = ModelsNews::whereHas('Category', function ($query) use ($categoryUmum) {
-            $query->where('name', $categoryUmum);
+        $Headlines = ModelsNews::whereHas('Category', function ($query) use ($categoryHeadline) {
+            $query->where('name', $categoryHeadline);
         })->orderBy('created_at', 'desc')->get();
 
         $Advertorial = ModelsNews::whereHas('Category', function ($query) use ($categoryAdvertorial) {
@@ -58,8 +53,9 @@ class News extends Controller
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
-        return view('templates.index', compact('Berita', 'Acara', 'Rilis', 'Umum', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
+        return view('templates.index', compact('Berita', 'Acara', 'Headlines', 'kiri', 'kanan', 'video', 'adv', 'Advertorial'));
     }
+
     public function dashboard()
     {
         $categories = Category::get();
@@ -171,6 +167,25 @@ class News extends Controller
     }
 
 
+
+    public function form_news()
+    {
+        // Ambil role pengguna saat ini
+        $role = Auth::user()->getRoleNames()->first();
+        // dd($role);
+
+        // Filter kategori berdasarkan role pengguna
+        $categories = Category::when(in_array($role, ['Wartawan', 'Narasumber', 'Umum', 'Jasa', 'Humas']), function ($query) {
+            return $query->whereIn('name', ['Acara', 'Berita']); // Kategori yang ditampilkan untuk role user
+        })
+            ->when($role === 'admin', function ($query) {
+                return $query; // Tampilkan semua kategori untuk admin
+            })
+            ->get();
+
+        return view('pages.public.form_berita', compact('categories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -259,6 +274,85 @@ class News extends Controller
             ], 500);
         }
     }
+
+    public function add_news(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'judul_berita' => 'required',
+            'category' => 'required',
+            'content' => 'required|string',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        // dd($request);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+
+        DB::beginTransaction();
+
+        try {
+            // Ambil file dari request
+            $file = $request->file('gambar');
+            if (!$file) {
+                throw new \Exception('No file uploaded');
+            }
+
+            // Generate nama file unik
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            // Upload file ke S3
+            $uploadSuccess = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            if (!$uploadSuccess) {
+                throw new \Exception('Failed to upload file to S3');
+            }
+
+            // Simpan informasi file
+            $uploadedFile = [
+                'name' => $filename,
+                'url' => Storage::disk('s3')->url($filename),
+            ];
+
+            // Ambil data author
+            $author = Auth::user();
+
+            // Simpan data berita ke database
+            $news_data = ModelsNews::create([
+                'id' => Str::uuid(),
+                'title' => $request->judul_berita,
+                'slug' => Str::slug($request->judul_berita),
+                'content' => $request->content,
+                'image_name' => $uploadedFile['name'],
+                'image_url' => $uploadedFile['url'],
+                'author_id' => $author->uuid,
+                'category_id' => $request->category
+            ]);
+
+            // Commit transaksi jika semua berhasil
+            DB::commit();
+
+            return response()->json([
+                'error_code' => 200,
+                'success' => true,
+                'message' => 'Files uploaded successfully',
+                'data' => $news_data,
+                'uploadedFiles' => $uploadedFile
+            ], 201);
+        } catch (\Throwable $th) {
+            // Rollback transaksi jika terjadi kesalahan
+            DB::rollback();
+
+            return response()->json([
+                'error_code' => 500,
+                'success' => false,
+                'message' => 'Error uploading files',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+
 
     /**
      * Display the specified resource.
@@ -385,5 +479,21 @@ class News extends Controller
             return response()->json(['success' => 'Berita berhasil dihapus ' . $news->title]);
         }
         return response()->json(['error' => 'Berita tidak ditemukan'], 404);
+    }
+
+    public function viewAll($category)
+    {
+        $search = request('search'); // Ambil kata kunci pencarian dari request
+
+        $newsItems = ModelsNews::whereHas('Category', function ($query) use ($category) {
+            $query->where('name', $category);
+        })
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'like', "%{$search}%"); // Filter berdasarkan kata kunci di kolom 'title'
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.public.view_all', compact('newsItems', 'category'));
     }
 }

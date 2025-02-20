@@ -29,7 +29,8 @@ Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verif
 Route::get('/dashboards', [News::class, 'dashboards'])->middleware(['auth', 'verified'])->name('dashboards');
 
 
-
+// public
+Route::get('/add-news', [News::class, 'form_news'])->middleware(['auth', 'verified'])->name('add-news');
 
 // Berita
 Route::get('/berita/input_berita', [News::class, 'input_berita'])->middleware(['auth', 'verified'])->name('input_berita');
@@ -88,6 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/info', [App\Http\Controllers\UserController::class, 'umumIndex'])->name('info.index');
 
     Route::get('/get-video-news', [IklanController::class, 'getVideoNews'])->name('iklan.getVideoNews');
+    Route::get('/category/{category}', [News::class, 'viewAll'])->name('category.viewAll');
 
     //API
     Route::prefix('api')->group(function () {
