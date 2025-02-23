@@ -211,7 +211,13 @@
         background: rgba(0, 0, 0, 0.5);
     }
 
-
+    /* kode untuk menyamaan ukuran gambar */
+    .tn-left .tn-img img, 
+    .tn-right .tn-img img {
+        width: 100%; /* Agar gambar menyesuaikan dengan container */
+        height: 300px; /* Atur tinggi tetap untuk semua gambar */
+        object-fit: cover; /* Pastikan gambar tidak terdistorsi */
+    }
   
     </style>
 </head>
