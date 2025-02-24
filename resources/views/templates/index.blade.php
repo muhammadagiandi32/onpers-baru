@@ -190,28 +190,7 @@
         border: 1px solid #ddd;
     }
 
-    .cn-img {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .cn-img img {
-        height: 300px;
-        object-fit: cover;
-        width: 100%;
-    }
-
-    .cn-title {
-        position: absolute;
-        bottom: 0;
-        color: white;
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
-        background: rgba(0, 0, 0, 0.5);
-    }
-
-    /* kode untuk menyamaan ukuran gambar */
+    /* kode untuk menyamaan ukuran gambar kiri dan kanan */
     .tn-left .tn-img img, 
     .tn-right .tn-img img {
         width: 100%; /* Agar gambar menyesuaikan dengan container */
@@ -343,28 +322,54 @@
     }
     
     /* end css untuk semua category and slider */
-       
-        .main-content {
-            flex: 1;
-        }
+    /* Membuat HTML & Body memenuhi layar */
+    html, body {
+        height: 100%;
+        /* margin: 0; */
+        /* display: flex;
+        flex-direction: column; */
+    }
 
+    /* Kontainer utama agar konten memenuhi ruang */
+    .main-content {
+        flex: 1; /* Mendorong footer ke bawah */
+    }
+
+    /* Footer tetap di bawah */
+    .footer {
+        background-color:  #000;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 16px;
+        font-weight: 400;
+        width: 100%;
+    }
+    .putih{
+        color: #f4f4f4;
+    }
+
+    /* Styling untuk teks "onPers" */
+    .brand-text {
+        color: red;
+        font-weight: bold;
+    }
+
+    /* Pastikan footer tidak mengambang di tengah */
+    @media (min-height: 500px) {
         .footer {
-            background-color: #000;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            margin-top: auto; /* Membuat footer berada di bawah */
+            position: relative;
+            bottom: 0;
         }
+    }
 
-        .container p {
-            margin: 0;
-        }
+
     /* end css untuk footer */
     </style>
 </head>
 
 <body>
-    <div class="main-content mb-5">
+    <div class="main-content">
         <!-- Header Start -->
         <header class="header">
             <div class="container d-flex justify-content-between align-items-center">
@@ -408,7 +413,6 @@
                 </div>
             </div>
         </nav>
-
         <!-- Navbar End -->
 
         <!-- Top News Start-->
@@ -639,11 +643,13 @@
         </div>
     </div>
 
-    <!-- <footer class="footer">
+    <footer class="footer mt-3">
         <div class="container">
-            <p class="mb-0"> Copyright &copy; <strong style="color:red">onPers</strong>. All Rights Reserved.</p>
+            <p class="mb-0 putih">Copyright &copy; <strong class="brand-text">onPers</strong>. All Rights Reserved.</p>
         </div>
-    </footer> -->
+    </footer>
+
+
 </body>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -753,9 +759,5 @@
 
         setTimeout(setupAllSliders, 500);
     });
-</script>
-
-
-
-
+    </script>
 </html>
