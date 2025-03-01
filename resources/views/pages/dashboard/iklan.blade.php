@@ -78,17 +78,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
-            <div class="row">
-                <form action="{{ route('video.upload') }}" id="videoUpload" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="file">Upload file</label>
-                        <input type="file" class="form-control-file" id="file" name="file" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </form>
-            </div>
         </div>
         <!-- /.container-fluid -->
     </section>

@@ -20,7 +20,8 @@ class IklanController extends Controller
      */
     public function index()
     {
-        //
+        $iklans = Iklan::all();
+        return view('pages.dashboard.iklan.index', compact('iklans'));
     }
 
     /**
