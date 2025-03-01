@@ -627,7 +627,7 @@
                                                     <img src="{{ $item->image_url }}" class="h-100 w-100" alt="{{ $item->title }}">
                                                     <div class="card-img-overlay d-flex flex-column justify-content-end">
                                                         <a href="{{ route('news-details', $item->slug) }}">
-                                                            <h5 class="card-title text-white fw-bold">{{ Str::limit($item->title, 50) }}</h5>
+                                                            <h5 class="card-title text-white fw-bold">{{ $item->title }}</h5>
                                                         </a>
                                                     </div>
                                                 </div>
