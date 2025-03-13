@@ -47,13 +47,13 @@ class News extends Controller
         })->orderBy('created_at', 'desc')->get();
 
         // iklan
-        $kiri = Iklan::where('category_name', 'kiri')->limit(4)->get();
+        $kiri = Iklan::where('category_name', 'kiri')->limit(4)->orderBy('created_at', 'desc')->get();
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();
         return view('templates.index', compact('Berita', 'Acara', 'Headlines','kiri', 'kanan', 'video', 'adv', 'Advertorial'));
     }
-    
+
     public function dashboard()
     {
         $categories = Category::get();
@@ -469,7 +469,7 @@ class News extends Controller
     public function viewAll($category)
     {
         $search = request('search'); // Ambil kata kunci pencarian dari request
-        
+
         $newsItems = ModelsNews::whereHas('Category', function ($query) use ($category) {
             $query->where('name', $category);
         })
@@ -478,7 +478,7 @@ class News extends Controller
         })
         ->orderBy('created_at', 'desc')
         ->get();
-        
+
         return view('pages.public.view_all', compact('newsItems', 'category'));
     }
 }
