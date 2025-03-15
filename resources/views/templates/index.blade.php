@@ -95,7 +95,7 @@
             right: 10px;
         }
     </style>
-    
+
     <style>
       body {
         background-color: #f4f4f4;
@@ -191,7 +191,7 @@
     }
 
     /* kode untuk menyamaan ukuran gambar kiri dan kanan */
-    .tn-left .tn-img img, 
+    .tn-left .tn-img img,
     .tn-right .tn-img img {
         width: 100%; /* Agar gambar menyesuaikan dengan container */
         height: 300px; /* Atur tinggi tetap untuk semua gambar */
@@ -199,7 +199,7 @@
     }
 
     /* css untuk semua category and slider*/
-  
+
     .slider-container {
         display: flex;
         gap: 16px;
@@ -320,7 +320,7 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
     }
-    
+
     /* end css untuk semua category and slider */
     /* Membuat HTML & Body memenuhi layar */
     html, body {
@@ -627,7 +627,7 @@
                                                     <img src="{{ $item->image_url }}" class="h-100 w-100" alt="{{ $item->title }}">
                                                     <div class="card-img-overlay d-flex flex-column justify-content-end">
                                                         <a href="{{ route('news-details', $item->slug) }}">
-                                                            <h5 class="card-title text-white fw-bold">{{ $item->title }}</h5>
+                                                            <h6 class="card-title text-white fw-bold">{{ $item->title }}</h6>
                                                         </a>
                                                     </div>
                                                 </div>
