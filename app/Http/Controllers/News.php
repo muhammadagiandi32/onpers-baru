@@ -47,7 +47,9 @@ class News extends Controller
         })->orderBy('created_at', 'desc')->get();
 
         // iklan
-        $kiri = Iklan::where('category_name', 'kiri')->limit(4)->orderBy('created_at', 'desc')->get();
+        // $kiri = Iklan::where('category_name', 'kiri')->limit(4)->orderBy('created_at', 'desc')->get();
+        $kiri = Iklan::where('category_name', 'kiri')->limit(20)->orderBy('created_at', 'desc')->get();
+
         $kanan = Iklan::where('category_name', 'kanan')->latest()->first();
         $adv = Iklan::all();
         $video = Video::take(1)->first();

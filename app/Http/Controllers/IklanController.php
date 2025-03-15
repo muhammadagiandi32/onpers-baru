@@ -20,7 +20,8 @@ class IklanController extends Controller
      */
     public function index()
     {
-        $iklans = Iklan::all();
+        $iklans = Iklan::orderBy('created_at', 'desc')->get();
+
         return view('pages.dashboard.iklan.index', compact('iklans'));
     }
 
@@ -172,6 +173,19 @@ class IklanController extends Controller
      */
     public function destroy(Iklan $iklan)
     {
-        //
+        try {
+            // Pastikan iklan ada
+            if (!$iklan) {
+                return back()->with('error', 'Iklan tidak ditemukan.');
+            }
+
+            // Hapus iklan
+            $iklan->delete();
+
+            return back()->with('success', 'Iklan berhasil dihapus.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
+
 }
