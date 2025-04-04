@@ -22,6 +22,8 @@ Route::get('/contoh', function () {
 });
 Route::get('/', [News::class, 'index']);
 Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
+Route::get('/event-details/{id}', [News::class, 'event'])->name('event-details');
+
 Route::get('/dashboard', [News::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //dashboard

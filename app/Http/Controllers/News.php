@@ -374,6 +374,36 @@ class News extends Controller
         return view('pages.index', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Berita'));
     }
 
+    public function event(string $id)
+    {
+        $data = ModelsNews::where('slug', $id)->first();
+        // Check if the news item is found
+        if (!$data) {
+            // Handle the case where the news is not found
+            return redirect()->back()->with('error', 'News not found');
+        }
+        // Calculate the reading time
+        $readingTime = $data->readingTime();
+        $jumlahBerita = \App\Models\News::selectRaw('categories.name as category_name, count(*) as total')
+            ->join('categories', 'news.category_id', '=', 'categories.id')
+            ->groupBy('categories.name')
+            ->get();
+        $beritaTerbaru = \App\Models\News::orderBy('published_at', 'desc')
+            ->first()
+            ->take(3)  // Ambil 10 berita terbaru, sesuaikan sesuai kebutuhan
+            ->get();
+        $acaraTerbaru = \App\Models\News::orderBy('published_at', 'desc')
+            ->take(3)  // Ambil 10 berita terbaru, sesuaikan sesuai kebutuhan
+            ->get();
+        $categoryBerita = 'Berita';
+        $Berita = ModelsNews::whereHas('Category', function ($query) use ($categoryBerita) {
+            $query->where('name', $categoryBerita);
+        })->get();
+
+
+        return view('pages.event', compact('data', 'readingTime', 'jumlahBerita', 'beritaTerbaru', 'acaraTerbaru', 'Berita'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
