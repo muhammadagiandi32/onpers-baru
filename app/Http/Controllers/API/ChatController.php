@@ -19,45 +19,54 @@ class ChatController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Mengambil semua pengguna dengan pesan terkait
+        // Mengambil semua pengguna dengan pesan terkait, urutkan berdasarkan waktu terbaru
         $users = User::with(['messages' => function ($query) {
-            $query->select('id', 'sender', 'to', 'message', 'created_at') // Pilih kolom yang diperlukan
-                ->orderBy('created_at', 'desc'); // Urutkan berdasarkan waktu terbaru
-        }])->where('email', $loggedInUser->email)->get();
+            $query->select('id', 'sender', 'to', 'message', 'created_at')
+                ->orderBy('created_at', 'desc'); // Urutkan dari terbaru ke terlama
+        }])->get();
 
-        // Proses untuk setiap pengguna
-        $result = $users->map(function ($user) use ($loggedInUser) {
-            // Ambil pesan terakhir antara sender dan to yang relevan
-            $messages = $user->messages->groupBy(function ($message) {
-                return $message->sender . '-' . $message->to; // Kelompokkan berdasarkan pasangan sender dan to
+        // Kelompokkan pesan berdasarkan pasangan sender-to, agar hanya pesan terakhir yang diambil
+        $lastMessages = collect();
+
+        foreach ($users as $user) {
+            foreach ($user->messages as $message) {
+                $key = $message->sender . '-' . $message->to;
+
+                // Simpan hanya pesan terbaru antara sender dan to
+                if (!$lastMessages->has($key) || $lastMessages[$key]->created_at < $message->created_at) {
+                    $lastMessages[$key] = $message;
+                }
+            }
+        }
+
+        // Format hasil akhir
+        $formattedUsers = $users->map(function ($user) use ($lastMessages) {
+            $userMessages = $lastMessages->filter(function ($message) use ($user) {
+                return $message->sender === $user->email || $message->to === $user->email;
             });
 
-            // Ambil pesan terakhir untuk setiap kelompok
-            $lastMessages = $messages->map(function ($group) {
-                return $group->first(); // Ambil pesan pertama (terbaru) dari setiap grup
-            });
-
-            // Return hasil dengan nama pengguna penerima
-            return $lastMessages->map(function ($message) use ($loggedInUser) {
-                // Cari pengguna penerima berdasarkan email
-                $receiver = User::where('email', $message->to)->first(); // Cari pengguna berdasarkan kolom `to`
-
-                return [
-                    'id' => $message->id,
-                    'sender' => $message->sender,
-                    'to' => $message->to,
-                    'message' => $message->message,
-                    'created_at' => $message->created_at,
-                    'updated_at' => $message->updated_at,
-                    'name' => $receiver ? $receiver->name : null, // Nama penerima dari kolom `to`
-                    'latest_message' => $message->message,
-                ];
-            });
+            return [
+                'id' => $user->id,
+                'email' => $user->email,
+                'name' => $user->name,
+                'messages' => $userMessages->map(function ($message) {
+                    $receiver = User::where('email', $message->to)->first();
+                    return [
+                        'id' => $message->id,
+                        'sender' => $message->sender,
+                        'to' => $message->to,
+                        'message' => $message->message,
+                        'created_at' => $message->created_at,
+                        'receiver_name' => $receiver ? $receiver->name : null,
+                    ];
+                })->values(), // Reset index array
+            ];
         });
 
-        // Menggabungkan hasil dan meratakan hasilnya menjadi array datar
-        return response()->json($result->flatten(1), 200); // Flatten hasilnya agar lebih datar
+        return response()->json($formattedUsers, 200);
     }
+
+
 
 
     public function postMessages(Request $request)

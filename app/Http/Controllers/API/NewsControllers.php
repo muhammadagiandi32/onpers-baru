@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\News as ModelsNews;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 class NewsControllers extends Controller
@@ -106,6 +107,36 @@ class NewsControllers extends Controller
             'success' => true,
             'message' => 'List data news for category: ' . ($categoryName ?? 'all'),
             'data' => $news,
+        ], 200);
+    }
+
+    public function getUsers(Request $request)
+    {
+        $category = $request->query('category'); // dari filter kategori
+        $keyword = $request->query('keyword');   // dari kolom search
+
+        $query = User::query();
+
+        // Filter berdasarkan kategori (role)
+        if ($category) {
+            $query->where('role', 'like', "%{$category}%");
+        }
+
+        // Filter berdasarkan nama, media, atau lokasi
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'like', "%{$keyword}%")
+                  ->orWhere('media', 'like', "%{$keyword}%");
+            });
+        }
+
+        $data = $query->get();
+
+        return response()->json([
+            'error_code' => 200,
+            'success' => true,
+            'message' => 'List data Users:',
+            'data' => $data,
         ], 200);
     }
 

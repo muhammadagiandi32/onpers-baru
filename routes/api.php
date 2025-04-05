@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
             ]),
         ]);
     });
+    Route::get('/get-users', [Newss::class, 'getUsers']);
+
 });
 
 Route::get('/news', [Newss::class, 'index']);
