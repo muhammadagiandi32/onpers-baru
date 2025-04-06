@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Laravel\Socialite\Facades\Socialite;
+use Google_Client;
 
 class AuthController extends Controller
 {
@@ -100,5 +102,33 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Register successfully ' . $request->email,
         ]);
+    }
+
+    public function googleLogin(Request $request)
+    {
+        $token = $request->input('token');
+
+        $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]); // web client ID dari Google Console
+        $payload = $client->verifyIdToken($token);
+
+        if ($payload) {
+            $email = $payload['email'];
+            $name = $payload['name'];
+
+            // Cek atau buat user
+            $user = User::firstOrCreate(
+                ['email' => $email],
+                ['name' => $name, 'password' => bcrypt(Str::random(16))]
+            );
+
+            Auth::login($user);
+
+            // Sanctum token
+            $token = $user->createToken('google-login')->plainTextToken;
+
+            return response()->json(['token' => $token, 'user' => $user]);
+        } else {
+            return response()->json(['error' => 'Invalid Google token'], 401);
+        }
     }
 }
