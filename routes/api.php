@@ -24,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/auth/google', [AuthController::class, 'googleLogin']);
-Route::get('/auth/callback', [AuthController::class, 'googleCallback']);
+Route::get('/auth/google-redirect', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 
 
 Route::post('/register', [AuthController::class, 'register']);
