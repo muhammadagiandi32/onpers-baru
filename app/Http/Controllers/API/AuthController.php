@@ -131,4 +131,36 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid Google token'], 401);
         }
     }
+
+    public function googleCallback(Request $request){
+        $idToken = $request->query('id_token'); // atau `code` jika pakai code flow
+
+        if (!$idToken) {
+            return response('Missing token', 400);
+        }
+
+        $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
+        $payload = $client->verifyIdToken($idToken);
+
+        if ($payload) {
+            $email = $payload['email'];
+            $name = $payload['name'];
+
+            // Cek atau buat user
+            $user = User::firstOrCreate(
+                ['email' => $email],
+                ['name' => $name, 'password' => bcrypt(Str::random(16))]
+            );
+
+            Auth::login($user);
+
+            // Buat Sanctum token
+            $token = $user->createToken('google-login')->plainTextToken;
+
+            // ✅ Redirect kembali ke aplikasi dengan scheme: onpers://
+            return redirect("onpers://auth-success?token={$token}");
+        } else {
+            return response('Invalid Google ID token', 401);
+        }
+    }
 }
