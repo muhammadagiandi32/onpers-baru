@@ -104,47 +104,20 @@ class AuthController extends Controller
         ]);
     }
 
-    public function googleLogin(Request $request)
+
+    public function redirectToGoogle()
     {
-        $token = $request->input('token');
-
-        $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]); // web client ID dari Google Console
-        $payload = $client->verifyIdToken($token);
-
-        if ($payload) {
-            $email = $payload['email'];
-            $name = $payload['name'];
-
-            // Cek atau buat user
-            $user = User::firstOrCreate(
-                ['email' => $email],
-                ['name' => $name, 'password' => bcrypt(Str::random(16))]
-            );
-
-            Auth::login($user);
-
-            // Sanctum token
-            $token = $user->createToken('google-login')->plainTextToken;
-
-            return response()->json(['token' => $token, 'user' => $user]);
-        } else {
-            return response()->json(['error' => 'Invalid Google token'], 401);
-        }
+        return Socialite::driver('google')
+            ->with(['prompt' => 'select_account'])
+            ->redirect();
     }
 
-    public function googleCallback(Request $request){
-        $idToken = $request->query('id_token'); // atau `code` jika pakai code flow
-
-        if (!$idToken) {
-            return response('Missing token', 400);
-        }
-
-        $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
-        $payload = $client->verifyIdToken($idToken);
-
-        if ($payload) {
-            $email = $payload['email'];
-            $name = $payload['name'];
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            $email = $googleUser->getEmail();
+            $name = $googleUser->getName();
 
             // Cek atau buat user
             $user = User::firstOrCreate(
@@ -153,14 +126,13 @@ class AuthController extends Controller
             );
 
             Auth::login($user);
-
-            // Buat Sanctum token
             $token = $user->createToken('google-login')->plainTextToken;
 
-            // ✅ Redirect kembali ke aplikasi dengan scheme: onpers://
-            return redirect("onpers://auth-success?token={$token}");
-        } else {
-            return response('Invalid Google ID token', 401);
+            // 🚀 Redirect ke deep link app
+            return redirect("onpers://auth?token={$token}");
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Google login failed', 'message' => $e->getMessage()], 500);
         }
     }
 }
