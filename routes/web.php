@@ -6,6 +6,7 @@ use App\Http\Controllers\News;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\API\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +18,13 @@ use App\Http\Controllers\MessageController;
 |
 */
 
-Route::get('/contoh', function () {
+Route::get('/privacy', function () {
     return view('templates.contoh');
 });
+
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 Route::get('/', [News::class, 'index']);
 Route::get('/news-details/{id}', [News::class, 'show'])->name('news-details');
 Route::get('/event-details/{id}', [News::class, 'event'])->name('event-details');
