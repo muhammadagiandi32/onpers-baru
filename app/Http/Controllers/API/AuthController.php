@@ -122,7 +122,7 @@ class AuthController extends Controller
             // Cek atau buat user
             $user = User::firstOrCreate(
                 ['email' => $email],
-                ['name' => $name, 'password' => bcrypt(Str::random(16))]
+                ['uuid' => Str::uuid(), 'name' => $name, 'password' => bcrypt(Str::random(16))]
             );
 
             Auth::login($user);
