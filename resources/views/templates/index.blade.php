@@ -639,7 +639,7 @@
                         $categories = [
                             ['name' => 'Headline', 'slug' => 'headline', 'items' => $Headlines],
                             ['name' => 'Berita', 'slug' => 'berita', 'items' => $Berita],
-                            ['name' => 'Acara', 'slug' => 'acara', 'items' => $Acara],
+                            ['name' => 'Foto Acara', 'slug' => 'acara', 'items' => $Acara],
                             ['name' => 'Advertorial', 'slug' => 'advertorial', 'items' => $Advertorial],
                         ];
                     @endphp
@@ -710,7 +710,7 @@
             data.forEach(function(item) {
                 $('.progress-bar-container').append(
                     '<div class="progress-bar"><div class="progress-bar-inner"></div></div>'
-                    );
+                );
             });
 
             const videos = data;
