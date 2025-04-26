@@ -187,7 +187,7 @@
                                 {{ $data->title }}
                             </h1>
                             <h6>{{ $data->created_at->translatedFormat('l, d F Y') }}</h6>
-                            {{-- {!! $data->content !!} --}}
+                            {!! $data->content !!}
                         </div>
                     </div>
                     <div class="sn-related">
