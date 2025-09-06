@@ -257,7 +257,7 @@ class NewsControllers extends Controller
     public function show(string $slug)
     {
         try {
-            $news = News::with('category')->where('slug', $slug)->firstOrFail();
+            $news = News::with('author')->where('slug', $slug)->firstOrFail();
             return response()->json([
                 'error_code' => 200,
                 'success' => true,

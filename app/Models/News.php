@@ -39,7 +39,7 @@ class News extends Model
 
     ];
 
-
+    protected $appends = ['author_name'];
 
     // Relasi dengan tabel penulis (Authors)
     public function author()
@@ -57,5 +57,11 @@ class News extends Model
         $wordCount = Str::wordCount(strip_tags($this->content)); // Menghitung jumlah kata dalam konten
         $minutes = ceil($wordCount / 200); // Anggap 200 kata per menit
         return $minutes;
+    }
+
+     // accessor untuk nama author
+    public function getAuthorNameAttribute()
+    {
+        return $this->author ? $this->author->name : 'Unknown';
     }
 }
