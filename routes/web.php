@@ -22,6 +22,10 @@ Route::get('/privacy', function () {
     return view('templates.contoh');
 });
 
+Route::get('/redaksi', function () {
+    return view('templates.redaksi');
+});
+
 Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 
